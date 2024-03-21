@@ -94,14 +94,7 @@ const technologies = [
     name: 'Node JS',
     icon: nodejs,
   },
-  {
-    name: 'Rails',
-    icon: rubyrails,
-  },
-  {
-    name: 'graphql',
-    icon: graphql,
-  },
+ 
   {
     name: 'postgresql',
     icon: postgresql,
@@ -110,10 +103,7 @@ const technologies = [
     name: 'git',
     icon: git,
   },
-  {
-    name: 'figma',
-    icon: figma,
-  },
+ 
   {
     name: 'docker',
     icon: docker,
@@ -154,8 +144,8 @@ const experiences = [
 const projects = [
   {
     id: 'project-1',
-    name: 'KomiKult',
-    description: 'A comic characters list app that displays Marvel characters.',
+    name: 'Gani Tobacco',
+    description: 'This project provides a robust and full-featured online shopping platform with various functionalities to enhance the user experience.',
     tags: [
       {
         name: 'react',
@@ -171,8 +161,8 @@ const projects = [
       },
     ],
     image: komikult,
-    repo: 'https://github.com/shaqdeff/KomiKult',
-    demo: 'https://shaqdeff.github.io/KomiKult/',
+    repo: 'https://github.com/mirajhad/reactwebdev',
+    demo: 'https://reactwebdev.vercel.app/',
   },
   {
     id: 'project-2',

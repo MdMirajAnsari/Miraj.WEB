@@ -40,7 +40,7 @@ const About = () => {
         variants={fadeIn("", "", 0.1, 1)}
         className="mt-4 text-taupe text-[18px] max-w-3xl leading-[30px]"
       >
-        3+ years experienced data engineer professional possessing a prolific
+        3+ years experienced full stack software engineer professional possessing a prolific
         track record of driving user growth, boosting user retention & enhancing
         market share. Highly skilled software developer with experience in
         Asp.Net Core, Web Api, React, and SQL Server. Strong experience in
