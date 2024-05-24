@@ -253,7 +253,7 @@ const projects = [
     ],
     image: nyeusi,
     repo: "https://github.com/mirajhad/Transport-management-Version-2.0",
-    demo: "trans-p.000webhostapp.com/",
+    demo: "https://trans-p.000webhostapp.com/",
   },
 ];
 
