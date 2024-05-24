@@ -166,9 +166,9 @@ const projects = [
   },
   {
     id: 'project-2',
-    name: 'Leaderboard',
+    name: 'E-FoodShop',
     description:
-      'A leaderboard list app that displays scores submitted by different players.',
+      'Order Food Online, Just like Zomato',
     tags: [
       {
         name: 'react',
@@ -184,35 +184,35 @@ const projects = [
       },
     ],
     image: leaderboard,
-    repo: 'https://github.com/shaqdeff/Leaderboard',
-    demo: 'https://shaqdeff.github.io/Leaderboard/',
+    repo: 'https://github.com/mirajhad/E-FoodShop',
+    demo: 'https://github.com/mirajhad/E-FoodShop',
   },
   {
     id: 'project-3',
-    name: 'Math Magicians',
-    description: 'This is a single-page calculator app built with React',
+    name: 'E-Concert',
+    description: 'Concert booking system involves various components to manage the process of scheduling, selling tickets, and organizing events.',
     tags: [
       {
-        name: 'nextjs',
+        name: 'Asp.Net',
         color: 'blue-text-gradient',
       },
       {
-        name: 'supabase',
+        name: 'Sql Server',
         color: 'green-text-gradient',
       },
       {
-        name: 'css',
+        name: 'Bootstrap',
         color: 'pink-text-gradient',
       },
     ],
     image: math,
-    repo: 'https://github.com/shaqdeff/Math-Magicians',
-    demo: 'https://inspiring-medovik-37d3b3.netlify.app/',
+    repo: 'https://github.com/mirajhad/E-Concert',
+    demo: 'https://github.com/mirajhad/E-Concert',
   },
   {
     id: 'project-4',
-    name: 'Movie Metro',
-    description: `A single-page application that allows users to search for any movie or show's ratings and its details.`,
+    name: 'StudentManagement',
+    description: `The Student Management project is a comprehensive system designed to streamline various aspects of managing student information within an educational institution.`,
     tags: [
       {
         name: 'nextjs',
@@ -228,32 +228,32 @@ const projects = [
       },
     ],
     image: movie,
-    repo: 'https://github.com/shaqdeff/Movie-Metro',
-    demo: 'https://movie-metro.netlify.app/',
+    repo: 'https://github.com/mirajhad/StudentManagement',
+    demo: 'https://github.com/mirajhad/StudentManagement',
   },
-  {
-    id: 'project-5',
-    name: 'Nyeusi Fest Site',
-    description:
-      'This is a demo concert website for a music festival called Nyeusi.',
-    tags: [
-      {
-        name: 'nextjs',
-        color: 'blue-text-gradient',
-      },
-      {
-        name: 'supabase',
-        color: 'green-text-gradient',
-      },
-      {
-        name: 'css',
-        color: 'pink-text-gradient',
-      },
-    ],
-    image: nyeusi,
-    repo: 'https://github.com/shaqdeff/Nyeusi-Fest-Site',
-    demo: 'https://shaqdeff.github.io/Nyeusi-Fest-Site/',
-  },
+  // {
+  //   id: 'project-5',
+  //   name: 'Nyeusi Fest Site',
+  //   description:
+  //     'This is a demo concert website for a music festival called Nyeusi.',
+  //   tags: [
+  //     {
+  //       name: 'nextjs',
+  //       color: 'blue-text-gradient',
+  //     },
+  //     {
+  //       name: 'supabase',
+  //       color: 'green-text-gradient',
+  //     },
+  //     {
+  //       name: 'css',
+  //       color: 'pink-text-gradient',
+  //     },
+  //   ],
+  //   image: nyeusi,
+  //   repo: 'https://github.com/shaqdeff/Nyeusi-Fest-Site',
+  //   demo: 'https://shaqdeff.github.io/Nyeusi-Fest-Site/',
+  // },
 ];
 
 export { services, technologies, experiences, projects };
