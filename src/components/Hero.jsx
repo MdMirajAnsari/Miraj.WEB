@@ -1,7 +1,5 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { styles } from '../styles';
-import { navLinks } from '../constants';
 import {  bwmap, worldmap } from '../assets';
 
 const Hero = () => {
@@ -37,7 +35,7 @@ const Hero = () => {
           <div>
             <h1
               className={`${styles.heroHeadText} text-eerieBlack font-poppins uppercase`}>
-              Hi, I'm
+              HI, I&apos;m &nbsp;
               <span
                 className="sm:text-battleGray sm:text-[90px] 
                 text-eerieBlack text-[50px] font-mova
@@ -46,7 +44,7 @@ const Hero = () => {
               </span>
             </h1>
             <p className={`${styles.heroSubText} mt-2 text-eerieBlack`}>
-              Senior Software Engineer. <br className="sm:block hidden" />
+               Software Engineer. <br className="sm:block hidden" />
               Bangalore, India.
             </p>
           </div>
@@ -63,7 +61,7 @@ const Hero = () => {
           <a href="#about">
             <div
               className="w-[35px] h-[64px] rounded-3xl border-4 
-            border-french border-dim flex
+             border-dim flex
             justify-center items-start p-2">
               <motion.div
                 animate={{
