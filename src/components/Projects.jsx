@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { SectionWrapper } from '../hoc';
 import { styles } from '../styles';
@@ -109,6 +110,17 @@ const ProjectCard = ({
     </motion.div>
   );
 };
+ProjectCard.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  repo: PropTypes.string.isRequired,
+  demo: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+  active: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired,
+};
 
 const Projects = () => {
   const [active, setActive] = useState('project-2');
@@ -142,6 +154,7 @@ const Projects = () => {
           {projects.map((project, index) => (
             <ProjectCard
               key={project.id}
+              id={project.id} // Ensure id is explicitly passed
               index={index}
               {...project}
               active={active}
@@ -154,4 +167,5 @@ const Projects = () => {
   );
 };
 
-export default SectionWrapper(Projects, 'projects');
+const WrappedProjects = SectionWrapper(Projects, 'projects');
+export default WrappedProjects;
