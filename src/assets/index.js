@@ -39,7 +39,6 @@ import rubyrails from './tech/rubyrails.png';
 
 // companies
 import coverhunt from './company/coverhunt.png';
-import dcc from './company/dcc.png';
 import brillio from './company/brillio.jpg';
 import crisis24 from './company/onsolve.jpg';
 import sysfore from './company/sysfore.png';
@@ -91,7 +90,6 @@ export {
   nyeusi,
   space,
   coverhunt,
-  dcc,
   brillio,
   crisis24,
   sysfore,

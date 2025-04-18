@@ -18,7 +18,6 @@ import {
   math,
   movie,
   nyeusi,
-  dcc,
   brillio,
   crisis24,
   sysfore
@@ -141,7 +140,7 @@ const experiences = [
 const projects = [
   {
     id: "project-1",
-    name: "Gani Tobacco",
+    name: "Dell Prodg",
     description:
       "This project provides a robust and full-featured online shopping platform with various functionalities to enhance the user experience.",
     tags: [
@@ -159,13 +158,13 @@ const projects = [
       },
     ],
     image: sysfore,
-    repo: "https://github.com/mirajhad/reactwebdev",
-    demo: "https://reactwebdev.vercel.app/",
+    //repo: "https://github.com/mirajhad/reactwebdev",
+    demo: "https://www.dell.com/",
   },
   {
     id: "project-2",
-    name: "E-FoodShop",
-    description: "Order Food Online, Just like Zomato",
+    name: "Bajaj Auto",
+    description: "Bajaj Auto Limited is an Indian multinational automotive manufacturing company. It manufactures motorcycles, scooters and auto rickshaws.",
     tags: [
       {
         name: "react",
@@ -181,14 +180,14 @@ const projects = [
       },
     ],
     image: leaderboard,
-    repo: "https://github.com/mirajhad/E-FoodShop",
-    demo: "https://github.com/mirajhad/E-FoodShop",
+    // repo: "https://github.com/mirajhad/E-FoodShop",
+     demo: "https://www.bajajauto.com/",
   },
   {
     id: "project-3",
-    name: "E-Concert",
+    name: "Health2Home",
     description:
-      "Concert booking system involves various components to manage the process of scheduling, selling tickets, and organizing events.",
+      "Health2Home is equipped to send home healthcare specialists to collect lab samples at the patient’s convenience at his/her home or office.",
     tags: [
       {
         name: "Asp.Net",
@@ -204,13 +203,13 @@ const projects = [
       },
     ],
     image: math,
-    repo: "https://github.com/mirajhad/E-Concert",
-    demo: "https://github.com/mirajhad/E-Concert",
+    // repo: "https://github.com/mirajhad/E-Concert",
+     demo: "https://health2home.ae/",
   },
   {
     id: "project-4",
-    name: "StudentManagement",
-    description: `The Student Management project is a comprehensive system designed to streamline various aspects of managing student information within an educational institution.`,
+    name: "Chaitanya Audit",
+    description: `Chaitanya Audit provides audit reports and financial statements of Chaitanya India, a leading microfinance company in Karnataka.`,
     tags: [
       {
         name: "nextjs",
@@ -226,8 +225,8 @@ const projects = [
       },
     ],
     image: movie,
-    repo: "https://github.com/mirajhad/StudentManagement",
-    demo: "https://github.com/mirajhad/StudentManagement",
+    // repo: "https://github.com/mirajhad/StudentManagement",
+     demo: "https://www.chaitanyaindia.in/",
   },
   {
     id: "project-5",
