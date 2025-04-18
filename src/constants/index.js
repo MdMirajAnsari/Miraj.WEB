@@ -14,14 +14,14 @@ import {
   git,
   docker,
   postgresql,
-  komikult,
   leaderboard,
   math,
   movie,
   nyeusi,
   dcc,
-  kelhel,
-  microverse,
+  brillio,
+  crisis24,
+  sysfore
 } from "../assets";
 
 export const navLinks = [
@@ -116,25 +116,25 @@ const experiences = [
   //   date: 'Aug 2021 - Feb 2022',
   // },
   {
-    title: "Intern",
-    company_name: "Diatoz Solutions",
-    icon: microverse,
+    title: "Senior Software Development Engineer",
+    company_name: "Brillio Technologies",
+    icon: brillio,
     iconBg: "#333333",
-    date: "July 2020 - Dec 2021",
+    date: "September 2020 - Present",
+  },
+  {
+    title: "Senior Software Engineer",
+    company_name: "Crisis24 (formerly known as Onsolve)",
+    icon: crisis24,
+    iconBg: "#333333",
+    date: "February 2023 - August 2024",
   },
   {
     title: "Software Engineer",
     company_name: "Sysfore Technologies",
-    icon: kelhel,
+    icon: sysfore,
     iconBg: "#333333",
-    date: "April 2021 - Feb 2022",
-  },
-  {
-    title: "Full Stack Developer",
-    company_name: "Onsolve",
-    icon: dcc,
-    iconBg: "#333333",
-    date: "Feb 2022 - Present",
+    date: "May 2022 - February 2023",
   },
 ];
 
@@ -158,7 +158,7 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: komikult,
+    image: sysfore,
     repo: "https://github.com/mirajhad/reactwebdev",
     demo: "https://reactwebdev.vercel.app/",
   },

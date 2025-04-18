@@ -5,6 +5,7 @@ import {
 import { motion } from 'framer-motion';
 import 'react-vertical-timeline-component/style.min.css';
 import { styles } from '../styles';
+import PropTypes from 'prop-types';
 import { experiences } from '../constants';
 import { SectionWrapper } from '../hoc';
 import { download, downloadHover, resume } from '../assets';
@@ -23,7 +24,7 @@ const ExperienceCard = ({ experience }) => (
     }}
     date={
       <div>
-        <h3 className="text-dim text-[18px] font-bold font-beckman">
+        <h3 className="text-light text-[18px] font-bold font-beckman">
           {experience.date}
         </h3>
       </div>
@@ -50,13 +51,22 @@ const ExperienceCard = ({ experience }) => (
     </div>
   </VerticalTimelineElement>
 );
+ExperienceCard.propTypes = {
+  experience: PropTypes.shape({
+    date: PropTypes.string.isRequired,
+    icon: PropTypes.string.isRequired,
+    iconBg: PropTypes.string.isRequired,
+    company_name: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 const Experience = () => {
   return (
     <>
       <motion.div variants={textVariant()}>
         <p className={`${styles.sectionSubText} sm:pl-16 pl-[2rem]`}>
-          What I've done so far
+          What I&apos;ve done so far
         </p>
         <h2 className={`${styles.sectionHeadText} sm:pl-16 pl-[2rem]`}>
           Work Experience.
@@ -131,4 +141,5 @@ const Experience = () => {
   );
 };
 
-export default SectionWrapper(Experience, 'work');
+const WrappedExperience = SectionWrapper(Experience, 'work');
+export default WrappedExperience;
