@@ -142,7 +142,7 @@ const projects = [
     id: "project-1",
     name: "Dell Prodg",
     description:
-      "This project provides a robust and full-featured online shopping platform with various functionalities to enhance the user experience.",
+      "Enabling agile pricing and quoting for Dell's product catalog. This project is a web-based application that allows users to create and manage quotes for Dell products.",
     tags: [
       {
         name: "react",
