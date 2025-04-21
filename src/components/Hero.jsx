@@ -1,27 +1,33 @@
 import { motion } from 'framer-motion';
 import { styles } from '../styles';
 import {  bwmap, worldmap } from '../assets';
+import { NetworkWebBackground } from './canvas';
 
 const Hero = () => {
   return (
     <>
-      <div className="absolute top-0 left-0 z-0 h-[100vh] w-screen">
+    
+      {/* <div className="absolute top-0 left-0 z-0 h-[100vh] w-screen">
         <img
           src={bwmap}
           alt="world map"
           className="w-full h-full sm:block hidden object-cover"
         />
-      </div>
+      </div> */}
+     
       <div className="absolute top-0 left-0 z-0 h-[100vh] w-screen">
+      
         <img
           src={worldmap}
           alt="world map"
           className="w-full h-full sm:hidden block object-cover"
         />
       </div>
+      
       <section
         className="relative flex sm:flex-row flex-col w-full h-screen mx-auto 
         sm:bg-hero bg-hero-mobile overflow-hidden">
+          <NetworkWebBackground />
         <div
           className={`absolute inset-0 sm:top-[250px] top-[150px] 
           lg:top-[150px] xl:top-[250px] ${styles.paddingX} 
@@ -31,8 +37,9 @@ const Hero = () => {
             <div className="w-5 h-5 rounded-full bg-[#0a0a0a] sm:hidden" />
             <div className="w-1 sm:h-80 h-40 bw-gradient sm:hidden" />
           </div>
-
+          
           <div>
+          
             <h1
               className={`${styles.heroHeadText} text-eerieBlack font-poppins uppercase`}>
               HI, I&apos;m &nbsp;
