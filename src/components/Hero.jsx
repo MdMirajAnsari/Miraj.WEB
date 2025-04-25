@@ -7,7 +7,7 @@ const Hero = () => {
   return (
     <>
 
-     
+
 
       <section
         className="relative flex sm:flex-row flex-col w-full h-screen mx-auto 
@@ -21,6 +21,7 @@ const Hero = () => {
           justify-between gap-3`}
         >
           <div className="flex flex-col justify-center items-center mt-5 ml-3">
+            
             <div className="w-5 h-5 rounded-full bg-[#0a0a0a] sm:hidden" />
             <div className="w-1 sm:h-80 h-40 bw-gradient sm:hidden" />
           </div>
