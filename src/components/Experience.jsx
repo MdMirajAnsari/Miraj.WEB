@@ -106,33 +106,30 @@ const Experience = () => {
               sm:text-[18px] text-[14px] text-timberWolf 
               font-bold font-beckman items-center py-5 pl-3 pr-3 
               whitespace-nowrap gap-1 sm:w-[148px] sm:h-[58px] 
-              w-[125px] h-[46px] rounded-[10px] bg-jetLight 
+              w-[135px] h-[46px] rounded-[10px] bg-jetLight 
               sm:mt-[22px] mt-[16px] hover:bg-battleGray 
               hover:text-eerieBlack transition duration-[0.2s] 
               ease-in-out"
-              onClick={() =>
+              onClick={() => {
                 window.open(
-                  'https://drive.google.com/file/d/1VH-Zb5P4hnfuQw596fImcDI0ALLw6win/view?usp=sharing', //paste the link to your resume here
+                  'https://drive.google.com/file/d/1VH-Zb5P4hnfuQw596fImcDI0ALLw6win/view?usp=sharing',
                   '_blank'
-                )
-              }
-              onMouseOver={() => {
-                document
-                  .querySelector('.download-btn')
-                  .setAttribute('src', downloadHover);
-              }}
-              onMouseOut={() => {
-                document
-                  .querySelector('.download-btn')
-                  .setAttribute('src', download);
+                );
               }}>
-              MY RESUME
-              <img
-                src={download}
-                alt="download"
-                className="download-btn sm:w-[26px] sm:h-[26px] 
-                w-[23px] h-[23px] object-contain"
-              />
+              <motion.div
+                whileTap={{ scale: 0.9 }}
+                className="flex items-center gap-2"
+              >
+                MY RESUME
+                <motion.img
+                  src={download}
+                  alt="download"
+                  className="download-btn sm:w-[26px] sm:h-[26px] 
+                  w-[23px] h-[23px] object-contain"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.5 }}
+                />
+              </motion.div>
             </button>
           </VerticalTimelineElement>
         </VerticalTimeline>
