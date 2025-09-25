@@ -1,0 +1,78 @@
+<nav class="px-6 sm:px-16 w-full flex items-center py-2 fixed top-0 z-20 bg-tertiary sm:opacity-[0.97] h-[12vh]">
+  <div class="w-full flex justify-between items-center max-w-7xl mx-auto">
+    <a 
+      (click)="scrollToTop()" 
+      class="flex items-center gap-2 cursor-pointer"
+    >
+      <svg
+        role="img"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-[50px] h-[50px]"
+      >
+        <title>MinIO</title>
+        <path d="M13.2072.006c-.6216-.0478-1.2.1943-1.6211.582a2.15 2.15 0 0 0-.0938 3.0352l3.4082 3.5507a3.042 3.042 0 0 1-.664 4.6875l-.463.2383V7.2853a15.4198 15.4198 0 0 0-8.0174 10.4862v.0176l6.5487-3.3281v7.621L13.7794 24V13.6817l.8965-.4629a4.4432 4.4432 0 0 0 1.2207-7.0292l-3.371-3.5254a.7489.7489 0 0 1 .037-1.0547.7522.7522 0 0 1 1.0567.0371l.4668.4863-.006.0059 4.0704 4.2441a.0566.0566 0 0 0 .082 0 .06.06 0 0 0 0-.0703l-3.1406-5.1425-.1484.1425.1484-.1445C14.4945.3926 13.8287.0538 13.2072.006Zm-.9024 9.8652v2.9941l-4.1523 2.1484a13.9787 13.9787 0 0 1 2.7676-3.9277 14.1784 14.1784 0 0 1 1.3847-1.2148z" />
+      </svg>
+      <div class="text-[21px] font-medium font-mono tracking-[3px] ml-[0.6rem] text-secondary uppercase">
+        Miraj
+      </div>
+    </a>
+    
+    <ul class="list-none hidden sm:flex flex-row gap-14 mt-2">
+      <li
+        *ngFor="let nav of navLinks"
+        [ngClass]="{
+          'text-primary': active === nav.title,
+          'text-secondary': active !== nav.title
+        }"
+        class="hover:text-gray-600 text-[21px] font-medium font-mono uppercase tracking-[3px] cursor-pointer nav-links"
+        (click)="handleNavClick(nav)"
+      >
+        <a [href]="'#' + nav.id">{{ nav.title }}</a>
+      </li>
+    </ul>
+
+    <!-- Mobile Menu -->
+    <div class="sm:hidden flex flex-1 w-screen justify-end items-center">
+      <div
+        *ngIf="toggle"
+        [ngClass]="{
+          'menu-open': toggle,
+          'menu-close': !toggle
+        }"
+        class="p-6 bg-tertiary opacity-[0.98] absolute top-0 left-0 w-screen h-[100vh] z-10 menu"
+      >
+        <div class="flex justify-end">
+          <img
+            src="/assets/icons/close.png"
+            alt="close"
+            class="w-[22px] h-[22px] object-contain cursor-pointer"
+            (click)="toggleMobileMenu()"
+          />
+        </div>
+        <ul class="list-none flex flex-col -gap-[1rem] items-start justify-end mt-[10rem] -ml-[35px]">
+          <li
+            *ngFor="let nav of navLinks"
+            [id]="nav.id"
+            [ngClass]="{
+              'text-primary': active === nav.title,
+              'text-secondary': active !== nav.title
+            }"
+            class="text-[88px] font-bold font-mono uppercase tracking-[1px] cursor-pointer"
+            (click)="handleNavClick(nav)"
+          >
+            <a [href]="'#' + nav.id">{{ nav.title }}</a>
+          </li>
+        </ul>
+      </div>
+      
+      <img
+        *ngIf="!toggle"
+        src="/assets/icons/menu.png"
+        alt="menu"
+        class="w-[34px] h-[34px] object-contain cursor-pointer"
+        (click)="toggleMobileMenu()"
+      />
+    </div>
+  </div>
+</nav>

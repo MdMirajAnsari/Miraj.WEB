@@ -1,0 +1,21 @@
+<section class="px-6 sm:px-16 py-16 max-w-7xl mx-auto relative z-0">
+  <div class="mt-20">
+    <h2 class="text-4xl font-black text-secondary">About</h2>
+    <p class="mt-4 text-lg text-gray-600 max-w-3xl leading-relaxed">
+      I am Mohammad Miraj, a passionate software engineer with expertise in modern web technologies. 
+      I have extensive experience in building scalable applications and love working with cutting-edge technologies.
+    </p>
+  </div>
+
+  <div class="mt-16 flex flex-wrap gap-8">
+    <div 
+      *ngFor="let service of services" 
+      class="w-full sm:w-[250px] card-shadow bg-white p-6 rounded-lg hover:scale-105 transition-transform duration-200"
+    >
+      <div class="w-16 h-16 flex justify-center items-center mb-4">
+        <img [src]="service.icon" [alt]="service.title" class="w-12 h-12 object-contain" />
+      </div>
+      <h3 class="text-[20px] font-bold text-secondary text-center">{{ service.title }}</h3>
+    </div>
+  </div>
+</section>
