@@ -11,8 +11,9 @@ const Navbar = () => {
 
   const handleNavClick = (nav) => {
     if (nav.title === 'Blog') {
-      // Redirect to external URL for Blog
-      window.open('https://dev.to/mirajhad', '_blank');
+      // Navigate to Blog page
+      navigate('/blog');
+      setActive(nav.title);
     } else if (nav.title === 'Gadgets') {
       // Navigate to Gadgets page
       navigate('/gadgets');
