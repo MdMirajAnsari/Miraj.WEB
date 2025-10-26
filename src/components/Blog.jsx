@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { SectionWrapper } from '../hoc';
 import { styles } from '../styles';
 import { fadeIn, textVariant } from '../utils/motion';
 
-const BlogCard = ({ title, excerpt, date, category, readTime, image, link, index }) => {
+const BlogCard = ({ id, title, excerpt, date, category, readTime, image, index }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <motion.div
@@ -14,7 +16,7 @@ const BlogCard = ({ title, excerpt, date, category, readTime, image, link, index
       className="relative w-full sm:w-[350px] h-[450px] rounded-[20px] overflow-hidden cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onClick={() => window.open(link, '_blank')}>
+      onClick={() => navigate(`/blog/${id`)}>
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
@@ -90,13 +92,13 @@ const BlogCard = ({ title, excerpt, date, category, readTime, image, link, index
 };
 
 BlogCard.propTypes = {
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   excerpt: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   readTime: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
 };
 
@@ -112,7 +114,6 @@ const Blog = () => {
       category: 'Web Development',
       readTime: 8,
       image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800',
-      link: '#',
     },
     {
       id: 2,
@@ -123,7 +124,6 @@ const Blog = () => {
       category: 'JavaScript',
       readTime: 6,
       image: 'https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800',
-      link: '#',
     },
     {
       id: 3,
@@ -134,7 +134,6 @@ const Blog = () => {
       category: 'TypeScript',
       readTime: 10,
       image: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800',
-      link: '#',
     },
   ];
 

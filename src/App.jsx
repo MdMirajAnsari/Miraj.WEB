@@ -10,6 +10,7 @@ import {
   Gadgets,
 } from './components';
 import Blog from './components/Blog';
+import BlogDetail from './components/BlogDetail';
 
 const HomePage = () => (
   <>
@@ -51,6 +52,7 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/gadgets" element={<Gadgets />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<BlogDetail />} />
         </Routes>
       </div>
     </BrowserRouter>
