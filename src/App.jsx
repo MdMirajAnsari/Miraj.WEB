@@ -8,6 +8,7 @@ import {
   Tech,
   Projects,
   Gadgets,
+  Blog,
 } from './components';
 
 const HomePage = () => (
@@ -25,6 +26,10 @@ const HomePage = () => (
     </div>
 
     <Projects />
+
+    <div className="bg-tech bg-cover bg-center bg-no-repeat pb-10">
+      <Blog />
+    </div>
 
     <div
       className="bg-experience bg-cover bg-center bg-no-repeat 
