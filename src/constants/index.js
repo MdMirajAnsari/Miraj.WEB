@@ -344,7 +344,7 @@ const gadgets = [
     name: "ZEBRONICS EA124 LED Monitor, 24 inch (60.4 cm), 250 nits, 100Hz, FHD, 1920x1080, HDMI, VGA, Ultra Slim Bezel, Built-in Speakers, Metal Stand, Wall Mountable",
     description:
       "The ZEBRONICS EA124 LED Monitor offers a stunning visual experience with its 24-inch FHD display. Featuring a 100 Hz refresh rate, HDMI and VGA connectivity, built-in speakers, and a sleek design, this monitor is perfect for both work and entertainment.",
-    image: "https://zebronics.com/cdn/shop/products/Zeb-EA124-1.jpg?v=1655867000",
+    image: "https://www.amazon.in/ZEBRONICS-Monitor-1920x1080-Speakers-Mountable/dp/B0D2TFGBGS?th=1",
     specs: ["24 inch FHD Display", "100Hz Refresh Rate", "HDMI and VGA Connectivity", "Built-in Speakers"],
     price: "₹6,000",
     link: "https://www.amazon.in/ZEBRONICS-Monitor-1920x1080-Speakers-Mountable/dp/B0D2TFGBGS",
