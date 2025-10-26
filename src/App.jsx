@@ -8,8 +8,8 @@ import {
   Tech,
   Projects,
   Gadgets,
-  Blog,
 } from './components';
+import Blog from './components/Blog';
 
 const HomePage = () => (
   <>
@@ -26,10 +26,6 @@ const HomePage = () => (
     </div>
 
     <Projects />
-
-    <div className="bg-tech bg-cover bg-center bg-no-repeat pb-10">
-      <Blog />
-    </div>
 
     <div
       className="bg-experience bg-cover bg-center bg-no-repeat 
@@ -54,6 +50,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/gadgets" element={<Gadgets />} />
+          <Route path="/blog" element={<Blog />} />
         </Routes>
       </div>
     </BrowserRouter>
