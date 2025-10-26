@@ -16,7 +16,7 @@ const BlogCard = ({ id, title, excerpt, date, category, readTime, image, index }
       className="relative w-full sm:w-[350px] h-[450px] rounded-[20px] overflow-hidden cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onClick={() => navigate(`/blog/${id`)}>
+      onClick={() => navigate(`/blog/${id}`)}>
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
