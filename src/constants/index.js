@@ -264,13 +264,13 @@ const projects = [
 const gadgets = [
   {
     id: "gadget-1",
-    name: "MacBook Pro M1",
+    name: "Keychron K2 Pro",
     description:
-      "High-performance laptop with Apple M1 chip, perfect for development and design work. Features 16GB RAM and 512GB SSD.",
+      "Keychron K2 Pro QMK/VIA Wireless Mechanical Keyboard Bluetooth, Wireless, Wired USB Standard Multi-device Keyboard Compatible with Desktop, Laptop, Mac , with gaming mode ,stand support,K2 Pro Wireless Mechanical Keyboard (Version 2) Hot- Swapable Plastic Frame, 96% Standard Keyboard with Numpad, RGB Backlight, Gateron G Pro Red Switch  (KeychronK Pro Brown)",
     image: frontend,
-    specs: ["Apple M1", "16GB RAM", "512GB SSD"],
-    price: "$1,999",
-    link: "https://www.apple.com/macbook-pro/",
+    specs: ["Multi-device Keyboard", "USB 3.0", "Bluetooth version 5.2, Polling Rate : 1000Hz*, South-facing RGB, Hot Swappable switches, 75 % layout"],
+    price: "₹9,271",
+    link: "https://www.flipkart.com/keychron-k2-pro-qmk-via-wireless-mechanical-keyboard-bluetooth-wireless-wired-usb-standard-multi-device-compatible-desktop-laptop-mac-gaming-mode-stand-support-k2-version-2-hot-swapable-plastic-frame-96-numpad-rgb-backlight-gateron-g-red-switch/p/itm789f8f583439f?pid=ACCGT8DZYF7RUHPK&lid=LSTACCGT8DZYF7RUHPKYLEVFJ&marketplace=FLIPKART",
   },
   {
     id: "gadget-2",
