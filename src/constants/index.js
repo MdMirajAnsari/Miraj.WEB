@@ -289,7 +289,7 @@ const gadgets = [
     name: "APPLE Watch Series 8 GPS + Cellular with ECG app, Temperature sensor, Crash Detection",
     description:
       "The Apple Watch Series 8 is a powerful smartwatch that helps you stay connected, track your fitness, and monitor your health. It features a large Retina display, advanced health sensors, and a variety of apps to keep you productive and entertained throughout the day.",
-    image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MKMX3_AV1?wid=2000&hei=2000&fmt=jpeg&qlt=90&.v=1652432863209",
+    image: "https://www.gsmarena.com/apple_watch_series_8_41mm_aluminum_gps_cellular_long_term_review-news-59774.php",
     specs: ["Retina display", "ECG app", "Temperature sensor", "Crash Detection"],
     price: "₹49,178",
     link: "https://www.flipkart.com/apple-watch-series-8-45mm-gps-cellular-ecg-app-temperature-sensor-crash-detection/p/itm48dd630884322?pid=SMWGHWZ2NR3AH3SK&lid=LSTSMWGHWZ2NR3AH3SKVEXCV2&marketplace=FLIPKART",
