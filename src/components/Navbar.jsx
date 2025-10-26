@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { styles } from '../styles';
 import { navLinks } from '../constants';
 import { close, menu } from '../assets';
@@ -7,13 +7,27 @@ import { close, menu } from '../assets';
 const Navbar = () => {
   const [active, setActive] = useState('');
   const [toggle, setToggle] = useState(false);
+  const navigate = useNavigate();
 
   const handleNavClick = (nav) => {
     if (nav.title === 'Blog') {
       // Redirect to external URL for Blog
       window.open('https://dev.to/mirajhad', '_blank');
-    } else {
+    } else if (nav.title === 'Gadgets') {
+      // Navigate to Gadgets page
+      navigate('/gadgets');
       setActive(nav.title);
+    } else {
+      // Navigate to home page and scroll to section
+      navigate('/');
+      setActive(nav.title);
+      // Small delay to ensure navigation completes before scrolling
+      setTimeout(() => {
+        const element = document.getElementById(nav.id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
     }
     setToggle(false); // Close the mobile menu if open
   };

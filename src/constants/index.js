@@ -37,6 +37,10 @@ export const navLinks = [
     title: "Blog",
   },
   {
+    id: "gadgets",
+    title: "Gadgets",
+  },
+  {
     id: "contact",
     title: "Contact",
   },
@@ -257,4 +261,47 @@ const projects = [
   },
 ];
 
-export { services, technologies, experiences, projects };
+const gadgets = [
+  {
+    id: "gadget-1",
+    name: "MacBook Pro M1",
+    description:
+      "High-performance laptop with Apple M1 chip, perfect for development and design work. Features 16GB RAM and 512GB SSD.",
+    image: frontend,
+    specs: ["Apple M1", "16GB RAM", "512GB SSD"],
+    price: "$1,999",
+    link: "https://www.apple.com/macbook-pro/",
+  },
+  {
+    id: "gadget-2",
+    name: "iPhone 13 Pro",
+    description:
+      "Latest iPhone with advanced camera system, A15 Bionic chip, and stunning Super Retina XDR display.",
+    image: backend,
+    specs: ["A15 Bionic", "128GB Storage", "Pro Camera"],
+    price: "$999",
+    link: "https://www.apple.com/iphone-13-pro/",
+  },
+  {
+    id: "gadget-3",
+    name: "iPad Air",
+    description:
+      "Versatile tablet with M1 chip, perfect for sketching, note-taking, and productivity on the go.",
+    image: ux,
+    specs: ["M1 Chip", "64GB Storage", "Apple Pencil Support"],
+    price: "$599",
+    link: "https://www.apple.com/ipad-air/",
+  },
+  {
+    id: "gadget-4",
+    name: "Dell XPS 15",
+    description:
+      "Premium Windows laptop with powerful specs, beautiful 4K display, and excellent build quality.",
+    image: prototyping,
+    specs: ["Intel i7", "32GB RAM", "1TB SSD"],
+    price: "$2,499",
+    link: "https://www.dell.com/en-us/shop/dell-laptops/xps-15-laptop/spd/xps-15-9520-laptop",
+  },
+];
+
+export { services, technologies, experiences, projects, gadgets };
