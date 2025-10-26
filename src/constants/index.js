@@ -289,7 +289,7 @@ const gadgets = [
     name: "APPLE Watch Series 8 GPS + Cellular with ECG app, Temperature sensor, Crash Detection",
     description:
       "The Apple Watch Series 8 is a powerful smartwatch that helps you stay connected, track your fitness, and monitor your health. It features a large Retina display, advanced health sensors, and a variety of apps to keep you productive and entertained throughout the day.",
-    image: "https://www.gsmarena.com/apple_watch_series_8_41mm_aluminum_gps_cellular_long_term_review-news-59774.php",
+    image: "https://res.cloudinary.com/dj6ebo4as/image/upload/v1761506184/Gadgets/Screenshot_2025-10-27_004556_ungta7.png",
     specs: ["Retina display", "ECG app", "Temperature sensor", "Crash Detection"],
     price: "₹49,178",
     link: "https://www.flipkart.com/apple-watch-series-8-45mm-gps-cellular-ecg-app-temperature-sensor-crash-detection/p/itm48dd630884322?pid=SMWGHWZ2NR3AH3SK&lid=LSTSMWGHWZ2NR3AH3SKVEXCV2&marketplace=FLIPKART",
@@ -300,7 +300,7 @@ const gadgets = [
     name: "Logitech MX Keys Mini Minimalist Wireless Illuminated Keyboard, Compact, Bluetooth, Backlit, USB-C, Compatible with Apple MacOS, iOS, Windows, Linux, Android, Metal Build-Graphite",
     description:
       "The Logitech MX Keys Mini is a compact and minimalist wireless keyboard that offers a comfortable typing experience. It features backlit keys, Bluetooth connectivity, and a USB-C port for charging. Compatible with multiple operating systems, this keyboard is perfect for both work and play.",
-    image: "https://resource.logitech.com/w_1580,c_limit,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/mx-keys-mini/mx-keys-mini-graphite-top-view.png?v=1",
+    image: "https://res.cloudinary.com/dj6ebo4as/image/upload/v1761506334/Gadgets/Screenshot_2025-10-27_004839_pczkye.png",
     specs: ["Bluetooth", "Backlit", "USB-C", "Compact Design"],
     price: "₹9,999",
     link: "https://www.amazon.in/dp/B09LYZP1LG?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1",
@@ -311,7 +311,7 @@ const gadgets = [
     name: "Boult Audio X1 Pro Wired Earphones with Type-C Port, 10mm Bass Drivers, Inline Control, IPX5 Water Resistant, Comfort Fit earphones wired headphones with mic, Type-C earphones, Voice Assistant (Black)",
     description:
       "Boult Audio X1 Pro Wired Earphones are designed for comfort and high-quality sound. With 10 mm bass drivers and an IPX5 water-resistant rating, these earphones are perfect for workouts and daily use.",
-    image: "https://cdn.shopify.com/s/files/1/0547/1422/1059/products/image_593d41c0-b801-4c26-9eff-90d87fe0239f_500x500.jpg?v=1673749201",
+    image: "https://res.cloudinary.com/dj6ebo4as/image/upload/v1761506451/Gadgets/Screenshot_2025-10-27_005037_hhq6mp.png",
     specs: ["10mm Bass Drivers", "IPX5 Water Resistant", "Inline Control", "Comfort Fit"],
     price: "₹1,299",
     link: "https://www.amazon.in/dp/B0CC2DP26M?ref=ppx_yo2ov_dt_b_fed_asin_title",
@@ -322,7 +322,7 @@ const gadgets = [
     name: "Apple AirPods Pro",
     description:
       "Active Noise Cancellation and Transparency mode for an immersive listening experience.",
-    image: "https://www.apple.com/v/airpods-pro/d/images/overview/hero_endframe__d0vyhbyu3cqe_large.jpg",
+    image: "https://res.cloudinary.com/dj6ebo4as/image/upload/v1761506556/Gadgets/Screenshot_2025-10-27_005226_sj3yje.png",
     specs: ["Active Noise Cancellation", "Transparency Mode", "Spatial Audio"],
     price: "₹16,900",
     link: "https://www.amazon.in/dp/B07ZRXF7M8?ref=ppx_yo2ov_dt_b_fed_asin_title",
@@ -333,7 +333,7 @@ const gadgets = [
     name: "Green Soul Trigger Height Adjustable Standing Desk | Ergonomic Design Table Top (5.3 Ft) | 80 KG Lifting Capacity | Digital Display with Memory Preset | 3 Year Warranty | (Black 1600 × 750 Top)",
     description:
       "The Green Soul Trigger Height Adjustable Standing Desk is designed to enhance your workspace ergonomics. With a spacious tabletop and sturdy build, it supports a healthy working posture whether sitting or standing.",
-    image: "https://cdn.shopify.com/s/files/1/0136/5735/3309/products/standing-desk-green-soul-trigger-black.jpg?v=1648758321",
+    image: "https://res.cloudinary.com/dj6ebo4as/image/upload/v1761506635/Gadgets/Screenshot_2025-10-27_005339_xp3pdq.png",
     specs: ["Height Adjustable", "Ergonomic Design", "Digital Display"],
     price: "₹18,989",
     link: "https://www.amazon.in/Green-Soul-Multipurpose-Adjustable-Ergonomic/dp/B09MLY3CJZ",
@@ -344,7 +344,7 @@ const gadgets = [
     name: "ZEBRONICS EA124 LED Monitor, 24 inch (60.4 cm), 250 nits, 100Hz, FHD, 1920x1080, HDMI, VGA, Ultra Slim Bezel, Built-in Speakers, Metal Stand, Wall Mountable",
     description:
       "The ZEBRONICS EA124 LED Monitor offers a stunning visual experience with its 24-inch FHD display. Featuring a 100 Hz refresh rate, HDMI and VGA connectivity, built-in speakers, and a sleek design, this monitor is perfect for both work and entertainment.",
-    image: "https://www.amazon.in/ZEBRONICS-Monitor-1920x1080-Speakers-Mountable/dp/B0D2TFGBGS?th=1",
+    image: "https://res.cloudinary.com/dj6ebo4as/image/upload/v1761506703/Gadgets/Screenshot_2025-10-27_005450_tdmpcv.png",
     specs: ["24 inch FHD Display", "100Hz Refresh Rate", "HDMI and VGA Connectivity", "Built-in Speakers"],
     price: "₹6,000",
     link: "https://www.amazon.in/ZEBRONICS-Monitor-1920x1080-Speakers-Mountable/dp/B0D2TFGBGS",
