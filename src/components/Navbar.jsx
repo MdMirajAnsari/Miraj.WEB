@@ -76,37 +76,35 @@ const Navbar = () => {
         </ul>
 
         {/* Mobile Menu */}
-        <div className="sm:hidden flex flex-1 w-screen justify-end items-center">
+        <div className="sm:hidden flex flex-1 justify-end items-center">
           {toggle ? (
             <div
-              className={`p-6 bg-flashWhite opacity-[0.98] absolute 
-                top-0 left-0 w-screen h-[100vh] z-10 menu ${
-                  toggle ? 'menu-open' : 'menu-close'
-                }`}
+              className="p-6 bg-flashWhite opacity-[0.98] fixed 
+                top-0 left-0 right-0 w-full h-screen z-50 menu overflow-y-auto"
             >
-              <div className="flex justify-end">
+              <div className="flex justify-end mb-8">
                 <img
                   src={close}
                   alt="close"
-                  className="w-[22px] h-[22px] object-contain cursor-pointer"
-                  onClick={() => setToggle(!toggle)}
+                  className="w-[28px] h-[28px] object-contain cursor-pointer"
+                  onClick={() => setToggle(false)}
                 />
               </div>
               <ul
-                className="list-none flex flex-col -gap-[1rem] 
-                items-start justify-end mt-[10rem] -ml-[35px]"
+                className="list-none flex flex-col gap-6 
+                items-center justify-center mt-[5rem] px-4"
               >
                 {navLinks.map((nav) => (
                   <li
-                    id={nav.id}
                     key={nav.id}
                     className={`${
                       active === nav.title ? 'text-french' : 'text-eerieBlack'
-                    } text-[88px] font-bold font-arenq 
-                      uppercase tracking-[1px] cursor-pointer`}
+                    } text-[48px] sm:text-[64px] font-bold font-arenq 
+                      uppercase tracking-[1px] cursor-pointer hover:text-taupe
+                      transition-colors duration-300`}
                     onClick={() => handleNavClick(nav)}
                   >
-                    <a href={`#${nav.id}`}>{nav.title}</a>
+                    <span>{nav.title}</span>
                   </li>
                 ))}
               </ul>
@@ -116,7 +114,7 @@ const Navbar = () => {
               src={menu}
               alt="menu"
               className="w-[34px] h-[34px] object-contain cursor-pointer"
-              onClick={() => setToggle(!toggle)}
+              onClick={() => setToggle(true)}
             />
           )}
         </div>
