@@ -107,6 +107,16 @@ const Blog = () => {
   const blogPosts = [
     {
       id: 1,
+      title: 'C# Concepts - Complete Guide',
+      excerpt:
+        'Comprehensive guide covering C# fundamentals, advanced features, threading, async programming, and best practices for .NET developers.',
+      date: 'Jan 26, 2024',
+      category: 'C# / .NET',
+      readTime: 45,
+      image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800',
+    },
+    {
+      id: 2,
       title: 'Building Scalable Web Applications with React',
       excerpt:
         'Explore best practices for creating maintainable and scalable React applications using modern patterns and tools.',
@@ -116,7 +126,7 @@ const Blog = () => {
       image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800',
     },
     {
-      id: 2,
+      id: 3,
       title: 'The Future of JavaScript: What\'s Coming in ES2024',
       excerpt:
         'A deep dive into the latest JavaScript features and how they will change the way we write code.',
@@ -126,7 +136,7 @@ const Blog = () => {
       image: 'https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800',
     },
     {
-      id: 3,
+      id: 4,
       title: 'Mastering TypeScript for Better Code Quality',
       excerpt:
         'Learn how TypeScript can help you write more robust code and catch bugs before they reach production.',
