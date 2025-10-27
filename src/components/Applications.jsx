@@ -313,48 +313,7 @@ const Applications = ({ setActiveTab }) => {
           </motion.div>
         </div>
 
-        {/* Skills Section */}
-        <motion.div
-          variants={fadeIn('up', 'spring', 0.5, 0.75)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.25 }}
-          className="mt-12 bg-gradient-to-br from-jetLight to-night p-8 rounded-[20px] shadow-card">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-french rounded-[10px] flex items-center justify-center">
-              <span className="text-[24px]">🚀</span>
-            </div>
-            <h3 className="text-timberWolf font-beckman font-bold text-[28px] tracking-[1px]">
-              Technical Skills
-            </h3>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-poppins">
-            <div className="bg-primary p-5 rounded-[15px] border border-battleGray hover:border-french transition-all duration-300">
-              <h4 className="text-french font-bold text-[16px] mb-3">Development Skills</h4>
-              <p className="text-taupe text-[14px] leading-relaxed">
-                ASP.NET, ASP.NET CORE, Web API, ASP.NET MVC, C#, LINQ, Entity Framework
-              </p>
-            </div>
-            <div className="bg-primary p-5 rounded-[15px] border border-battleGray hover:border-french transition-all duration-300">
-              <h4 className="text-french font-bold text-[16px] mb-3">Database</h4>
-              <p className="text-taupe text-[14px] leading-relaxed">SQL Server</p>
-            </div>
-            <div className="bg-primary p-5 rounded-[15px] border border-battleGray hover:border-french transition-all duration-300">
-              <h4 className="text-french font-bold text-[16px] mb-3">Architecture</h4>
-              <p className="text-taupe text-[14px] leading-relaxed">Microservice</p>
-            </div>
-            <div className="bg-primary p-5 rounded-[15px] border border-battleGray hover:border-french transition-all duration-300">
-              <h4 className="text-french font-bold text-[16px] mb-3">Frontend</h4>
-              <p className="text-taupe text-[14px] leading-relaxed">
-                Angular, React, Javascript, HTML, CSS, Bootstrap, jQuery
-              </p>
-            </div>
-            <div className="bg-primary p-5 rounded-[15px] border border-battleGray hover:border-french transition-all duration-300">
-              <h4 className="text-french font-bold text-[16px] mb-3">Cloud</h4>
-              <p className="text-taupe text-[14px] leading-relaxed">Azure</p>
-            </div>
-          </div>
-        </motion.div>
+       
       </div>
     </div>
   );
