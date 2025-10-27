@@ -349,6 +349,28 @@ const gadgets = [
     price: "₹6,000",
     link: "https://www.amazon.in/ZEBRONICS-Monitor-1920x1080-Speakers-Mountable/dp/B0D2TFGBGS",
     source: "https://zebronics.com/products/zeb-ea-124-100hz"  // official product page :contentReference[oaicite:2]{index=2}
+  },
+  {
+    id: "gadget-9",
+    name: "Marshall Emberon 2.0 Bluetooth Speaker",
+    description:
+      "The Marshall Emberon 2.0 Bluetooth Speaker combines classic design with modern technology. It delivers powerful sound with deep bass and clear highs, making it perfect for music lovers on the go.",
+    image: "https://res.cloudinary.com/dj6ebo4as/image/upload/v1761540506/Gadgets/Screenshot_2025-10-27_100951_wh38mk.png",
+    specs: ["Bluetooth Connectivity", "Powerful Sound", "Portable Design"],
+    price: "₹14,999",
+    link: "https://www.amazon.in/Marshall-Emberton-Portable-Bluetooth-Speaker/dp/B08L8LG4Z5",
+    source: "https://www.marshallheadphones.com/us/en/emberton"  // official product page
+  },
+  {
+    id: "gadget-10",
+    name: "MacBook Pro 13-inch",
+    description:
+      "The MacBook Pro 13-inch is a powerful and portable laptop designed for professionals and creatives. With its M1 chip, stunning Retina display, and long battery life, it's perfect for on-the-go productivity.",
+    image: "https://res.cloudinary.com/dj6ebo4as/image/upload/v1761540506/Gadgets/Screenshot_2025-10-27_101128_pv9vki.png",
+    specs: ["Apple M1 Chip", "13-inch Retina Display", "Up to 20 hours battery life"],
+    price: "₹1,22,900",
+    link: "https://www.amazon.in/Apple-MacBook-13-inch-256GB-Storage/dp/B08N5WRWNZ",
+    source: "https://www.apple.com/in/macbook-pro-13/"  // official product page
   }
 ];
 
