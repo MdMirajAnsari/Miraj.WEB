@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { styles } from '../styles';
 import { gadgets } from '../constants';
 import { fadeIn, textVariant } from '../utils/motion';
+import Applications from './Applications';
 
 const GadgetCard = ({ id, name, description, image, specs, price, link, index }) => {
   return (
@@ -77,6 +79,12 @@ GadgetCard.propTypes = {
 };
 
 const Gadgets = () => {
+  const [activeTab, setActiveTab] = useState('gadgets');
+
+  if (activeTab === 'software') {
+    return <Applications setActiveTab={setActiveTab} />;
+  }
+
   return (
     <div className="relative z-0 bg-primary min-h-screen pt-[120px] pb-20">
       <div className={`${styles.padding} max-w-7xl mx-auto`}>
@@ -88,6 +96,28 @@ const Gadgets = () => {
           <p className={`${styles.sectionSubText}`}>My Tech Arsenal</p>
           <h2 className={`${styles.sectionHeadTextLight}`}>Gadgets.</h2>
         </motion.div>
+
+        {/* Toggle Buttons */}
+        <div className="mt-8 flex gap-4">
+          <button
+            onClick={() => setActiveTab('gadgets')}
+            className={`px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 ${
+              activeTab === 'gadgets'
+                ? 'bg-french text-timberWolf shadow-lg'
+                : 'bg-jetLight text-taupe hover:bg-battleGray'
+            }`}>
+            Gadgets
+          </button>
+          <button
+            onClick={() => setActiveTab('software')}
+            className={`px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 ${
+              activeTab === 'software'
+                ? 'bg-french text-timberWolf shadow-lg'
+                : 'bg-jetLight text-taupe hover:bg-battleGray'
+            }`}>
+            Applications
+          </button>
+        </div>
 
         <div className="w-full flex">
           <motion.p
