@@ -113,16 +113,7 @@ const Applications = ({ setActiveTab }) => {
               </ul>
             </div>
 
-            <div className="mb-8">
-              <h3 className="text-[24px] font-bold mb-4 text-battleGray">SKILLS</h3>
-              <ul className="space-y-2 text-taupe text-[16px]">
-                <li>• <span className="font-semibold text-timberWolf">Development Skills:</span> ASP.NET, ASP.NET CORE, Web API, ASP.NET MVC, C#, LINQ, Entity Framework</li>
-                <li>• <span className="font-semibold text-timberWolf">Database:</span> SQL Server</li>
-                <li>• <span className="font-semibold text-timberWolf">Architecture:</span> Microservice</li>
-                <li>• <span className="font-semibold text-timberWolf">Frontend:</span> Angular, React, Javascript, HTML, CSS, Bootstrap, jQuery</li>
-                <li>• <span className="font-semibold text-timberWolf">Cloud:</span> Azure</li>
-              </ul>
-            </div>
+         
           </div>
         </motion.div>
       </div>
