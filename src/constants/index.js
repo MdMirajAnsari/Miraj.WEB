@@ -275,7 +275,7 @@ const gadgets = [
   },
   {
     id: "gadget-2",
-    name: "Logitech MX Master 3S Wireless Touch Mouse",
+    name: "Logitech MX Master 3S",
     description:
       "You can work, play games, and do more effortlessly with the help of the Logitech MX Master 3S Wireless Mouse. Thanks to its high performance, this mouse offers optimal results. With up to 8k DPI tracking, this mouse can function smoothly on any surface including glass. In addition, owing to its MagSpeed control, this mouse can work at high speeds with utmost accuracy as it scrolls up to 1,000 lines per second and stops at a pixel.",
     image: "https://m.media-amazon.com/images/I/51m4354BqaL._AC_UF894,1000_QL80_.jpg",
@@ -286,7 +286,7 @@ const gadgets = [
   },
   {
     id: "gadget-3",
-    name: "APPLE Watch Series 8 GPS + Cellular with ECG app, Temperature sensor, Crash Detection",
+    name: "APPLE Watch Series 8 GPS + Cellular",
     description:
       "The Apple Watch Series 8 is a powerful smartwatch that helps you stay connected, track your fitness, and monitor your health. It features a large Retina display, advanced health sensors, and a variety of apps to keep you productive and entertained throughout the day.",
     image: "https://res.cloudinary.com/dj6ebo4as/image/upload/v1761506184/Gadgets/Screenshot_2025-10-27_004556_ungta7.png",
@@ -297,7 +297,7 @@ const gadgets = [
   },
   {
     id: "gadget-4",
-    name: "Logitech MX Keys Mini Minimalist Wireless Illuminated Keyboard, Compact, Bluetooth, Backlit, USB-C, Compatible with Apple MacOS, iOS, Windows, Linux, Android, Metal Build-Graphite",
+    name: "Logitech MX Keys Mini",
     description:
       "The Logitech MX Keys Mini is a compact and minimalist wireless keyboard that offers a comfortable typing experience. It features backlit keys, Bluetooth connectivity, and a USB-C port for charging. Compatible with multiple operating systems, this keyboard is perfect for both work and play.",
     image: "https://res.cloudinary.com/dj6ebo4as/image/upload/v1761506334/Gadgets/Screenshot_2025-10-27_004839_pczkye.png",
@@ -308,7 +308,7 @@ const gadgets = [
   },
   {
     id: "gadget-5",
-    name: "Boult Audio X1 Pro Wired Earphones with Type-C Port, 10mm Bass Drivers, Inline Control, IPX5 Water Resistant, Comfort Fit earphones wired headphones with mic, Type-C earphones, Voice Assistant (Black)",
+    name: "Boult Audio X1 Pro Wired Earphones",
     description:
       "Boult Audio X1 Pro Wired Earphones are designed for comfort and high-quality sound. With 10 mm bass drivers and an IPX5 water-resistant rating, these earphones are perfect for workouts and daily use.",
     image: "https://res.cloudinary.com/dj6ebo4as/image/upload/v1761506451/Gadgets/Screenshot_2025-10-27_005037_hhq6mp.png",
@@ -330,7 +330,7 @@ const gadgets = [
   },
   {
     id: "gadget-7",
-    name: "Green Soul Trigger Height Adjustable Standing Desk | Ergonomic Design Table Top (5.3 Ft) | 80 KG Lifting Capacity | Digital Display with Memory Preset | 3 Year Warranty | (Black 1600 × 750 Top)",
+    name: "Green Soul Trigger Height Adjustable Standing Desk",
     description:
       "The Green Soul Trigger Height Adjustable Standing Desk is designed to enhance your workspace ergonomics. With a spacious tabletop and sturdy build, it supports a healthy working posture whether sitting or standing.",
     image: "https://res.cloudinary.com/dj6ebo4as/image/upload/v1761506635/Gadgets/Screenshot_2025-10-27_005339_xp3pdq.png",
@@ -341,7 +341,7 @@ const gadgets = [
   },
   {
     id: "gadget-8",
-    name: "ZEBRONICS EA124 LED Monitor, 24 inch (60.4 cm), 250 nits, 100Hz, FHD, 1920x1080, HDMI, VGA, Ultra Slim Bezel, Built-in Speakers, Metal Stand, Wall Mountable",
+    name: "ZEBRONICS EA124 LED Monitor, 24 inch",
     description:
       "The ZEBRONICS EA124 LED Monitor offers a stunning visual experience with its 24-inch FHD display. Featuring a 100 Hz refresh rate, HDMI and VGA connectivity, built-in speakers, and a sleek design, this monitor is perfect for both work and entertainment.",
     image: "https://res.cloudinary.com/dj6ebo4as/image/upload/v1761506703/Gadgets/Screenshot_2025-10-27_005450_tdmpcv.png",
