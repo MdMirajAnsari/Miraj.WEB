@@ -41,6 +41,10 @@ export const navLinks = [
     title: "Gadgets",
   },
   {
+    id: "gallery",
+    title: "Gallery",
+  },
+  {
     id: "gov",
     title: "Gov",
   },
