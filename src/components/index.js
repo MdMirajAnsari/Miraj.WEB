@@ -8,5 +8,6 @@ import Projects from './Projects';
 import Gadgets from './Gadgets';
 import Contact from './Contact';
 import Blog from './Blog';
+import Gov from './Gov';
 
-export { Hero, Navbar, About, Tech, Experience, Projects, Gadgets, Contact, Blog, BallCanvas };
+export { Hero, Navbar, About, Tech, Experience, Projects, Gadgets, Contact, Blog, Gov, BallCanvas };

@@ -10,19 +10,18 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const handleNavClick = (nav) => {
-    if (nav.title === 'Blog') {
-      // Navigate to Blog page
+    if (nav.id === 'blog') {
       navigate('/blog');
       setActive(nav.title);
-    } else if (nav.title === 'Gadgets') {
-      // Navigate to Gadgets page
+    } else if (nav.id === 'gadgets') {
       navigate('/gadgets');
       setActive(nav.title);
+    } else if (nav.id === 'gov') {
+      navigate('/gov');
+      setActive(nav.title);
     } else {
-      // Navigate to home page and scroll to section
       navigate('/');
       setActive(nav.title);
-      // Small delay to ensure navigation completes before scrolling
       setTimeout(() => {
         const element = document.getElementById(nav.id);
         if (element) {
