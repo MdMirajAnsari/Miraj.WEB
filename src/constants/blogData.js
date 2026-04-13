@@ -1,13 +1,14 @@
 export const blogPosts = {
   1: {
     id: 1,
-    title: 'C# Concepts - Complete Guide',
-    excerpt: 'Comprehensive guide covering C# fundamentals, advanced features, threading, async programming, and best practices for .NET developers.',
-    date: 'Jan 26, 2024',
-    category: 'C# / .NET',
+    title: "C# Concepts - Complete Guide",
+    excerpt:
+      "Comprehensive guide covering C# fundamentals, advanced features, threading, async programming, and best practices for .NET developers.",
+    date: "Jan 26, 2024",
+    category: "C# / .NET",
     readTime: 45,
-    image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800',
-    author: 'Miraj',
+    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800",
+    author: "Miraj",
     content: `
       <h2>Version</h2>
       <h3>Latest Version- C# 13, .NET 9</h3>
@@ -277,13 +278,14 @@ var squares = numbers.AsParallel().Select(n => n * n).ToList();</code></pre>
   },
   2: {
     id: 2,
-    title: 'Building Scalable Web Applications with React',
-    excerpt: 'Explore best practices for creating maintainable and scalable React applications using modern patterns and tools.',
-    date: 'Jan 15, 2024',
-    category: 'Web Development',
+    title: "Building Scalable Web Applications with React",
+    excerpt:
+      "Explore best practices for creating maintainable and scalable React applications using modern patterns and tools.",
+    date: "Jan 15, 2024",
+    category: "Web Development",
     readTime: 8,
-    image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800',
-    author: 'Miraj',
+    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800",
+    author: "Miraj",
     content: `
       <h2>Introduction</h2>
       <p>Building scalable web applications is crucial in today's fast-paced development environment. React has become the go-to library for creating interactive user interfaces, but scaling a React application requires careful planning and adherence to best practices.</p>
@@ -316,12 +318,13 @@ var squares = numbers.AsParallel().Select(n => n * n).ToList();</code></pre>
   3: {
     id: 3,
     title: "The Future of JavaScript: What's Coming in ES2024",
-    excerpt: 'A deep dive into the latest JavaScript features and how they will change the way we write code.',
-    date: 'Jan 10, 2024',
-    category: 'JavaScript',
+    excerpt:
+      "A deep dive into the latest JavaScript features and how they will change the way we write code.",
+    date: "Jan 10, 2024",
+    category: "JavaScript",
     readTime: 6,
-    image: 'https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800',
-    author: 'Miraj',
+    image: "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800",
+    author: "Miraj",
     content: `
       <h2>What's New in ES2024</h2>
       <p>JavaScript continues to evolve with exciting new features that make development more efficient and enjoyable. Let's explore what's coming in ES2024.</p>
@@ -346,13 +349,14 @@ var squares = numbers.AsParallel().Select(n => n * n).ToList();</code></pre>
   },
   4: {
     id: 4,
-    title: 'Mastering TypeScript for Better Code Quality',
-    excerpt: 'Learn how TypeScript can help you write more robust code and catch bugs before they reach production.',
-    date: 'Jan 5, 2024',
-    category: 'TypeScript',
+    title: "Mastering TypeScript for Better Code Quality",
+    excerpt:
+      "Learn how TypeScript can help you write more robust code and catch bugs before they reach production.",
+    date: "Jan 5, 2024",
+    category: "TypeScript",
     readTime: 10,
-    image: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800',
-    author: 'Miraj',
+    image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800",
+    author: "Miraj",
     content: `
       <h2>Why TypeScript?</h2>
       <p>TypeScript has revolutionized the way we write JavaScript by adding static typing, which catches errors at compile time rather than runtime.</p>
@@ -388,4 +392,152 @@ var squares = numbers.AsParallel().Select(n => n * n).ToList();</code></pre>
       <p>TypeScript is more than just adding types to JavaScript. It's a tool that helps you write better, more maintainable code and catch bugs before they become problems.</p>
     `,
   },
+  5: {
+    id: 5,
+    title: ".NET Coding Standards & Best Practices",
+    excerpt:
+      "A complete guide to writing clean, maintainable, and professional .NET code using proper naming conventions and project structure.",
+    date: "Apr 13, 2026",
+    category: "C# / .NET",
+    readTime: 25,
+    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800",
+    author: "Miraj",
+    content: `
+      <h2>Introduction</h2>
+      <p>
+        Writing clean and consistent code is critical in any <strong>.NET project</strong>. 
+        Following proper naming conventions improves readability, maintainability, and team collaboration.
+      </p>
+
+      <h2>Why Coding Standards?</h2>
+      <ul>
+        <li>Improves readability of code</li>
+        <li>Makes debugging easier</li>
+        <li>Ensures consistency across the project</li>
+        <li>Helps new developers understand code quickly</li>
+      </ul>
+
+      <h2>General Naming Conventions</h2>
+      <table border="1" cellpadding="8">
+        <tr><th>Element</th><th>Convention</th><th>Example</th></tr>
+        <tr><td>Local Variables</td><td>camelCase</td><td>totalCount</td></tr>
+        <tr><td>Properties</td><td>PascalCase</td><td>FirstName</td></tr>
+        <tr><td>Methods</td><td>PascalCase</td><td>GetUser()</td></tr>
+        <tr><td>Classes</td><td>PascalCase</td><td>UserService</td></tr>
+        <tr><td>Interfaces</td><td>I + PascalCase</td><td>IUserService</td></tr>
+        <tr><td>Private Fields</td><td>_camelCase</td><td>_logger</td></tr>
+      </table>
+
+      <h2>Local Variables (camelCase)</h2>
+      <pre><code>int totalCount = 0;
+string userName = "Miraj";
+decimal orderAmount = 1000;</code></pre>
+
+      <h2>Properties & Methods (PascalCase)</h2>
+      <pre><code>public class Employee
+{
+    public string FirstName { get; set; }
+    public bool IsActive { get; set; }
+
+    public void SaveEmployee()
+    {
+        Console.WriteLine("Saved");
+    }
+}</code></pre>
+
+      <h2>Boolean Variables (Important)</h2>
+      <p>Always write boolean variables as questions or conditions.</p>
+
+      <h3>Good Examples</h3>
+      <pre><code>bool isActive = true;
+bool hasAccess = false;
+bool canEdit = true;
+bool shouldRetry = false;</code></pre>
+
+      <h3>Bad Examples</h3>
+      <pre><code>bool active = true;
+bool flag = false;</code></pre>
+
+      <h2>Private Fields</h2>
+      <pre><code>private readonly ILogger _logger;
+private readonly IUserService _userService;</code></pre>
+
+      <h2>Interfaces</h2>
+      <pre><code>public interface IUserService
+{
+    void CreateUser();
+}</code></pre>
+
+      <h2>Constants</h2>
+      <pre><code>public const int MaxRetryCount = 3;
+public const string DefaultRole = "User";</code></pre>
+
+      <h2>Async Method Naming</h2>
+      <pre><code>public async Task SaveUserAsync()
+{
+    await Task.Delay(100);
+}</code></pre>
+
+      <h2>Project Structure (Recommended)</h2>
+      <ul>
+        <li><strong>Controllers</strong> → Handle HTTP requests</li>
+        <li><strong>Services</strong> → Business logic</li>
+        <li><strong>Repositories</strong> → Database access</li>
+        <li><strong>Models</strong> → Data structures</li>
+        <li><strong>DTOs</strong> → Data transfer objects</li>
+      </ul>
+
+      <h3>Example Structure</h3>
+      <pre><code>MyProject/
+ ├── Controllers/
+ ├── Services/
+ ├── Repositories/
+ ├── Models/
+ ├── DTOs/
+ └── Program.cs</code></pre>
+
+      <h2>Complete Example</h2>
+      <pre><code>public class CustomerService : ICustomerService
+{
+    private readonly ILogger _logger;
+
+    public string ServiceName { get; set; }
+    public bool IsEnabled { get; set; }
+
+    public CustomerService(ILogger logger)
+    {
+        _logger = logger;
+    }
+
+    public bool CreateCustomer(string customerName, bool isActive)
+    {
+        bool isCreated = false;
+
+        if (!string.IsNullOrWhiteSpace(customerName) && isActive)
+        {
+            isCreated = true;
+            _logger.Log("Customer created successfully");
+        }
+
+        return isCreated;
+    }
+}</code></pre>
+
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Use meaningful variable names</li>
+        <li>Avoid magic numbers</li>
+        <li>Keep methods small and focused</li>
+        <li>Follow SOLID principles</li>
+        <li>Use dependency injection</li>
+      </ul>
+
+      <h2>Summary</h2>
+      <p>
+        Following proper naming conventions and project structure in .NET ensures your code is clean, scalable, 
+        and easy to maintain. These practices are essential for professional development and team collaboration.
+      </p>
+    `,
+  },
+
 };

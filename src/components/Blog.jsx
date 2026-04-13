@@ -145,6 +145,17 @@ const Blog = () => {
       readTime: 10,
       image: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800',
     },
+    {
+      id: 5,
+      title: 'How to write code for .net projects',
+      excerpt:
+        'A comprehensive guide to writing clean, efficient, and maintainable code for .NET projects, covering best practices and design patterns.',
+      date: 'Jan 1, 2024',
+      category: '.NET',
+      readTime: 12,
+      image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800',
+      
+    }
   ];
 
   return (
