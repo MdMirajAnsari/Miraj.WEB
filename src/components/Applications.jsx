@@ -311,6 +311,131 @@ const Applications = ({ setActiveTab }) => {
               </li>
             </ul>
           </motion.div>
+
+          {/* VS CODE Extensions */}
+      <motion.div
+        variants={fadeIn("up", "spring", 0.3, 0.75)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="bg-jetLight p-8 rounded-[20px] shadow-card hover:shadow-xl transition-all duration-300"
+      >
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-12 h-12 bg-french rounded-[10px] flex items-center justify-center">
+            <span className="text-[24px]">🧩</span>
+          </div>
+          <h3 className="text-timberWolf font-beckman font-bold text-[24px] tracking-[1px]">
+            VS CODE Extensions
+          </h3>
+        </div>
+
+        <ul className="space-y-3 text-taupe text-[15px] font-poppins">
+
+          <li className="hover:translate-x-2 transition-transform duration-200">
+            <a href="https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight"
+              target="_blank" rel="noopener noreferrer"
+              className="hover:text-french transition flex items-center gap-2">
+              <span className="text-french">▸</span> Color Highlight
+            </a>
+          </li>
+
+          <li className="hover:translate-x-2 transition-transform duration-200">
+            <a href="https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost"
+              target="_blank" rel="noopener noreferrer"
+              className="hover:text-french transition flex items-center gap-2">
+              <span className="text-french">▸</span> Import Cost
+            </a>
+          </li>
+
+          <li className="hover:translate-x-2 transition-transform duration-200">
+            <a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode"
+              target="_blank" rel="noopener noreferrer"
+              className="hover:text-french transition flex items-center gap-2">
+              <span className="text-french">▸</span> Prettier - Code Formatter
+            </a>
+          </li>
+
+          <li className="hover:translate-x-2 transition-transform duration-200">
+            <a href="https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens"
+              target="_blank" rel="noopener noreferrer"
+              className="hover:text-french transition flex items-center gap-2">
+              <span className="text-french">▸</span> Error Lens
+            </a>
+          </li>
+
+          <li className="hover:translate-x-2 transition-transform duration-200">
+            <a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens"
+              target="_blank" rel="noopener noreferrer"
+              className="hover:text-french transition flex items-center gap-2">
+              <span className="text-french">▸</span> GitLens
+            </a>
+          </li>
+
+        </ul>
+      </motion.div>
+
+
+      {/* VISUAL STUDIO Extensions */}
+      <motion.div
+        variants={fadeIn("up", "spring", 0.4, 0.75)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="bg-jetLight p-8 rounded-[20px] shadow-card hover:shadow-xl transition-all duration-300"
+      >
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-12 h-12 bg-french rounded-[10px] flex items-center justify-center">
+            <span className="text-[24px]">🛠️</span>
+          </div>
+          <h3 className="text-timberWolf font-beckman font-bold text-[24px] tracking-[1px]">
+            VISUAL STUDIO Extensions
+          </h3>
+        </div>
+
+        <ul className="space-y-3 text-taupe text-[15px] font-poppins">
+
+          <li className="hover:translate-x-2 transition-transform duration-200">
+            <a href="https://marketplace.visualstudio.com/items?itemName=MadsKristensen.FileIcons"
+              target="_blank" rel="noopener noreferrer"
+              className="hover:text-french transition flex items-center gap-2">
+              <span className="text-french">▸</span> File Icons
+            </a>
+          </li>
+
+          <li className="hover:translate-x-2 transition-transform duration-200">
+            <a href="https://marketplace.visualstudio.com/items?itemName=SonarSource.SonarLintforVisualStudio"
+              target="_blank" rel="noopener noreferrer"
+              className="hover:text-french transition flex items-center gap-2">
+              <span className="text-french">▸</span> SonarLint
+            </a>
+          </li>
+
+          <li className="hover:translate-x-2 transition-transform duration-200">
+            <a href="https://marketplace.visualstudio.com/items?itemName=VisualStudioProductTeam.ProductivityPowerTools"
+              target="_blank" rel="noopener noreferrer"
+              className="hover:text-french transition flex items-center gap-2">
+              <span className="text-french">▸</span> Productivity Power Tools
+            </a>
+          </li>
+
+          <li className="hover:translate-x-2 transition-transform duration-200">
+            <a href="https://marketplace.visualstudio.com/items?itemName=SteveCadwallader.CodeMaid"
+              target="_blank" rel="noopener noreferrer"
+              className="hover:text-french transition flex items-center gap-2">
+              <span className="text-french">▸</span> CodeMaid
+            </a>
+          </li>
+
+          <li className="hover:translate-x-2 transition-transform duration-200">
+            <a href="https://marketplace.visualstudio.com/items?itemName=GitHub.VisualStudio"
+              target="_blank" rel="noopener noreferrer"
+              className="hover:text-french transition flex items-center gap-2">
+              <span className="text-french">▸</span> GitHub Extension
+            </a>
+          </li>
+
+        </ul>
+      </motion.div>
         </div>
 
        
