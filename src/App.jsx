@@ -10,6 +10,7 @@ import {
   Gadgets,
   Gov,
   Gallery,
+  YouTube,
 } from './components';
 import Blog from './components/Blog';
 import BlogDetail from './components/BlogDetail';
@@ -56,6 +57,7 @@ const App = () => {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="/youtube" element={<YouTube />} />
           <Route path="/gov" element={<Gov />} />
         </Routes>
       </div>

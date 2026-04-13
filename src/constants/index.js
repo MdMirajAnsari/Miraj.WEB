@@ -45,6 +45,10 @@ export const navLinks = [
     title: "Gallery",
   },
   {
+    id: "youtube",
+    title: "YouTube",
+  },
+  {
     id: "gov",
     title: "Gov",
   },
