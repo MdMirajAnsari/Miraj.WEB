@@ -418,6 +418,7 @@ var squares = numbers.AsParallel().Select(n => n * n).ToList();</code></pre>
       </ul>
 
       <h2>General Naming Conventions</h2>
+      <hr>
       <table border="1" cellpadding="8">
         <tr><th>Element</th><th>Convention</th><th>Example</th></tr>
         <tr><td>Local Variables</td><td>camelCase</td><td>totalCount</td></tr>
@@ -429,6 +430,7 @@ var squares = numbers.AsParallel().Select(n => n * n).ToList();</code></pre>
       </table>
 
       <h2>Local Variables (camelCase)</h2>
+       <hr>
       <pre><code>int totalCount = 0;
 string userName = "Miraj";
 decimal orderAmount = 1000;</code></pre>
@@ -524,6 +526,7 @@ public const string DefaultRole = "User";</code></pre>
 }</code></pre>
 
       <h2>Best Practices</h2>
+       <hr>
       <ul>
         <li>Use meaningful variable names</li>
         <li>Avoid magic numbers</li>
