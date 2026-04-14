@@ -83,7 +83,7 @@ const Navbar = () => {
         <div className="sm:hidden flex flex-1 justify-end items-center">
           {toggle ? (
             <div
-              className="fixed inset-0 z-50 bg-flashWhite/98 backdrop-blur-sm p-6 min-h-screen overflow-y-auto"
+              className="fixed inset-0 z-50 bg-black/60 backdrop-blur-md p-6 min-h-screen overflow-y-auto animate-in fade-in duration-300"
             >
               <div className="flex justify-end mb-6">
                 <button
@@ -107,10 +107,10 @@ const Navbar = () => {
                   <li
                     key={nav.id}
                     className={`${
-                      active === nav.title ? 'text-french' : 'text-eerieBlack'
+                      active === nav.title ? 'text-white' : 'text-white'
                     } text-[32px] sm:text-[40px] font-bold font-arenq 
-                      uppercase tracking-[1px] cursor-pointer hover:text-taupe
-                      transition-colors duration-300 text-center`}
+                      uppercase tracking-[1px] cursor-pointer hover:text-blue-300
+                      transition-colors duration-300 text-center drop-shadow-lg`}
                     onClick={() => handleNavClick(nav)}
                   >
                     <span>{nav.title}</span>
