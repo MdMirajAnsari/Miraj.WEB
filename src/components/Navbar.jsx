@@ -83,13 +83,13 @@ const Navbar = () => {
         <div className="sm:hidden flex flex-1 justify-end items-center">
           {toggle ? (
             <div
-              className="fixed inset-0 z-50 bg-flashWhite/98 backdrop-blur-sm p-6 overflow-y-auto"
+              className="fixed inset-0 z-50 bg-flashWhite/98 backdrop-blur-sm p-6 min-h-screen overflow-y-auto"
             >
               <div className="flex justify-end mb-6">
                 <button
                   type="button"
                   onClick={() => setToggle(false)}
-                  className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center focus:outline-none"
+                  className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center focus:outline-none"
                   aria-label="Close menu"
                 >
                   <img
@@ -119,12 +119,18 @@ const Navbar = () => {
               </ul>
             </div>
           ) : (
-            <img
-              src={menu}
-              alt="menu"
-              className="w-[34px] h-[34px] object-contain cursor-pointer"
+            <button
+              type="button"
               onClick={() => setToggle(true)}
-            />
+              className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-sm border border-slate-200 focus:outline-none"
+              aria-label="Open menu"
+            >
+              <img
+                src={menu}
+                alt="menu"
+                className="w-6 h-6 object-contain"
+              />
+            </button>
           )}
         </div>
       </div>
