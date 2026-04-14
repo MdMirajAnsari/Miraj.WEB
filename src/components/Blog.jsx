@@ -1,75 +1,53 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
-import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { SectionWrapper } from '../hoc';
 import { styles } from '../styles';
-import { fadeIn, textVariant } from '../utils/motion';
 
 const BlogCard = ({ id, title, excerpt, date, category, readTime, image, index }) => {
-  const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
 
   return (
-    <motion.div
-      variants={fadeIn('up', 'spring', index * 0.2, 0.75)}
-      className="relative w-full sm:w-[350px] h-[450px] rounded-[20px] overflow-hidden cursor-pointer"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={() => navigate(`/blog/${id}`)}>
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <img
-          src={image}
-          alt={title}
-          className={`w-full h-full object-cover transition-transform duration-500 ${
-            isHovered ? 'scale-110' : 'scale-100'
-          }`}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-night via-night/80 to-transparent" />
-      </div>
-
+    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer relative" onClick={() => navigate(`/blog/${id}`)}>
       {/* Category Badge */}
-      <div className="absolute top-4 left-4 z-10">
-        <span className="px-3 py-1 bg-primary rounded-full text-[12px] font-bold text-night uppercase tracking-wider">
+      <div className="absolute top-2 left-2 z-10">
+        <span className="px-2 py-1 bg-blue-600 text-white text-xs font-bold rounded-full uppercase">
           {category}
         </span>
       </div>
 
+      {/* Image */}
+      <div className="h-48 overflow-hidden">
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          onError={(e) => {
+            e.target.src = 'https://via.placeholder.com/400x300?text=Image+Not+Available';
+          }}
+        />
+      </div>
+
       {/* Content */}
-      <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-        {/* Date & Read Time */}
-        <div className="flex items-center gap-3 mb-3 text-silver text-[12px] font-poppins">
+      <div className="p-6">
+        <div className="flex items-center gap-3 mb-3 text-gray-500 text-sm">
           <span>{date}</span>
           <span>•</span>
           <span>{readTime} min read</span>
         </div>
 
-        {/* Title */}
-        <h3
-          className={`font-beckman font-bold text-timberWolf text-[22px] leading-[28px] mb-3 transition-colors duration-300 ${
-            isHovered ? 'text-primary' : ''
-          }`}>
-          {title}
-        </h3>
+        <h3 className="text-lg font-semibold text-gray-800 mb-3 line-clamp-2">{title}</h3>
 
-        {/* Excerpt */}
-        <p className="text-taupe text-[14px] leading-[20px] font-poppins line-clamp-3 mb-4">
-          {excerpt}
-        </p>
+        <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">{excerpt}</p>
 
-        {/* Read More Link */}
-        <div
-          className={`flex items-center gap-2 text-[14px] font-beckman font-bold transition-all duration-300 ${
-            isHovered ? 'text-primary translate-x-2' : 'text-silver'
-          }`}>
-          <span>READ MORE</span>
+        <div className="flex items-center text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">
+          <span>Read More</span>
           <svg
-            width="20"
-            height="20"
+            width="16"
+            height="16"
             viewBox="0 0 20 20"
             fill="none"
-            xmlns="http://www.w3.org/2000/svg">
+            xmlns="http://www.w3.org/2000/svg"
+            className="ml-2"
+          >
             <path
               d="M7.5 15L12.5 10L7.5 5"
               stroke="currentColor"
@@ -80,14 +58,7 @@ const BlogCard = ({ id, title, excerpt, date, category, readTime, image, index }
           </svg>
         </div>
       </div>
-
-      {/* Hover Overlay */}
-      <div
-        className={`absolute inset-0 bg-primary/10 transition-opacity duration-300 ${
-          isHovered ? 'opacity-100' : 'opacity-0'
-        }`}
-      />
-    </motion.div>
+    </div>
   );
 };
 
@@ -111,7 +82,7 @@ const Blog = () => {
       excerpt:
         'Comprehensive guide covering C# fundamentals, advanced features, threading, async programming, and best practices for .NET developers.',
       date: 'Jan 26, 2024',
-      category: 'C# / .NET',
+      category: 'tech',
       readTime: 45,
       image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800',
     },
@@ -121,7 +92,7 @@ const Blog = () => {
       excerpt:
         'Explore best practices for creating maintainable and scalable React applications using modern patterns and tools.',
       date: 'Jan 15, 2024',
-      category: 'Web Development',
+      category: 'coding',
       readTime: 8,
       image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800',
     },
@@ -131,7 +102,7 @@ const Blog = () => {
       excerpt:
         'A deep dive into the latest JavaScript features and how they will change the way we write code.',
       date: 'Jan 10, 2024',
-      category: 'JavaScript',
+      category: 'tech',
       readTime: 6,
       image: 'https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800',
     },
@@ -141,7 +112,7 @@ const Blog = () => {
       excerpt:
         'Learn how TypeScript can help you write more robust code and catch bugs before they reach production.',
       date: 'Jan 5, 2024',
-      category: 'TypeScript',
+      category: 'coding',
       readTime: 10,
       image: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800',
     },
@@ -151,52 +122,55 @@ const Blog = () => {
       excerpt:
         'A comprehensive guide to writing clean, efficient, and maintainable code for .NET projects, covering best practices and design patterns.',
       date: 'Jan 1, 2024',
-      category: '.NET',
+      category: 'projects',
       readTime: 12,
       image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800',
       
     }
   ];
 
-  return (
-    <div className="mt-12 mb-20">
-      <motion.div variants={textVariant()}>
-        <p className={`${styles.sectionSubText}`}>My Writings</p>
-        <h2 className={`${styles.sectionHeadTextLight}`}>Blog.</h2>
-      </motion.div>
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const categories = ['all', 'tech', 'interview', 'fun', 'coding', 'projects'];
 
-      <div className="w-full flex">
-        <motion.p
-          variants={fadeIn('', '', 0.1, 1)}
-          className="mt-4 text-taupe text-[18px] max-w-3xl leading-[30px]">
-          Sharing insights, tutorials, and thoughts on web development,
-          programming, and technology. Stay updated with the latest trends and
-          best practices in software engineering.
-        </motion.p>
+  const filteredPosts = selectedCategory === 'all' 
+    ? blogPosts 
+    : blogPosts.filter(post => post.category === selectedCategory);
+
+  return (
+    <div className={`${styles.padding} max-w-7xl mx-auto relative z-0`}>
+      <div className="text-center mb-8">
+        <h2 className={`${styles.sectionHeadText} text-center`}>
+          Blog
+        </h2>
+        <p className={`${styles.sectionSubText} text-center`}>
+          Sharing insights, tutorials, and thoughts on web development
+        </p>
       </div>
 
-      {/* Blog Grid */}
-      <div className="mt-20 flex flex-wrap gap-8 justify-center">
-        {blogPosts.map((post, index) => (
-          <BlogCard key={post.id} {...post} index={index} />
+      {/* Category Filter Buttons */}
+      <div className="flex flex-wrap justify-center gap-4 mb-8">
+        {categories.map((category) => (
+          <button
+            key={category}
+            onClick={() => setSelectedCategory(category)}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+              selectedCategory === category
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
+          >
+            {category.charAt(0).toUpperCase() + category.slice(1)}
+          </button>
         ))}
       </div>
 
-      {/* View All Button */}
-      <motion.div
-        variants={fadeIn('up', 'spring', 0.5, 0.75)}
-        className="flex justify-center mt-12">
-        <button
-          className="bg-primary hover:bg-primary/80 text-night font-beckman font-bold 
-          px-8 py-4 rounded-[10px] text-[16px] uppercase tracking-wider
-          transition-all duration-300 hover:scale-105 shadow-lg"
-          onClick={() => console.log('View all blogs')}>
-          View All Posts
-        </button>
-      </motion.div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {filteredPosts.map((post, index) => (
+          <BlogCard key={post.id} {...post} index={index} />
+        ))}
+      </div>
     </div>
   );
 };
 
-const WrappedBlog = SectionWrapper(Blog, 'blog');
-export default WrappedBlog;
+export default Blog;

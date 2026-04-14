@@ -7,27 +7,38 @@ const YouTube = () => {
       id: 1,
       embedId: 'lFeYU31TnQ8',
       title: 'Video 1',
-      url: 'https://www.youtube.com/watch?v=lFeYU31TnQ8'
+      url: 'https://www.youtube.com/watch?v=lFeYU31TnQ8',
+      category: 'tech'
     },
     {
       id: 2,
       embedId: 'F2FmTdLtb_4',
       title: 'Video 2',
-      url: 'https://www.youtube.com/watch?v=F2FmTdLtb_4'
+      url: 'https://www.youtube.com/watch?v=F2FmTdLtb_4',
+      category: 'interview'
     },
     {
       id: 3,
       embedId: 'CuQmQpvw04I',
       title: 'Video 3',
-      url: 'https://www.youtube.com/watch?v=CuQmQpvw04I'
+      url: 'https://www.youtube.com/watch?v=CuQmQpvw04I',
+      category: 'fun'
     },
     {
       id: 4,
       embedId: 'X48VuDVv0do',
       title: 'Video 4',
-      url: 'https://www.youtube.com/watch?v=X48VuDVv0do'
+      url: 'https://www.youtube.com/watch?v=X48VuDVv0do',
+      category: 'coding'
     }
   ]);
+
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const categories = ['all', 'tech', 'interview', 'fun', 'coding', 'projects'];
+
+  const filteredVideos = selectedCategory === 'all' 
+    ? videos 
+    : videos.filter(video => video.category === selectedCategory);
 
   return (
     <div className={`${styles.padding} max-w-7xl mx-auto relative z-0`}>
@@ -40,9 +51,32 @@ const YouTube = () => {
         </p>
       </div>
 
+      {/* Category Filter Buttons */}
+      <div className="flex flex-wrap justify-center gap-4 mb-8">
+        {categories.map((category) => (
+          <button
+            key={category}
+            onClick={() => setSelectedCategory(category)}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+              selectedCategory === category
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
+          >
+            {category.charAt(0).toUpperCase() + category.slice(1)}
+          </button>
+        ))}
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {videos.map((video) => (
-          <div key={video.id} className="bg-white rounded-lg shadow-md overflow-hidden">
+        {filteredVideos.map((video) => (
+          <div key={video.id} className="bg-white rounded-lg shadow-md overflow-hidden relative">
+            {/* Category Badge */}
+            <div className="absolute top-2 left-2 z-10">
+              <span className="px-2 py-1 bg-blue-600 text-white text-xs font-bold rounded-full uppercase">
+                {video.category}
+              </span>
+            </div>
             <div className="aspect-video">
               <iframe
                 width="100%"
