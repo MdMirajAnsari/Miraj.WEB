@@ -14,6 +14,7 @@ import {
 } from './components';
 import Blog from './components/Blog';
 import BlogDetail from './components/BlogDetail';
+import Footer from './components/Footer';
 
 const HomePage = () => (
   <>
@@ -43,6 +44,9 @@ const HomePage = () => (
     <div className="relative z-0">
       <Contact />
     </div>
+
+    {/* Footer - Only on Home Page */}
+    <Footer />
   </>
 );
 
