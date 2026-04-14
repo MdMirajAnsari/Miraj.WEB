@@ -40,8 +40,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`${styles.paddingX} w-full flex items-center py-2 fixed 
-      top-0 z-20 bg-flashWhite sm:opacity-[0.97] xxs:h-[12vh]`}
+      className={`${styles.paddingX} w-full flex items-center py-3 fixed top-0 z-50 bg-flashWhite/95 backdrop-blur-sm border-b border-white/10 shadow-sm`}
     >
       <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
         <Link
@@ -65,14 +64,14 @@ const Navbar = () => {
             Miraj
           </div> */}
         </Link>
-        <ul className="list-none hidden sm:flex flex-row gap-14 mt-2">
+        <ul className="list-none hidden sm:flex flex-row flex-wrap gap-4 md:gap-8 lg:gap-12 mt-2 items-center">
           {navLinks.map((nav) => (
             <li
               key={nav.id}
               className={`${
                 active === nav.title ? 'text-french' : 'text-eerieBlack'
-              } hover:text-taupe text-[21px] font-medium font-mova 
-                uppercase tracking-[3px] cursor-pointer nav-links`}
+              } hover:text-taupe text-[16px] sm:text-[18px] md:text-[20px] font-medium font-mova 
+                uppercase tracking-[2px] cursor-pointer nav-links`}
               onClick={() => handleNavClick(nav)}
             >
               <a href={`#${nav.id}`}>{nav.title}</a>
@@ -84,29 +83,34 @@ const Navbar = () => {
         <div className="sm:hidden flex flex-1 justify-end items-center">
           {toggle ? (
             <div
-              className="p-6 bg-flashWhite opacity-[0.98] fixed 
-                top-0 left-0 right-0 w-full h-screen z-50 menu overflow-y-auto"
+              className="fixed inset-0 z-50 bg-flashWhite/98 backdrop-blur-sm p-6 overflow-y-auto"
             >
-              <div className="flex justify-end mb-8">
-                <img
-                  src={close}
-                  alt="close"
-                  className="w-[28px] h-[28px] object-contain cursor-pointer"
+              <div className="flex justify-end mb-6">
+                <button
+                  type="button"
                   onClick={() => setToggle(false)}
-                />
+                  className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center focus:outline-none"
+                  aria-label="Close menu"
+                >
+                  <img
+                    src={close}
+                    alt="close"
+                    className="w-6 h-6 object-contain"
+                  />
+                </button>
               </div>
               <ul
-                className="list-none flex flex-col gap-6 
-                items-center justify-center mt-[5rem] px-4"
+                className="list-none flex flex-col gap-5 
+                items-center justify-center mt-10 px-4"
               >
                 {navLinks.map((nav) => (
                   <li
                     key={nav.id}
                     className={`${
                       active === nav.title ? 'text-french' : 'text-eerieBlack'
-                    } text-[48px] sm:text-[64px] font-bold font-arenq 
+                    } text-[32px] sm:text-[40px] font-bold font-arenq 
                       uppercase tracking-[1px] cursor-pointer hover:text-taupe
-                      transition-colors duration-300`}
+                      transition-colors duration-300 text-center`}
                     onClick={() => handleNavClick(nav)}
                   >
                     <span>{nav.title}</span>
