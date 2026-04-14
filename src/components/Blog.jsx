@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { styles } from '../styles';
 
-const BlogCard = ({ id, title, excerpt, date, category, readTime, image, index }) => {
+const BlogCard = ({ id, title, excerpt, date, category, readTime, image }) => {
   const navigate = useNavigate();
 
   return (
@@ -60,17 +60,6 @@ const BlogCard = ({ id, title, excerpt, date, category, readTime, image, index }
       </div>
     </div>
   );
-};
-
-BlogCard.propTypes = {
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  excerpt: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
-  readTime: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired,
 };
 
 const Blog = () => {
@@ -165,8 +154,8 @@ const Blog = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {filteredPosts.map((post, index) => (
-          <BlogCard key={post.id} {...post} index={index} />
+        {filteredPosts.map((post) => (
+          <BlogCard key={post.id} {...post} />
         ))}
       </div>
     </div>
