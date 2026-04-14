@@ -13,10 +13,10 @@ const Tech = () => {
         <h2 className={styles.sectionHeadTextLight}>Technologies.</h2>
       </motion.div>
 
-      <div className="flex flex-wrap justify-center gap-10 mt-14">
+      <div className="flex flex-wrap justify-center gap-6 sm:gap-10 mt-14">
         {technologies.map((technology) => (
           <motion.div
-            className="w-28 h-28 flex items-center justify-center relative group cursor-pointer"
+            className="w-20 h-20 sm:w-28 sm:h-28 flex items-center justify-center relative group cursor-pointer"
             key={technology.name}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
@@ -32,17 +32,17 @@ const Tech = () => {
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></div>
 
             {/* Icon container */}
-            <div className="relative z-10 p-3 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 group-hover:border-white/30 transition-all duration-300">
+            <div className="relative z-10 p-2 sm:p-3 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 group-hover:border-white/30 transition-all duration-300">
               {technology.icon.startsWith('http') ? (
                 <motion.img
                   src={technology.icon}
                   alt={technology.name}
-                  className="w-16 h-16 object-contain filter group-hover:brightness-110 group-hover:drop-shadow-lg"
+                  className="w-12 h-12 sm:w-16 sm:h-16 object-contain filter group-hover:brightness-110 group-hover:drop-shadow-lg"
                   whileHover={{ rotate: [0, -10, 10, 0] }}
                   transition={{ duration: 0.5 }}
                 />
               ) : (
-                <div className="w-16 h-16 group-hover:drop-shadow-2xl transition-all duration-300">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 group-hover:drop-shadow-2xl transition-all duration-300">
                   <BallCanvas icon={technology.icon} />
                 </div>
               )}

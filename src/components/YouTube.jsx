@@ -52,12 +52,12 @@ const YouTube = () => {
       </div>
 
       {/* Category Filter Buttons */}
-      <div className="flex flex-wrap justify-center gap-4 mb-8">
+      <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8">
         {categories.map((category) => (
           <button
             key={category}
             onClick={() => setSelectedCategory(category)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+            className={`px-3 py-2 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-colors ${
               selectedCategory === category
                 ? 'bg-blue-600 text-white'
                 : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -68,7 +68,7 @@ const YouTube = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
         {filteredVideos.map((video) => (
           <div key={video.id} className="bg-white rounded-lg shadow-md overflow-hidden relative">
             {/* Category Badge */}
@@ -89,8 +89,8 @@ const YouTube = () => {
                 className="w-full h-full"
               ></iframe>
             </div>
-            <div className="p-4">
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">{video.title}</h3>
+            <div className="p-4 sm:p-4">
+              <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-2">{video.title}</h3>
               <a
                 href={video.url}
                 target="_blank"

@@ -66,12 +66,12 @@ const Gallery = () => {
       </div>
 
       {/* Category Filter Buttons */}
-      <div className="flex flex-wrap justify-center gap-4 mb-8">
+      <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8">
         {categories.map((category) => (
           <button
             key={category}
             onClick={() => setSelectedCategory(category)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+            className={`px-3 py-2 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-colors ${
               selectedCategory === category
                 ? 'bg-blue-600 text-white'
                 : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -82,7 +82,7 @@ const Gallery = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
         {filteredImages.map((image) => (
           <div key={image.id} className="relative group">
             {/* Category Badge */}
@@ -100,13 +100,13 @@ const Gallery = () => {
               <img
                 src={image.url}
                 alt={image.name}
-                className="w-full h-64 object-cover rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+                className="w-full h-48 sm:h-64 object-cover rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
                 onError={(e) => {
                   e.target.src = 'https://via.placeholder.com/400x300?text=Image+Not+Available';
                 }}
               />
             </a>
-            <div className="mt-3">
+            <div className="mt-2 sm:mt-3">
               <p className="text-sm font-medium text-gray-800 truncate">{image.name}</p>
               <a
                 href={image.originalUrl}

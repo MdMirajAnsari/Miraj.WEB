@@ -40,7 +40,7 @@ const ProjectCard = ({
         <div className="flex items-center justify-start pr-[4.5rem]">
           <h3
             className="font-extrabold font-beckman uppercase w-[200px] h-[30px] 
-        whitespace-nowrap sm:text-[27px] text-[18px] text-white tracking-[1px]
+        whitespace-nowrap sm:text-[27px] text-[20px] xs:text-[24px] text-white tracking-[1px]
         absolute z-0 lg:bottom-[7rem] lg:rotate-[-90deg] lg:origin-[0,0]
         leading-none z-20 drop-shadow-lg hover:text-blue-300 transition-colors duration-300">
             {name}
@@ -152,18 +152,18 @@ const Projects = () => {
         whileInView="show"
         viewport={{ once: false, amount: 0.25 }}
         className={`${styles.innerWidth} mx-auto flex flex-col`}>
-        <div className="mt-[50px] flex lg:flex-row flex-col min-h-[70vh] gap-5">
-          {projects.map((project, index) => (
-            <ProjectCard
-              key={project.id}
-              id={project.id} // Ensure id is explicitly passed
-              index={index}
-              {...project}
-              active={active}
-              handleClick={setActive}
-            />
-          ))}
-        </div>
+      <div className="mt-[50px] flex lg:flex-row flex-col min-h-[70vh] gap-5">
+        {projects.map((project, index) => (
+          <ProjectCard
+            key={project.id}
+            id={project.id} // Ensure id is explicitly passed
+            index={index}
+            {...project}
+            active={active}
+            handleClick={setActive}
+          />
+        ))}
+      </div>
       </motion.div>
     </div>
   );
