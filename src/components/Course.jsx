@@ -357,19 +357,19 @@ const StudentSuccess = () => {
   const testimonials = [
     {
       quote: 'This cohort transformed my career. The hands-on approach and expert mentorship helped me land my dream job!',
-      author: 'Rahul Sharma',
+      author: 'Jhon Doe',
       position: 'Software Engineer at Google',
       image: '👨‍💼',
     },
     {
       quote: 'Best investment I made in my career. The curriculum is comprehensive and the community support is amazing.',
-      author: 'Priya Singh',
+      author: 'Jane Smith',
       position: 'Full-Stack Developer at Amazon',
       image: '👩‍💼',
     },
     {
       quote: "From zero to hero in 6 months! The projects and real-world scenarios prepared me for the industry.",
-      author: 'Arjun Patel',
+      author: 'Alex Johnson',
       position: 'Frontend Developer at Microsoft',
       image: '👨‍💻',
     },
