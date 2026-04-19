@@ -11,5 +11,6 @@ import Blog from './Blog';
 import Gov from './Gov';
 import Gallery from './Gallery';
 import YouTube from './YouTube';
+import Course from './Course';
 
-export { Hero, Navbar, About, Tech, Experience, Projects, Gadgets, Contact, Blog, Gov, Gallery, YouTube, BallCanvas };
+export { Hero, Navbar, About, Tech, Experience, Projects, Gadgets, Contact, Blog, Gov, Gallery, YouTube, BallCanvas, Course };

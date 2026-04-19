@@ -11,6 +11,7 @@ import {
   Gov,
   Gallery,
   YouTube,
+  Course,
 } from './components';
 import Blog from './components/Blog';
 import BlogDetail from './components/BlogDetail';
@@ -57,6 +58,7 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/course" element={<Course />} />
           <Route path="/gadgets" element={<Gadgets />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogDetail />} />
