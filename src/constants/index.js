@@ -403,16 +403,60 @@ const gadgets = [
     source: "https://www.marshallheadphones.com/us/en/emberton"  // official product page
   },
   {
-    id: "gadget-10",
-    name: "MacBook Pro 13-inch",
+    id: "gadget-11",
+    name: "MSI Optix MAG342CQR 34 Inch Curved Monitor",
     description:
-      "The MacBook Pro 13-inch is a powerful and portable laptop designed for professionals and creatives. With its M1 chip, stunning Retina display, and long battery life, it's perfect for on-the-go productivity.",
-    image: "https://res.cloudinary.com/dj6ebo4as/image/upload/v1761540506/Gadgets/Screenshot_2025-10-27_101128_pv9vki.png",
-    specs: ["Apple M1 Chip", "13-inch Retina Display", "Up to 20 hours battery life"],
-    price: "₹1,22,900",
-    link: "https://www.amazon.in/Apple-MacBook-13-inch-256GB-Storage/dp/B08N5WRWNZ",
-    source: "https://www.apple.com/in/macbook-pro-13/"  // official product page
-  }
+      "MSI Optix MAG342CQR 34 Inch (86.36 cm) Curved Monitor - 21:9 UWQHD 3440 x 1440 Pixels, 1ms Response Time, Night Vision, 178° Wide View Angle, Mystic Light RGB, Black. Perfect for gaming and productivity with its ultrawide curved display.",
+    image: "https://rukminim2.flixcart.com/image/300/300/xif0q/monitor/r/w/d/mag342cqr-e2-uwqhd-34-2024-mag342cqr-e2-msi-original-imah4w4rsykcyfjf.jpeg?q=90",
+    specs: ["34 Inch Curved", "3440 x 1440 UWQHD", "1ms Response Time", "1500R Curvature"],
+    price: "₹31,999",
+    link: "https://www.flipkart.com/msi-86-36-cm-34-inch-curved-uwqhd-va-panel-ai-vision-technology-1500r-curvature-119-srgb-hdr-ready-vesa-mountable-height-adjustable-gaming-monitor-mag342cqr-e2/p/itmd076c7ffceef4",
+    source: "https://www.msi.com/monitor/optix-mag342cqr" // official product page
+  },
+  {
+    id: "gadget-12",
+    name: "ASRock RX7600 SL 8GB Graphics Card",
+    description:
+      "ASRock Rx7600 Sl 8Go AMD Radeon Rx 7600 Steel Legend 8Gb OC Graphics Card - PCI_E_X8, GDDR6. High-performance entry-level graphics card with excellent power efficiency.",
+    image: "https://m.media-amazon.com/images/I/51T8V5H9V7L._AC_SL1000_.jpg",
+    specs: ["8GB GDDR6", "PCI Express 4.0 x8", "Steel Legend Design", "OC Edition"],
+    price: "₹13,999",
+    link: "https://www.amazon.in/ASRock-RX7600-CL-8GO-Challenger/dp/B0C626FFG2",
+    source: "https://www.asrock.com/Graphics/AMD/RX7600%20SL/"  // official product page
+  },
+  {
+    id: "gadget-13",
+    name: "Logitech G304 Wireless Gaming Mouse",
+    description:
+      "Logitech G304 Lightspeed Wireless Gaming Mouse, Hero Sensor, 12,000 DPI, Lightweight, 6 Programmable Buttons, 250h Battery Life, On-Board Memory, Compatible with PC/Mac - Black",
+    image: "https://m.media-amazon.com/images/I/71eRVmPIb-L._AC_SL1500_.jpg",
+    specs: ["12,000 DPI Hero Sensor", "6 Programmable Buttons", "250h Battery Life", "Lightweight Design"],
+    price: "₹3,999",
+    link: "https://www.amazon.in/Logitech-Lightspeed-Wireless-Gaming-Mouse/dp/B07G98H6PM",
+    source: "https://www.logitech.com/en-us/products/mice/g304-lightspeed-wireless-gaming-mouse"  // official product page
+  },
+  {
+    id: "gadget-14",
+    name: "Samsung Galaxy S25 Ultra 5G AI Smartphone",
+    description:
+      "Samsung Galaxy S25 Ultra 5G AI Smartphone (Titanium Black, 12GB RAM, 256GB Storage), 200MP Camera, S Pen Included, Long Battery Life. Premium flagship smartphone with advanced AI capabilities.",
+    image: "https://m.media-amazon.com/images/I/71XXXXXX.jpg",
+    specs: ["200MP Main Camera", "S Pen Included", "12GB RAM", "5G AI Features"],
+    price: "₹1,17,999",
+    link: "https://www.amazon.in/Samsung-Galaxy-AI-Titanium-Storage/dp/BXXXXXXX",
+    source: "https://www.samsung.com/in/galaxy/s25-ultra/"  // official product page
+  },
+  {
+    id: "gadget-15",
+    name: "Portronics Conch Theta C Type C Earphones",
+    description:
+      "Portronics Conch Theta C in Ear Type C Wired Earphones with in Line HD Mic, Powerful Audio, 14.2mm Driver, Unique Earbuds Design, TPE Anti Tangle Wire, in line Controls, Wide Compatibility(White)",
+    image: "https://res.cloudinary.com/dj6ebo4as/image/upload/v1777213830/Gadgets/portronics-conch-theta-c-earphones.jpg",
+    specs: ["Type C Connector", "14.2mm Driver", "HD Mic", "Anti Tangle Wire"],
+    price: "₹899",
+    link: "https://www.amazon.in/Portronics-Conch-Theta-Earphones-Controls/dp/BXXXXXXX",
+    source: "https://www.portronics.com/products/earphones"  // official product page
+  },
 ];
 
 
