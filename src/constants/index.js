@@ -280,26 +280,25 @@ const projects = [
   },
   {
     id: "project-5",
-    name: "Transport Management",
+    name: "Diageo",
     description:
-      "This is a web-related application that permits us to approach the entire knowledge regarding the College Transport Management, employees, students, faculties etc. This application is also called as College Transport Management System.",
+      "Diageo is a British multinational leader in premium drinks, producing and selling over 200 brands—including Johnnie Walker, Smirnoff, and Guinness—in nearly 180 countries. Headquartered in London, the company holds roughly 40% of all Scotch whisky production. It is publicly traded on the London and New York stock exchanges.",
     tags: [
       {
-        name: "Php",
+        name: "premium drinks",
         color: "blue-text-gradient",
       },
       {
-        name: "supabase",
+        name: "beverages",
         color: "green-text-gradient",
       },
       {
-        name: "css",
+        name: "multinational",
         color: "pink-text-gradient",
       },
     ],
-    image: nyeusi,
-    repo: "https://github.com/mirajhad/Transport-management-Version-2.0",
-    demo: "https://trans-p.000webhostapp.com/",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Diageo_logo.svg/220px-Diageo_logo.svg.png",
+    demo: "https://www.diageo.com/en",
   },
 ];
 
