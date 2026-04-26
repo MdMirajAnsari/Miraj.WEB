@@ -101,36 +101,98 @@ const Experience = () => {
                 />
               </div>
             }>
-            <button
+            <motion.button
               className="live-demo flex justify-between 
               sm:text-[18px] text-[14px] text-timberWolf 
               font-bold font-beckman items-center py-5 pl-3 pr-3 
               whitespace-nowrap gap-1 sm:w-[148px] sm:h-[58px] 
               w-[135px] h-[46px] rounded-[10px] bg-jetLight 
-              sm:mt-[22px] mt-[16px] hover:bg-battleGray 
-              hover:text-eerieBlack transition duration-[0.2s] 
-              ease-in-out"
+              sm:mt-[22px] mt-[16px] transition duration-[0.2s] 
+              ease-in-out relative overflow-hidden group"
               onClick={() => {
                 window.open(
                   'https://drive.google.com/file/d/1VH-Zb5P4hnfuQw596fImcDI0ALLw6win/view?usp=sharing',
                   '_blank'
                 );
+              }}
+              whileHover={{ 
+                scale: 1.08,
+                boxShadow: '0 0 25px rgba(0, 255, 150, 0.6), 0 0 40px rgba(0, 150, 255, 0.4)'
+              }}
+              whileTap={{ 
+                scale: 0.95,
+                boxShadow: '0 0 15px rgba(0, 255, 150, 0.4)'
+              }}
+              transition={{
+                type: 'spring',
+                stiffness: 300,
+                damping: 15
               }}>
+              {/* Animated background gradient */}
               <motion.div
-                whileTap={{ scale: 0.9 }}
-                className="flex items-center gap-2"
+                className="absolute inset-0 bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 opacity-0 group-hover:opacity-20 rounded-[10px]"
+                animate={{ 
+                  backgroundPosition: ['0% center', '100% center', '0% center']
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: 'linear'
+                }}
+              />
+              
+              <motion.div
+                className="flex items-center gap-2 relative z-10"
+                whileTap={{ scale: 0.95 }}
+                transition={{
+                  type: 'spring',
+                  stiffness: 400,
+                  damping: 20
+                }}
               >
-                MY RESUME
+                <motion.span
+                  animate={{ y: [0, -2, 0] }}
+                  transition={{
+                    duration: 0.6,
+                    repeat: Infinity,
+                    repeatType: 'reverse',
+                    ease: 'easeInOut'
+                  }}
+                >
+                  MY RESUME
+                </motion.span>
+                
                 <motion.img
                   src={download}
                   alt="download"
                   className="download-btn sm:w-[26px] sm:h-[26px] 
                   w-[23px] h-[23px] object-contain"
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.5 }}
+                  whileHover={{ 
+                    rotate: 360,
+                    scale: 1.2
+                  }}
+                  whileTap={{
+                    rotate: 180,
+                    scale: 0.9
+                  }}
+                  transition={{ 
+                    duration: 0.6,
+                    type: 'spring',
+                    stiffness: 200
+                  }}
                 />
               </motion.div>
-            </button>
+
+              {/* Pulse effect on hover */}
+              <motion.div
+                className="absolute inset-0 bg-white opacity-0 rounded-[10px]"
+                animate={{ opacity: 0 }}
+                whileHover={{ 
+                  opacity: [0, 0.1, 0],
+                }}
+                transition={{ duration: 0.6 }}
+              />
+            </motion.button>
           </VerticalTimelineElement>
         </VerticalTimeline>
       </div>
