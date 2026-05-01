@@ -1322,5 +1322,18 @@ These directives make Angular powerful for building dynamic, interactive user in
     markdownUrl:
       "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/typeOfJS.md",
   },
+  33: {
+    id: 33,
+    title: "Practical Clean Architecture",
+    excerpt:
+      "Practical Clean Architecture README loaded directly from its GitHub repository.",
+    date: "May 01, 2026",
+    category: "Architecture",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/phongnguyend/Practical.CleanArchitecture/blob/master/README.md",
+  },
 
 };
