@@ -5,50 +5,134 @@ const Gallery = () => {
   const [images] = useState([
     {
       id: 1,
-      url: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=400&h=300&fit=crop',
-      name: 'Butterfly on Leaf',
-      originalUrl: 'https://unsplash.com/photos/a-butterfly-on-a-leaf-Kl3MvqEPJmY',
-      category: 'fun'
+      url: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654842/GalaryScene/IMG_20231227_070256752_ljlbp8.jpg',
+      name: 'Scene 1',
+      originalUrl: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654842/GalaryScene/IMG_20231227_070256752_ljlbp8.jpg',
+      category: 'scene'
     },
     {
       id: 2,
-      url: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=400&h=300&fit=crop',
-      name: 'City Lights Bokeh',
-      originalUrl: 'https://unsplash.com/photos/bokeh-photography-of-city-lights-during-night-time-ixcjK6eLaIs',
-      category: 'tech'
+      url: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654842/GalaryScene/IMG_20210227_162542_mjbd7m.jpg',
+      name: 'Scene 2',
+      originalUrl: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654842/GalaryScene/IMG_20210227_162542_mjbd7m.jpg',
+      category: 'scene'
     },
     {
       id: 3,
-      url: 'https://images.unsplash.com/photo-1549144511-f099e773c147?w=400&h=300&fit=crop',
-      name: 'Golden Buddha Statue',
-      originalUrl: 'https://unsplash.com/photos/a-large-golden-buddha-statue-sits-atop-a-colorful-pedestal--YbWw5mpgms',
-      category: 'interview'
+      url: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654836/GalaryScene/IMG20250222134645_jsdseg.jpg',
+      name: 'Scene 3',
+      originalUrl: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654836/GalaryScene/IMG20250222134645_jsdseg.jpg',
+      category: 'scene'
     },
     {
       id: 4,
-      url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop',
-      name: 'Red Wall Architecture',
-      originalUrl: 'https://unsplash.com/photos/red-wall-with-blue-ceiling-and-red-pillar-S6aUx1L_qrA',
-      category: 'coding'
+      url: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654834/GalaryScene/IMG20250529145657_cbitot.jpg',
+      name: 'Scene 4',
+      originalUrl: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654834/GalaryScene/IMG20250529145657_cbitot.jpg',
+      category: 'scene'
     },
     {
       id: 5,
-      url: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop',
-      name: 'Yellow Vintage Car',
-      originalUrl: 'https://unsplash.com/photos/a-yellow-vintage-car-parked-by-a-body-of-water-J9arQNc4xTU',
-      category: 'projects'
+      url: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654832/GalaryScene/IMG-20250729-WA0012_icvb6q.jpg',
+      name: 'Scene 5',
+      originalUrl: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654832/GalaryScene/IMG-20250729-WA0012_icvb6q.jpg',
+      category: 'scene'
     },
     {
       id: 6,
-      url: 'https://images.unsplash.com/photo-1551782450-17144efb5723?w=400&h=300&fit=crop',
-      name: 'White Eggs',
-      originalUrl: 'https://unsplash.com/photos/two-white-eggs-one-cracked-on-black-background-aBHhCAB_xqc',
-      category: 'fun'
+      url: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654832/GalaryScene/IMG_20240307_143932632_brb2gx.jpg',
+      name: 'Scene 6',
+      originalUrl: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654832/GalaryScene/IMG_20240307_143932632_brb2gx.jpg',
+      category: 'scene'
+    },
+    {
+      id: 7,
+      url: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654831/GalaryScene/IMG_20231009_110354449_aq39c0.jpg',
+      name: 'Scene 7',
+      originalUrl: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654831/GalaryScene/IMG_20231009_110354449_aq39c0.jpg',
+      category: 'scene'
+    },
+    {
+      id: 8,
+      url: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654832/GalaryScene/IMG_20240307_143932632_brb2gx.jpg',
+      name: 'Scene 8',
+      originalUrl: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654832/GalaryScene/IMG_20240307_143932632_brb2gx.jpg',
+      category: 'scene'
+    },
+    {
+      id: 9,
+      url: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654831/GalaryScene/IMG_20231009_110354449_aq39c0.jpg',
+      name: 'Scene 9',
+      originalUrl: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654831/GalaryScene/IMG_20231009_110354449_aq39c0.jpg',
+      category: 'scene'
+    },
+    {
+      id: 10,
+      url: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654831/GalaryScene/IMG-20250404-WA0071_rjshoi.jpg',
+      name: 'Scene 10',
+      originalUrl: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654831/GalaryScene/IMG-20250404-WA0071_rjshoi.jpg',
+      category: 'scene'
+    },
+    {
+      id: 11,
+      url: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654831/GalaryScene/IMG_20230914_161324766_sevkyy.jpg',
+      name: 'Scene 11',
+      originalUrl: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654831/GalaryScene/IMG_20230914_161324766_sevkyy.jpg',
+      category: 'scene'
+    },
+    {
+      id: 12,
+      url: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654831/GalaryScene/c6681a26-9796-45fa-9eef-20af3484ead9_htudjj.jpg',
+      name: 'Scene 12',
+      originalUrl: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654831/GalaryScene/c6681a26-9796-45fa-9eef-20af3484ead9_htudjj.jpg',
+      category: 'scene'
+    },
+    {
+      id: 13,
+      url: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654830/GalaryScene/IMG_20240107_164842869_fbdmz4.jpg',
+      name: 'Scene 13',
+      originalUrl: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654830/GalaryScene/IMG_20240107_164842869_fbdmz4.jpg',
+      category: 'scene'
+    },
+    {
+      id: 14,
+      url: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654830/GalaryScene/IMG_7385_skxk7e.jpg',
+      name: 'Scene 14',
+      originalUrl: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654830/GalaryScene/IMG_7385_skxk7e.jpg',
+      category: 'scene'
+    },
+    {
+      id: 15,
+      url: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654830/GalaryScene/24059141-8640-4bee-a3a6-3f46979e612b_mdro7q.jpg',
+      name: 'Scene 15',
+      originalUrl: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654830/GalaryScene/24059141-8640-4bee-a3a6-3f46979e612b_mdro7q.jpg',
+      category: 'scene'
+    },
+    {
+      id: 16,
+      url: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654829/GalaryScene/IMG-20250404-WA0025_gyilhd.jpg',
+      name: 'Scene 16',
+      originalUrl: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654829/GalaryScene/IMG-20250404-WA0025_gyilhd.jpg',
+      category: 'scene'
+    },
+    {
+      id: 17,
+      url: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654827/GalaryScene/IMG_7230_nciin5.jpg',
+      name: 'Scene 17',
+      originalUrl: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654827/GalaryScene/IMG_7230_nciin5.jpg',
+      category: 'scene'
+    },
+    {
+      id: 18,
+      url: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654789/GalaryScene/IMG20250404131640_qiopxi.jpg',
+      name: 'Scene 18',
+      originalUrl: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654789/GalaryScene/IMG20250404131640_qiopxi.jpg',
+      category: 'scene'
     }
   ]);
 
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const categories = ['all', 'tech', 'interview', 'fun', 'coding', 'projects'];
+  const categories = ['all', 'scene'];
 
   const filteredImages = selectedCategory === 'all' 
     ? images 
@@ -121,7 +205,7 @@ const Gallery = () => {
                 rel="noopener noreferrer"
                 className="text-xs text-blue-600 hover:text-blue-800 transition-colors"
               >
-                View on Unsplash
+                View photo
               </a>
             </div>
           </div>
