@@ -39,15 +39,22 @@ const YouTube = () => {
   const filteredVideos = selectedCategory === 'all' 
     ? videos 
     : videos.filter(video => video.category === selectedCategory);
+  const totalVideos = videos.length;
+  const visibleVideos = filteredVideos.length;
 
   return (
     <div className={`${styles.padding} max-w-7xl mx-auto relative z-0`}>
       <div className="text-center mb-8">
-        <h2 className={`${styles.sectionHeadText} text-center`}>
+        <h2 className={`${styles.sectionHeadText} text-center text-white`}>
           YouTube Videos
         </h2>
-        <p className={`${styles.sectionSubText} text-center`}>
+        <p className={`${styles.sectionSubText} text-center text-gray-300`}>
           Watch my favorite videos
+        </p>
+        <p className="mt-3 text-sm sm:text-base text-blue-600 font-poppins">
+          {selectedCategory === 'all'
+            ? `${totalVideos} videos`
+            : `${visibleVideos} of ${totalVideos} videos`}
         </p>
       </div>
 

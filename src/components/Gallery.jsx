@@ -53,15 +53,22 @@ const Gallery = () => {
   const filteredImages = selectedCategory === 'all' 
     ? images 
     : images.filter(image => image.category === selectedCategory);
+  const totalImages = images.length;
+  const visibleImages = filteredImages.length;
 
   return (
     <div className={`${styles.padding} max-w-7xl mx-auto relative z-0`}>
       <div className="text-center mb-8">
-        <h2 className={`${styles.sectionHeadText} text-center`}>
+        <h2 className={`${styles.sectionHeadText} text-center text-white`}>
           Gallery
         </h2>
-        <p className={`${styles.sectionSubText} text-center`}>
+        <p className={`${styles.sectionSubText} text-center text-gray-300`}>
           Featured Photos Collection
+        </p>
+        <p className="mt-3 text-sm sm:text-base text-blue-300 font-poppins">
+          {selectedCategory === 'all'
+            ? `${totalImages} photos`
+            : `${visibleImages} of ${totalImages} photos`}
         </p>
       </div>
 

@@ -71,6 +71,8 @@ const Blog = () => {
   const filteredPosts = selectedCategory === 'all'
     ? posts
     : posts.filter((post) => post.category === selectedCategory);
+  const totalPosts = posts.length;
+  const visiblePosts = filteredPosts.length;
 
   return (
     <div className={`${styles.padding} max-w-7xl mx-auto relative z-0 bg-primary min-h-screen pt-[80px] pb-10`}>
@@ -80,6 +82,11 @@ const Blog = () => {
         </h2>
         <p className={`${styles.sectionSubText} text-center text-gray-400`}>
           Sharing insights, tutorials, and thoughts on web development
+        </p>
+        <p className="mt-3 text-sm sm:text-base text-indigo-300 font-poppins">
+          {selectedCategory === 'all'
+            ? `${totalPosts} blogs`
+            : `${visiblePosts} of ${totalPosts} blogs`}
         </p>
       </div>
 
