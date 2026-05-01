@@ -418,7 +418,7 @@ const gadgets = [
     name: "ASRock RX7600 SL 8GB Graphics Card",
     description:
       "ASRock Rx7600 Sl 8Go AMD Radeon Rx 7600 Steel Legend 8Gb OC Graphics Card - PCI_E_X8, GDDR6. High-performance entry-level graphics card with excellent power efficiency.",
-    image: "https://m.media-amazon.com/images/I/51T8V5H9V7L._AC_SL1000_.jpg",
+    image: "https://res.cloudinary.com/dj6ebo4as/image/upload/v1777618466/Gadgets/61G-kbh4_hL._SX679__nfgug6.jpg",
     specs: ["8GB GDDR6", "PCI Express 4.0 x8", "Steel Legend Design", "OC Edition"],
     price: "₹13,999",
     link: "https://www.amazon.in/ASRock-RX7600-CL-8GO-Challenger/dp/B0C626FFG2",
@@ -429,7 +429,7 @@ const gadgets = [
     name: "Logitech G304 Wireless Gaming Mouse",
     description:
       "Logitech G304 Lightspeed Wireless Gaming Mouse, Hero Sensor, 12,000 DPI, Lightweight, 6 Programmable Buttons, 250h Battery Life, On-Board Memory, Compatible with PC/Mac - Black",
-    image: "https://m.media-amazon.com/images/I/71eRVmPIb-L._AC_SL1500_.jpg",
+    image: "https://res.cloudinary.com/dj6ebo4as/image/upload/v1777618465/Gadgets/51VpABY-b6L._SX679__xttvjk.jpg",
     specs: ["12,000 DPI Hero Sensor", "6 Programmable Buttons", "250h Battery Life", "Lightweight Design"],
     price: "₹3,999",
     link: "https://www.amazon.in/Logitech-Lightspeed-Wireless-Gaming-Mouse/dp/B07G98H6PM",
@@ -440,7 +440,7 @@ const gadgets = [
     name: "Samsung Galaxy S25 Ultra 5G AI Smartphone",
     description:
       "Samsung Galaxy S25 Ultra 5G AI Smartphone (Titanium Black, 12GB RAM, 256GB Storage), 200MP Camera, S Pen Included, Long Battery Life. Premium flagship smartphone with advanced AI capabilities.",
-    image: "https://m.media-amazon.com/images/I/71XXXXXX.jpg",
+    image: "https://res.cloudinary.com/dj6ebo4as/image/upload/v1777618465/Gadgets/61-g46cjguL._SX679__cayfdw.jpg",
     specs: ["200MP Main Camera", "S Pen Included", "12GB RAM", "5G AI Features"],
     price: "₹1,17,999",
     link: "https://www.amazon.in/Samsung-Galaxy-AI-Titanium-Storage/dp/BXXXXXXX",
@@ -451,7 +451,7 @@ const gadgets = [
     name: "Portronics Conch Theta C Type C Earphones",
     description:
       "Portronics Conch Theta C in Ear Type C Wired Earphones with in Line HD Mic, Powerful Audio, 14.2mm Driver, Unique Earbuds Design, TPE Anti Tangle Wire, in line Controls, Wide Compatibility(White)",
-    image: "https://res.cloudinary.com/dj6ebo4as/image/upload/v1777213830/Gadgets/portronics-conch-theta-c-earphones.jpg",
+    image: "https://res.cloudinary.com/dj6ebo4as/image/upload/v1777618466/Gadgets/Portronics_Conch_Tune_C_Earphones_Wired_C_Type_1440x_jnh0nz.webp",
     specs: ["Type C Connector", "14.2mm Driver", "HD Mic", "Anti Tangle Wire"],
     price: "₹899",
     link: "https://www.amazon.in/Portronics-Conch-Theta-Earphones-Controls/dp/BXXXXXXX",
