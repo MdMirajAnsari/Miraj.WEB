@@ -1335,5 +1335,18 @@ These directives make Angular powerful for building dynamic, interactive user in
     markdownUrl:
       "https://github.com/phongnguyend/Practical.CleanArchitecture/blob/master/README.md",
   },
+  34: {
+    id: 34,
+    title: "Code Practice Interview Notes",
+    excerpt:
+      "Code practice notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "Coding Practice",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/CodePractice.md",
+  },
 
 };
