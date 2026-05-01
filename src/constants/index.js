@@ -297,7 +297,7 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Diageo_logo.svg/220px-Diageo_logo.svg.png",
+    image: "https://img.etimg.com/thumb/msid-123717553,width-300,height-225,imgsize-14844,resizemode-75/value-contribution-from-india-will-keep-rising-on-back-of-premiumisation-diageo.jpg",
     demo: "https://www.diageo.com/en",
   },
 ];
