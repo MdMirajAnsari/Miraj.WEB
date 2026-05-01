@@ -66,8 +66,8 @@ const YouTube = () => {
             onClick={() => setSelectedCategory(category)}
             className={`px-3 py-2 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-colors ${
               selectedCategory === category
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                ? 'glass-button-active text-white'
+                : 'glass-button text-gray-300'
             }`}
           >
             {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -77,10 +77,10 @@ const YouTube = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
         {filteredVideos.map((video) => (
-          <div key={video.id} className="bg-white rounded-lg shadow-md overflow-hidden relative">
+          <div key={video.id} className="glass-card rounded-lg overflow-hidden relative transition-all duration-300 hover:-translate-y-1">
             {/* Category Badge */}
             <div className="absolute top-2 left-2 z-10">
-              <span className="px-2 py-1 bg-blue-600 text-white text-xs font-bold rounded-full uppercase">
+              <span className="px-2 py-1 bg-blue-500/70 backdrop-blur-md border border-white/20 text-white text-xs font-bold rounded-full uppercase">
                 {video.category}
               </span>
             </div>
@@ -97,7 +97,7 @@ const YouTube = () => {
               ></iframe>
             </div>
             <div className="p-4 sm:p-4">
-              <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-2">{video.title}</h3>
+              <h3 className="text-base sm:text-lg font-semibold text-white mb-2">{video.title}</h3>
               <a
                 href={video.url}
                 target="_blank"

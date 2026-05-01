@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {
   About,
@@ -16,8 +17,9 @@ import {
 import Blog from './components/Blog';
 import BlogDetail from './components/BlogDetail';
 import Footer from './components/Footer';
+import PropTypes from 'prop-types';
 
-const HomePage = () => (
+const HomePage = ({ theme, onThemeChange }) => (
   <>
     <div>
       <Hero />
@@ -47,17 +49,41 @@ const HomePage = () => (
     </div>
 
     {/* Footer - Only on Home Page */}
-    <Footer />
+    <Footer theme={theme} onThemeChange={onThemeChange} />
   </>
 );
 
+HomePage.propTypes = {
+  theme: PropTypes.oneOf(['dark', 'light', 'glass']).isRequired,
+  onThemeChange: PropTypes.func.isRequired,
+};
+
 const App = () => {
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === 'undefined') return 'glass';
+
+    const savedTheme = window.localStorage.getItem('theme');
+
+    return ['dark', 'light', 'glass'].includes(savedTheme) ? savedTheme : 'glass';
+  });
+
+  useEffect(() => {
+    window.localStorage.setItem('theme', theme);
+  }, [theme]);
+
   return (
     <BrowserRouter>
-      <div className="relative z-0">
+      <div
+        className={`theme-${theme} ${
+          theme === 'glass' ? 'glass-theme' : ''
+        } relative z-0 min-h-screen`}
+      >
         <Navbar />
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/"
+            element={<HomePage theme={theme} onThemeChange={setTheme} />}
+          />
           <Route path="/course" element={<Course />} />
           <Route path="/gadgets" element={<Gadgets />} />
           <Route path="/blog" element={<Blog />} />

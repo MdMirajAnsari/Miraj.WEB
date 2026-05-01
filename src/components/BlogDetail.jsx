@@ -60,14 +60,14 @@ const BlogDetail = () => {
 
   if (!blog) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-primary">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-4xl font-beckman font-bold text-white mb-4">
             Blog Not Found
           </h2>
           <button
             onClick={() => navigate('/blog')}
-            className="bg-night text-white px-6 py-3 rounded-lg font-poppins hover:bg-night/80 transition">
+            className="glass-button text-white px-6 py-3 rounded-lg font-poppins transition">
             Back to Blog
           </button>
         </div>
@@ -76,7 +76,7 @@ const BlogDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-primary pt-[120px] pb-20">
+    <div className="min-h-screen pt-[120px] pb-20">
       <div className="max-w-4xl mx-auto px-6">
         {/* Back Button */}
         <motion.button
@@ -107,7 +107,7 @@ const BlogDetail = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="w-full h-[400px] rounded-[20px] overflow-hidden mb-8">
+          className="glass-card w-full h-[400px] rounded-[20px] overflow-hidden mb-8 p-2">
           <img
             src={blog.image}
             alt={blog.title}
@@ -121,7 +121,7 @@ const BlogDetail = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mb-4">
-          <span className="px-4 py-2 bg-battleGray rounded-full text-[14px] font-bold text-white uppercase tracking-wider">
+          <span className="px-4 py-2 bg-white/15 backdrop-blur-md border border-white/20 rounded-full text-[14px] font-bold text-white uppercase tracking-wider">
             {blog.category}
           </span>
         </motion.div>
@@ -243,7 +243,7 @@ const BlogDetail = () => {
                   '_blank'
                 )
               }
-              className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-poppins transition">
+              className="glass-button text-white px-6 py-3 rounded-lg font-poppins transition">
               Twitter
             </button>
             <button
@@ -253,7 +253,7 @@ const BlogDetail = () => {
                   '_blank'
                 )
               }
-              className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-poppins transition">
+              className="glass-button text-white px-6 py-3 rounded-lg font-poppins transition">
               LinkedIn
             </button>
             <button
@@ -263,7 +263,7 @@ const BlogDetail = () => {
                   '_blank'
                 )
               }
-              className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-poppins transition">
+              className="glass-button text-white px-6 py-3 rounded-lg font-poppins transition">
               Facebook
             </button>
           </div>

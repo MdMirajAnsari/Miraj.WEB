@@ -43,7 +43,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`${styles.paddingX} w-full flex items-center py-3 fixed top-0 z-50 bg-flashWhite/95 backdrop-blur-sm border-b border-white/10 shadow-sm`}
+      className={`${styles.paddingX} w-full flex items-center py-3 fixed top-0 z-50 glass-surface border-b border-white/10`}
     >
       <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
         <Link
@@ -72,8 +72,8 @@ const Navbar = () => {
             <li
               key={nav.id}
               className={`${
-                active === nav.title ? 'text-french' : 'text-eerieBlack'
-              } hover:text-taupe text-[16px] sm:text-[18px] md:text-[20px] font-medium font-mova 
+                active === nav.title ? 'text-white' : 'text-slate-200'
+              } hover:text-blue-200 text-[16px] sm:text-[18px] md:text-[20px] font-medium font-mova 
                 uppercase tracking-[2px] cursor-pointer nav-links`}
               onClick={() => handleNavClick(nav)}
             >
@@ -92,7 +92,7 @@ const Navbar = () => {
                 <button
                   type="button"
                   onClick={() => setToggle(false)}
-                  className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center focus:outline-none"
+                  className="w-12 h-12 rounded-full glass-button flex items-center justify-center focus:outline-none"
                   aria-label="Close menu"
                 >
                   <img
@@ -125,7 +125,7 @@ const Navbar = () => {
             <button
               type="button"
               onClick={() => setToggle(true)}
-              className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-sm border border-slate-200 focus:outline-none"
+              className="inline-flex items-center justify-center w-12 h-12 rounded-full glass-button focus:outline-none"
               aria-label="Open menu"
             >
               <img

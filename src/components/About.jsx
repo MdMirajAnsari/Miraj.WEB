@@ -9,14 +9,14 @@ const ServiceCard = ({ index, title, icon }) => {
   return (
     <motion.div
       variants={fadeIn("right", "spring", 0.5 * index, 0.75)}
-      className="xs:w-[240px] w-full sm:w-[250px] card-gradient p-[1px] rounded-[20px] shadow-card"
+      className="xs:w-[240px] w-full sm:w-[250px] glass-card p-[1px] rounded-[20px]"
     >
       <div
       
-        className="bg-jetLight rounded-[20px] py-4 px-6 sm:py-5 sm:px-12 min-h-[260px] sm:min-h-[280px] flex justify-evenly items-center flex-col"
+        className="rounded-[20px] py-4 px-6 sm:py-5 sm:px-12 min-h-[260px] sm:min-h-[280px] flex justify-evenly items-center flex-col"
       >
         <img src={icon} alt={title} className="w-12 h-12 sm:w-16 sm:h-16 object-contain" />
-        <h3 className="text-taupe text-[16px] sm:text-[18px] font-bold text-center">
+        <h3 className="text-slate-100 text-[16px] sm:text-[18px] font-bold text-center">
           {title}
         </h3>
       </div>

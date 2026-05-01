@@ -7,10 +7,10 @@ const BlogCard = ({ id, title, excerpt, date, category, readTime, image }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-gray-900 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer relative border border-gray-800" onClick={() => navigate(`/blog/${id}`)}>
+    <div className="glass-card rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer relative hover:-translate-y-1" onClick={() => navigate(`/blog/${id}`)}>
       {/* Category Badge */}
       <div className="absolute top-2 left-2 z-10">
-        <span className="px-2 py-1 bg-indigo-600 text-white text-xs font-bold rounded-full uppercase">
+        <span className="px-2 py-1 bg-indigo-500/70 backdrop-blur-md border border-white/20 text-white text-xs font-bold rounded-full uppercase">
           {category}
         </span>
       </div>
@@ -75,7 +75,7 @@ const Blog = () => {
   const visiblePosts = filteredPosts.length;
 
   return (
-    <div className={`${styles.padding} max-w-7xl mx-auto relative z-0 bg-primary min-h-screen pt-[80px] pb-10`}>
+    <div className={`${styles.padding} max-w-7xl mx-auto relative z-0 min-h-screen pt-[80px] pb-10`}>
       <div className="text-center mb-8">
         <h2 className={`${styles.sectionHeadText} text-center text-white`}>
           Blog
@@ -98,8 +98,8 @@ const Blog = () => {
             onClick={() => setSelectedCategory(category)}
             className={`px-3 py-2 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-colors ${
               selectedCategory === category
-                ? 'bg-indigo-600 text-white'
-                : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                ? 'glass-button-active text-white'
+                : 'glass-button text-gray-300'
             }`}
           >
             {category.charAt(0).toUpperCase() + category.slice(1)}

@@ -80,8 +80,8 @@ const Gallery = () => {
             onClick={() => setSelectedCategory(category)}
             className={`px-3 py-2 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-colors ${
               selectedCategory === category
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                ? 'glass-button-active text-white'
+                : 'glass-button text-gray-300'
             }`}
           >
             {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -94,7 +94,7 @@ const Gallery = () => {
           <div key={image.id} className="relative group">
             {/* Category Badge */}
             <div className="absolute top-2 left-2 z-10">
-              <span className="px-2 py-1 bg-blue-600 text-white text-xs font-bold rounded-full uppercase">
+              <span className="px-2 py-1 bg-blue-500/70 backdrop-blur-md border border-white/20 text-white text-xs font-bold rounded-full uppercase">
                 {image.category}
               </span>
             </div>
@@ -113,8 +113,8 @@ const Gallery = () => {
                 }}
               />
             </a>
-            <div className="mt-2 sm:mt-3">
-              <p className="text-sm font-medium text-gray-800 truncate">{image.name}</p>
+            <div className="glass-card mt-2 sm:mt-3 rounded-lg px-3 py-2">
+              <p className="text-sm font-medium text-white truncate">{image.name}</p>
               <a
                 href={image.originalUrl}
                 target="_blank"

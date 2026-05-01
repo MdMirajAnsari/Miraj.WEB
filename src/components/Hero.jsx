@@ -11,7 +11,7 @@ const Hero = () => {
 
       <section
         className="relative flex sm:flex-row flex-col w-full h-screen mx-auto 
-        sm:bg-hero bg-hero-mobile overflow-hidden"
+        overflow-hidden"
       >
         <NetworkWebBackground />
         <div
@@ -22,24 +22,24 @@ const Hero = () => {
         >
           <div className="flex flex-col justify-center items-center mt-5 ml-3">
             
-            <div className="w-5 h-5 rounded-full bg-[#0a0a0a] sm:hidden" />
+            <div className="w-5 h-5 rounded-full bg-white/80 sm:hidden" />
             <div className="w-1 sm:h-80 h-40 bw-gradient sm:hidden" />
           </div>
 
           <div>
             <h1
-              className={`${styles.heroHeadText} text-eerieBlack font-poppins uppercase text-center sm:text-left`}
+              className={`${styles.heroHeadText} font-poppins uppercase text-center sm:text-left drop-shadow-lg`}
             >
               HI, I&apos;m &nbsp;
               <span
-                className="sm:text-battleGray sm:text-[90px] 
-                text-eerieBlack text-[40px] xs:text-[45px] font-mova
+                className="sm:text-blue-200 sm:text-[90px] 
+                text-white text-[40px] xs:text-[45px] font-mova
                 font-extrabold uppercase block sm:inline"
               >
                 MOHAMMAD MIRAJ
               </span>
             </h1>
-            <p className={`${styles.heroSubText} mt-2 text-eerieBlack text-center sm:text-left`}>
+            <p className={`${styles.heroSubText} mt-2 text-center sm:text-left drop-shadow-md`}>
               Software Engineer. <br className="sm:block hidden" />
               Bangalore, India.
             </p>
@@ -59,7 +59,7 @@ const Hero = () => {
           <a href="#about">
             <div
               className="w-[35px] h-[64px] rounded-3xl border-4 
-             border-dim flex
+             border-white/40 flex
             justify-center items-start p-2"
             >
               <motion.div
@@ -71,7 +71,7 @@ const Hero = () => {
                   repeat: Infinity,
                   repeatType: "loop",
                 }}
-                className="w-3 h-3 rounded-full bg-taupe mb-1"
+                className="w-3 h-3 rounded-full bg-blue-200 mb-1"
               />
             </div>
           </a>

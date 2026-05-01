@@ -10,8 +10,8 @@ const GadgetCard = ({ id, name, description, image, specs, price, link, index })
   return (
     <motion.div
       variants={fadeIn('up', 'spring', index * 0.5, 0.75)}
-      className="bg-jetLight p-5 rounded-[20px] w-full sm:w-[300px] 
-        shadow-card hover:shadow-xl transition-all duration-300 
+      className="glass-card p-5 rounded-[20px] w-full sm:w-[300px] 
+        hover:shadow-xl transition-all duration-300 
         hover:scale-[1.02] cursor-pointer">
       <div className="relative w-full h-[200px]">
         <img
@@ -38,7 +38,7 @@ const GadgetCard = ({ id, name, description, image, specs, price, link, index })
             {specs.map((spec, idx) => (
               <span
                 key={idx}
-                className="px-3 py-1 bg-night text-timberWolf 
+                className="px-3 py-1 glass-button text-timberWolf 
                   text-[12px] rounded-[5px] font-poppins">
                 {spec}
               </span>
@@ -55,9 +55,8 @@ const GadgetCard = ({ id, name, description, image, specs, price, link, index })
           {link && (
             <button
               onClick={() => window.open(link, '_blank')}
-              className="bg-night text-timberWolf px-4 py-2 rounded-[8px] 
-                text-[14px] font-poppins hover:bg-battleGray 
-                hover:text-eerieBlack transition duration-300 font-medium">
+              className="glass-button text-timberWolf px-4 py-2 rounded-[8px] 
+                text-[14px] font-poppins hover:text-white transition duration-300 font-medium">
               View Details
             </button>
           )}
@@ -86,7 +85,7 @@ const Gadgets = () => {
   }
 
   return (
-    <div className="relative z-0 bg-primary min-h-screen pt-[120px] pb-20">
+    <div className="relative z-0 min-h-screen pt-[120px] pb-20">
       <div className={`${styles.padding} max-w-7xl mx-auto`}>
         <motion.div
           variants={textVariant()}
@@ -103,8 +102,8 @@ const Gadgets = () => {
             onClick={() => setActiveTab('gadgets')}
             className={`px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 ${
               activeTab === 'gadgets'
-                ? 'bg-french text-timberWolf shadow-lg'
-                : 'bg-jetLight text-taupe hover:bg-battleGray'
+                ? 'glass-button-active text-white shadow-lg'
+                : 'glass-button text-taupe'
             }`}>
             Gadgets
           </button>
@@ -112,8 +111,8 @@ const Gadgets = () => {
             onClick={() => setActiveTab('software')}
             className={`px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 ${
               activeTab === 'software'
-                ? 'bg-french text-timberWolf shadow-lg'
-                : 'bg-jetLight text-taupe hover:bg-battleGray'
+                ? 'glass-button-active text-white shadow-lg'
+                : 'glass-button text-taupe'
             }`}>
             Applications
           </button>

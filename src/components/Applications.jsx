@@ -5,7 +5,7 @@ import { fadeIn, textVariant } from '../utils/motion';
 
 const Applications = ({ setActiveTab }) => {
   return (
-    <div className="relative z-0 bg-primary min-h-screen pt-[120px] pb-20">
+    <div className="relative z-0 min-h-screen pt-[120px] pb-20">
       <div className={`${styles.padding} max-w-7xl mx-auto`}>
         <motion.div
           variants={textVariant()}
@@ -20,12 +20,12 @@ const Applications = ({ setActiveTab }) => {
         <div className="mt-8 flex gap-4">
           <button
             onClick={() => setActiveTab('gadgets')}
-            className="px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 bg-jetLight text-taupe hover:bg-battleGray">
+            className="px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 glass-button text-taupe">
             Gadgets
           </button>
           <button
             onClick={() => setActiveTab('software')}
-            className="px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 bg-french text-timberWolf shadow-lg">
+            className="px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 glass-button-active text-white shadow-lg">
             Applications
           </button>
         </div>

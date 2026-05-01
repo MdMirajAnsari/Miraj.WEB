@@ -38,10 +38,10 @@ const govLinks = [
 
 const Gov = () => {
   return (
-    <div className="mt-12 mb-20 bg-slate-100/80 rounded-[30px] p-6 border border-slate-200 shadow-sm">
+    <div className="glass-card mt-12 mb-20 rounded-[30px] p-6">
       <motion.div variants={textVariant()}>
-        <p className={`${styles.sectionSubText} text-slate-500`}>Government Links</p>
-        <h2 className={`${styles.sectionHeadTextLight} text-slate-800`}>Gov Resources</h2>
+        <p className={`${styles.sectionSubText} text-slate-300`}>Government Links</p>
+        <h2 className={`${styles.sectionHeadTextLight} text-white`}>Gov Resources</h2>
       </motion.div>
 
       <motion.p
@@ -58,15 +58,15 @@ const Gov = () => {
             target="_blank"
             rel="noreferrer"
             variants={fadeIn('up', 'spring', index * 0.15, 0.75)}
-            className="block rounded-[20px] border border-slate-200 bg-slate-50 p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md"
+            className="glass-card block rounded-[20px] p-6 transition-transform duration-300 hover:-translate-y-1 hover:shadow-md"
           >
-            <div className="mb-4 text-[20px] font-beckman font-bold text-slate-900">
+            <div className="mb-4 text-[20px] font-beckman font-bold text-white">
               {link.title}
             </div>
             <p className="text-slate-600 text-[15px] leading-[24px] mb-4">
               {link.description}
             </p>
-            <span className="text-slate-700 font-bold text-[14px]">Visit site →</span>
+            <span className="text-blue-200 font-bold text-[14px]">Visit site →</span>
           </motion.a>
         ))}
       </div>
