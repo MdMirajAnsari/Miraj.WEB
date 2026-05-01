@@ -1348,5 +1348,18 @@ These directives make Angular powerful for building dynamic, interactive user in
     markdownUrl:
       "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/CodePractice.md",
   },
+  35: {
+    id: 35,
+    title: "Reference Architecture",
+    excerpt:
+      "Reference architecture notes loaded directly from the Reference-Architecture repository README.",
+    date: "May 02, 2026",
+    category: "Architecture",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/Reference-Architecture/blob/main/README.md",
+  },
 
 };
