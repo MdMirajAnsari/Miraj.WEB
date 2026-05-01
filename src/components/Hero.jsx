@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { styles } from "../styles";
-import { bwmap, worldmap } from "../assets";
+import { worldmap } from "../assets";
 import { NetworkWebBackground } from "./canvas";
 
 const Hero = () => {

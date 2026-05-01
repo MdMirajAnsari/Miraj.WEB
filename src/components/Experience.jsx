@@ -8,7 +8,7 @@ import { styles } from '../styles';
 import PropTypes from 'prop-types';
 import { experiences } from '../constants';
 import { SectionWrapper } from '../hoc';
-import { download, downloadHover, resume } from '../assets';
+import { download, resume } from '../assets';
 import { textVariant } from '../utils/motion';
 
 const ExperienceCard = ({ experience }) => (

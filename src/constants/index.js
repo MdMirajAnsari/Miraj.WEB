@@ -3,21 +3,9 @@ import {
   backend,
   ux,
   prototyping,
-  javascript,
-  typescript,
-  html,
-  css,
-  reactjs,
-  redux,
-  tailwind,
-  nodejs,
-  git,
-  docker,
-  postgresql,
   leaderboard,
   math,
   movie,
-  nyeusi,
   brillio,
   crisis24,
   sysfore
@@ -157,13 +145,6 @@ const technologies = [
 ];
 
 const experiences = [
-  // {
-  //   title: 'Front-End Developer',
-  //   company_name: 'Cover Hunt',
-  //   icon: coverhunt,
-  //   iconBg: '#333333',
-  //   date: 'Aug 2021 - Feb 2022',
-  // },
   {
     title: "Senior Software Development Engineer",
     company_name: "Brillio Technologies",
