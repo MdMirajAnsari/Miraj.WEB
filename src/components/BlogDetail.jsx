@@ -1,22 +1,62 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
-import { styles } from '../styles';
-import { fadeIn, textVariant } from '../utils/motion';
 import { blogPosts } from '../constants/blogData';
+import { toRawMarkdownUrl } from '../utils/markdown';
 
 const BlogDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const blog = blogPosts[id];
+  const [content, setContent] = useState(blog?.content || '');
+  const [isLoadingContent, setIsLoadingContent] = useState(false);
+  const [contentError, setContentError] = useState('');
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const blog = blogPosts[id];
+  useEffect(() => {
+    if (!blog) return undefined;
+
+    setContent(blog.content || '');
+    setContentError('');
+
+    if (!blog.markdownUrl) return undefined;
+
+    const controller = new AbortController();
+
+    const loadMarkdown = async () => {
+      setIsLoadingContent(true);
+
+      try {
+        const response = await fetch(toRawMarkdownUrl(blog.markdownUrl), {
+          signal: controller.signal,
+        });
+
+        if (!response.ok) {
+          throw new Error(`Unable to load markdown (${response.status})`);
+        }
+
+        setContent(await response.text());
+      } catch (error) {
+        if (error.name !== 'AbortError') {
+          setContentError(error.message || 'Unable to load markdown');
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setIsLoadingContent(false);
+        }
+      }
+    };
+
+    loadMarkdown();
+
+    return () => controller.abort();
+  }, [blog]);
 
   if (!blog) {
     return (
@@ -162,7 +202,7 @@ const BlogDetail = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="prose prose-invert prose-lg max-w-none
+          className="blog-markdown prose prose-invert prose-lg max-w-none
             prose-headings:font-beckman prose-headings:text-white
             prose-h2:text-[32px] prose-h2:mb-4 prose-h2:mt-8
             prose-p:text-white prose-p:text-opacity-100 prose-p:text-[18px] prose-p:leading-[32px] prose-p:mb-6 prose-p:font-poppins
@@ -173,9 +213,17 @@ const BlogDetail = () => {
             prose-pre:text-white prose-pre:text-opacity-100
             [&_p]:!text-white [&_li]:!text-white [&_ul]:!text-white"
         >
-          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
-            {blog.content}
-          </ReactMarkdown>
+          {isLoadingContent && (
+            <p className="!text-gray-300">Loading markdown...</p>
+          )}
+          {contentError && (
+            <p className="!text-red-300">{contentError}</p>
+          )}
+          {!isLoadingContent && !contentError && (
+            <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+              {content}
+            </ReactMarkdown>
+          )}
         </motion.div>
 
         {/* Share Section */}

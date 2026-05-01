@@ -1,13 +1,16 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
-const https = require('https');
+import fs from 'fs';
+import path from 'path';
+import https from 'https';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Function to fetch content from GitHub raw URL
 function fetchGitHubContent(url) {
   return new Promise((resolve, reject) => {
-    // Convert GitHub URL to raw URL
     const rawUrl = url
       .replace('github.com', 'raw.githubusercontent.com')
       .replace('/blob/', '/');
@@ -47,25 +50,24 @@ function estimateReadTime(content) {
   return Math.max(1, Math.ceil(wordCount / wordsPerMinute));
 }
 
-// Function to escape special characters in template strings
-function escapeBackticks(str) {
-  return str.replace(/\`/g, '\\`').replace(/\$/g, '\\$');
+function escapeDoubleQuotes(str) {
+  return str.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
 }
 
 // Function to format the new blog post entry
-function formatBlogEntry(id, title, excerpt, date, readTime, markdown) {
-  const escapedContent = escapeBackticks(markdown);
+function formatBlogEntry(id, title, excerpt, date, readTime, markdownUrl) {
   return `  ${id}: {
     id: ${id},
-    title: "${title}",
+    title: "${escapeDoubleQuotes(title)}",
     excerpt:
-      "${excerpt}",
+      "${escapeDoubleQuotes(excerpt)}",
     date: "${date}",
     category: "Tutorial",
     readTime: ${readTime},
     image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800",
     author: "Miraj",
-    content: \`${escapedContent}\`,
+    markdownUrl:
+      "${escapeDoubleQuotes(markdownUrl)}",
   },`;
 }
 
@@ -109,8 +111,8 @@ async function main() {
       ? Math.max(...idMatches.map(match => parseInt(match.match(/\d+/)[0]))) + 1 
       : 1;
 
-    // Format new entry
-    const newEntry = formatBlogEntry(nextId, title, excerpt, date, readTime, markdown);
+    // Format new entry. The app will fetch the Markdown when the blog opens.
+    const newEntry = formatBlogEntry(nextId, title, excerpt, date, readTime, url);
 
     // Insert before the closing };
     const updatedContent = blogDataContent.replace(

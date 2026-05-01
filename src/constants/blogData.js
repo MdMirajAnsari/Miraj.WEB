@@ -997,5 +997,330 @@ Angular directives are special markers (attributes or elements) in the DOM that 
 These directives make Angular powerful for building dynamic, interactive user interfaces.
     `,
   },
+  8: {
+    id: 8,
+    title: "Angular Interview Notes",
+    excerpt:
+      "Angular interview preparation notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "Angular",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/ANGULAR/Angular.Md",
+  },
+  9: {
+    id: 9,
+    title: "C# Code Interview Notes",
+    excerpt:
+      "C# coding interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "C# / .NET",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/C%23/C%23-Code.md",
+  },
+  10: {
+    id: 10,
+    title: "C# Concept Interview Notes",
+    excerpt:
+      "C# concept interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "C# / .NET",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/C%23/C%23-Concept.md",
+  },
+  11: {
+    id: 11,
+    title: "OOP Concepts Interview Notes",
+    excerpt:
+      "Object-oriented programming concept notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "C# / .NET",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/C%23/Oops-Concept.MD",
+  },
+  12: {
+    id: 12,
+    title: "CLI Interview Notes",
+    excerpt:
+      "Command-line interface interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "CLI",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/CLI/CLI.md",
+  },
+  13: {
+    id: 13,
+    title: "CSS Code Interview Notes",
+    excerpt:
+      "CSS coding interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "CSS",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1523437113738-bbd3cc89fb19?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/CSS/Css-Code.md",
+  },
+  14: {
+    id: 14,
+    title: "CSS Concept Interview Notes",
+    excerpt:
+      "CSS concept interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "CSS",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1523437113738-bbd3cc89fb19?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/CSS/Css-Concept.md",
+  },
+  15: {
+    id: 15,
+    title: "Data Structure Code Interview Notes",
+    excerpt:
+      "Data structure coding interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "Data Structures",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/DATA-STRUCTURE/DataStructure-Code.MD",
+  },
+  16: {
+    id: 16,
+    title: ".NET Concept Interview Notes",
+    excerpt:
+      ".NET concept interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "C# / .NET",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/DOTNET/Dotnet-Concept.MD",
+  },
+  17: {
+    id: 17,
+    title: "Git Command Interview Notes",
+    excerpt:
+      "Git command notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "Git",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/GIT/GIT-Command.md",
+  },
+  18: {
+    id: 18,
+    title: "HTML Concept Interview Notes",
+    excerpt:
+      "HTML concept interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "HTML",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/HTML/Html-Concept.md",
+  },
+  19: {
+    id: 19,
+    title: "JavaScript Code Interview Notes",
+    excerpt:
+      "JavaScript coding interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "JavaScript",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/JAVASCRIPT/JavaScript-Code.md",
+  },
+  20: {
+    id: 20,
+    title: "JavaScript Concept Interview Notes",
+    excerpt:
+      "JavaScript concept interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "JavaScript",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/JAVASCRIPT/JavaScript-Concept.md",
+  },
+  21: {
+    id: 21,
+    title: "JavaScript Program Interview Notes",
+    excerpt:
+      "JavaScript program interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "JavaScript",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/JAVASCRIPT/JavaScript-Program.md",
+  },
+  22: {
+    id: 22,
+    title: "LINQ Code Interview Notes",
+    excerpt:
+      "LINQ coding interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "C# / .NET",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/LINQ/Linq-Code.md",
+  },
+  23: {
+    id: 23,
+    title: "LINQ Concept Interview Notes",
+    excerpt:
+      "LINQ concept interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "C# / .NET",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/LINQ/Linq-Concept.Md",
+  },
+  24: {
+    id: 24,
+    title: "Networking Command Interview Notes",
+    excerpt:
+      "Networking command notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "Networking",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Networking/Networking-Commands.md",
+  },
+  25: {
+    id: 25,
+    title: "RxJS Concept Interview Notes",
+    excerpt:
+      "RxJS concept interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "Angular",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/RXJS/Rxjs-Concept.md",
+  },
+  26: {
+    id: 26,
+    title: "React Code Interview Notes",
+    excerpt:
+      "React coding interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "React",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/React/React-Code.md",
+  },
+  27: {
+    id: 27,
+    title: "React Concept Interview Notes",
+    excerpt:
+      "React concept interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "React",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/React/React-Concept.md",
+  },
+  28: {
+    id: 28,
+    title: "SQL Interview Notes",
+    excerpt:
+      "SQL interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "SQL",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/SQL%20SERVER/SQL.md",
+  },
+  29: {
+    id: 29,
+    title: "SQL Code Interview Notes",
+    excerpt:
+      "SQL coding interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "SQL",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/SQL%20SERVER/Sql-Code.md",
+  },
+  30: {
+    id: 30,
+    title: "SQL Concept Interview Notes",
+    excerpt:
+      "SQL concept interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "SQL",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/SQL%20SERVER/Sql-Concept.md",
+  },
+  31: {
+    id: 31,
+    title: "System Design Concept Interview Notes",
+    excerpt:
+      "System design concept interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "System Design",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/SystemDesign/SystemDesign-Concept.md",
+  },
+  32: {
+    id: 32,
+    title: "Types of JavaScript Interview Notes",
+    excerpt:
+      "JavaScript type notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 01, 2026",
+    category: "JavaScript",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/typeOfJS.md",
+  },
 
 };

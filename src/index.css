@@ -38,6 +38,146 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+.blog-markdown {
+  color: #f8fafc;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.blog-markdown h1,
+.blog-markdown h2,
+.blog-markdown h3,
+.blog-markdown h4,
+.blog-markdown h5,
+.blog-markdown h6 {
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.blog-markdown h1 {
+  font-size: 38px;
+  margin: 42px 0 18px;
+}
+
+.blog-markdown h2 {
+  font-size: 32px;
+  margin: 36px 0 16px;
+}
+
+.blog-markdown h3 {
+  font-size: 26px;
+  margin: 30px 0 14px;
+}
+
+.blog-markdown h4 {
+  font-size: 22px;
+  margin: 26px 0 12px;
+}
+
+.blog-markdown p {
+  color: #f8fafc;
+  margin: 0 0 20px;
+}
+
+.blog-markdown ul,
+.blog-markdown ol {
+  color: #f8fafc;
+  margin: 0 0 22px 28px;
+  padding-left: 18px;
+}
+
+.blog-markdown ul {
+  list-style: disc;
+}
+
+.blog-markdown ol {
+  list-style: decimal;
+}
+
+.blog-markdown li {
+  color: #f8fafc;
+  margin: 8px 0;
+  padding-left: 4px;
+}
+
+.blog-markdown li::marker {
+  color: #818cf8;
+}
+
+.blog-markdown a {
+  color: #93c5fd;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.blog-markdown strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.blog-markdown blockquote {
+  border-left: 4px solid #6366f1;
+  color: #dbeafe;
+  margin: 28px 0;
+  padding: 10px 0 10px 18px;
+  background: rgba(99, 102, 241, 0.08);
+}
+
+.blog-markdown code {
+  background: #111827;
+  border: 1px solid #374151;
+  border-radius: 4px;
+  color: #f9fafb;
+  font-size: 0.92em;
+  padding: 2px 6px;
+}
+
+.blog-markdown pre {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  margin: 26px 0;
+  overflow-x: auto;
+  padding: 18px;
+}
+
+.blog-markdown pre code {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+}
+
+.blog-markdown table {
+  border-collapse: collapse;
+  display: block;
+  margin: 28px 0;
+  overflow-x: auto;
+  width: 100%;
+}
+
+.blog-markdown th,
+.blog-markdown td {
+  border: 1px solid #475569;
+  color: #f8fafc;
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.blog-markdown th {
+  background: #1e293b;
+  font-weight: 700;
+}
+
+.blog-markdown hr {
+  border: 0;
+  border-top: 1px solid #334155;
+  margin: 34px 0;
+}
+
 .nav-links::after {
   content: '';
   display: block;
