@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 import { styles } from '../styles';
 import { fadeIn, textVariant } from '../utils/motion';
 import { blogPosts } from '../constants/blogData';
@@ -41,7 +44,7 @@ const BlogDetail = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
           onClick={() => navigate('/blog')}
-          className="flex items-center gap-2 text-taupe hover:text-white transition-colors mb-8 font-poppins">
+          className="flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition-colors mb-8 font-poppins">
           <svg
             width="24"
             height="24"
@@ -97,7 +100,7 @@ const BlogDetail = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex items-center gap-6 text-taupe text-[14px] font-poppins mb-8 pb-8 border-b border-taupe/30">
+          className="flex items-center gap-6 text-gray-400 text-[14px] font-poppins mb-8 pb-8 border-b border-gray-700">
           <div className="flex items-center gap-2">
             <svg
               width="20"
@@ -162,20 +165,26 @@ const BlogDetail = () => {
           className="prose prose-invert prose-lg max-w-none
             prose-headings:font-beckman prose-headings:text-white
             prose-h2:text-[32px] prose-h2:mb-4 prose-h2:mt-8
-            prose-p:text-taupe prose-p:text-[18px] prose-p:leading-[32px] prose-p:mb-6 prose-p:font-poppins
-            prose-ul:text-taupe prose-ul:text-[18px] prose-ul:leading-[32px] prose-ul:font-poppins
-            prose-li:mb-2
-            prose-strong:text-white"
-          dangerouslySetInnerHTML={{ __html: blog.content }}
-        />
+            prose-p:text-white prose-p:text-opacity-100 prose-p:text-[18px] prose-p:leading-[32px] prose-p:mb-6 prose-p:font-poppins
+            prose-ul:text-white prose-ul:text-opacity-100 prose-ul:text-[18px] prose-ul:leading-[32px] prose-ul:font-poppins
+            prose-li:text-white prose-li:text-opacity-100 prose-li:mb-2
+            prose-strong:text-white prose-strong:text-opacity-100
+            prose-code:text-white prose-code:text-opacity-100
+            prose-pre:text-white prose-pre:text-opacity-100
+            [&_p]:!text-white [&_li]:!text-white [&_ul]:!text-white"
+        >
+          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+            {blog.content}
+          </ReactMarkdown>
+        </motion.div>
 
         {/* Share Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-16 pt-8 border-t border-taupe/30">
-          <p className="text-taupe text-[16px] font-poppins mb-4">
+          className="mt-16 pt-8 border-t border-gray-700">
+          <p className="text-gray-400 text-[16px] font-poppins mb-4">
             Share this article:
           </p>
           <div className="flex gap-4">
@@ -186,7 +195,7 @@ const BlogDetail = () => {
                   '_blank'
                 )
               }
-              className="bg-battleGray hover:bg-battleGray/80 text-white px-6 py-3 rounded-lg font-poppins transition">
+              className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-poppins transition">
               Twitter
             </button>
             <button
@@ -196,7 +205,7 @@ const BlogDetail = () => {
                   '_blank'
                 )
               }
-              className="bg-battleGray hover:bg-battleGray/80 text-white px-6 py-3 rounded-lg font-poppins transition">
+              className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-poppins transition">
               LinkedIn
             </button>
             <button
@@ -206,7 +215,7 @@ const BlogDetail = () => {
                   '_blank'
                 )
               }
-              className="bg-battleGray hover:bg-battleGray/80 text-white px-6 py-3 rounded-lg font-poppins transition">
+              className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-poppins transition">
               Facebook
             </button>
           </div>
