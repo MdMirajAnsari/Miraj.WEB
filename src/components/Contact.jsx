@@ -5,8 +5,8 @@ import { SectionWrapper } from '../hoc';
 import { slideIn } from '../utils/motion';
 import { send, sendHover } from '../assets';
 
-const contactEmail = import.meta.env.VITE_CONTACT_EMAIL;
-const formSubmitEndpoint = import.meta.env.VITE_FORMSUBMIT_ENDPOINT;
+const contactEmail = 'clevercottonmouth@gmail.com';
+const formSubmitEndpoint = 'https://formsubmit.co/ajax/8afc617e303d56fd038545b21c3045de';
 
 const Contact = () => {
   const [form, setForm] = useState({
@@ -28,15 +28,6 @@ const Contact = () => {
     e.preventDefault();
 
     if (form.company) {
-      return;
-    }
-
-    if (!formSubmitEndpoint) {
-      setNotice({
-        type: 'error',
-        title: 'Contact form not configured',
-        message: `Please email me directly at ${contactEmail}.`,
-      });
       return;
     }
 
