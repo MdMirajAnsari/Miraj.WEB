@@ -1361,5 +1361,31 @@ These directives make Angular powerful for building dynamic, interactive user in
     markdownUrl:
       "https://github.com/MdMirajAnsari/Reference-Architecture/blob/main/README.md",
   },
+  36: {
+    id: 36,
+    title: ".NET L2 Interview Notes",
+    excerpt:
+      ".NET L2 interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 02, 2026",
+    category: "C# / .NET",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/Interview/dotnet_L2.MD",
+  },
+  37: {
+    id: 37,
+    title: ".NET L3 Interview Notes",
+    excerpt:
+      ".NET L3 interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 02, 2026",
+    category: "C# / .NET",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/Interview/dotnet_L3.MD",
+  },
 
 };
