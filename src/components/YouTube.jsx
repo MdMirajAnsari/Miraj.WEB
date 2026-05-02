@@ -520,6 +520,20 @@ const videos = [
     url: 'https://www.youtube.com/watch?v=zPXgRwuoILQ',
     category: 'dotnet interview',
   },
+  {
+    id: 73,
+    embedId: 'hrTQipWp6co',
+    title: 'Git Video 1',
+    url: 'https://www.youtube.com/watch?v=hrTQipWp6co',
+    category: 'git',
+  },
+  {
+    id: 74,
+    embedId: '1ibmWyt8hfw',
+    title: 'Git Video 2',
+    url: 'https://www.youtube.com/watch?v=1ibmWyt8hfw',
+    category: 'git',
+  },
 ];
 
 const readSavedVideoState = () => {
