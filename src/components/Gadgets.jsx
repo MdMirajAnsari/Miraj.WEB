@@ -9,7 +9,123 @@ import Applications from './Applications';
 const favoriteStorageKey = 'miraj-gadget-favorites';
 const gadgetStateStorageKey = 'miraj-gadget-state';
 const recentStorageKey = 'miraj-gadget-recently-viewed';
+const songStateStorageKey = 'miraj-fav-song-state';
+const recentSongsStorageKey = 'miraj-fav-song-recent';
 const ownershipOptions = ['Researching', 'Wishlist', 'Owned', 'Recommended'];
+const favoriteSongs = [
+  {
+    id: 'song-1',
+    embedId: 'dMa_DDiTGKc',
+    title: 'Funk Radio Pick 1',
+    artist: 'YouTube Music',
+    source: 'YouTube Radio',
+    moods: ['Chill', 'Coding', 'Drive'],
+    url: 'https://www.youtube.com/watch?v=dMa_DDiTGKc&list=RDdMa_DDiTGKc&start_radio=1',
+    category: 'Funk Songs',
+  },
+  {
+    id: 'song-2',
+    embedId: '57KetBnOvJY',
+    title: 'Funk Radio Pick 2',
+    artist: 'YouTube Music',
+    source: 'YouTube Radio',
+    moods: ['Party', 'Workout'],
+    url: 'https://www.youtube.com/watch?v=57KetBnOvJY&list=RD57KetBnOvJY&start_radio=1',
+    category: 'Funk Songs',
+  },
+  {
+    id: 'song-3',
+    embedId: 'gNBrDh_AUeQ',
+    title: 'Funk Radio Pick 3',
+    artist: 'YouTube Music',
+    source: 'YouTube Radio',
+    moods: ['Chill', 'Drive'],
+    url: 'https://www.youtube.com/watch?v=gNBrDh_AUeQ&list=RDgNBrDh_AUeQ&start_radio=1',
+    category: 'Funk Songs',
+  },
+  {
+    id: 'song-4',
+    embedId: 'GzExS7WybJg',
+    title: 'Vem Vem',
+    artist: 'Jmilton - Topic',
+    source: 'YouTube Radio',
+    moods: ['Party', 'Coding'],
+    url: 'https://www.youtube.com/watch?v=GzExS7WybJg&list=RDGzExS7WybJg&start_radio=1',
+    category: 'Funk Songs',
+  },
+  {
+    id: 'song-5',
+    embedId: 'zHm8GFK0m-E',
+    title: 'Funk Radio Pick 5',
+    artist: 'YouTube Music',
+    source: 'YouTube Radio',
+    moods: ['Chill', 'Focus'],
+    url: 'https://www.youtube.com/watch?v=zHm8GFK0m-E&list=RDzHm8GFK0m-E&start_radio=1',
+    category: 'Funk Songs',
+  },
+  {
+    id: 'song-6',
+    embedId: 'GeszARkWZw0',
+    title: 'Funk Radio Pick 6',
+    artist: 'YouTube Music',
+    source: 'YouTube Radio',
+    moods: ['Workout', 'Drive'],
+    url: 'https://www.youtube.com/watch?v=GeszARkWZw0&list=RDGeszARkWZw0&start_radio=1',
+    category: 'Funk Songs',
+  },
+  {
+    id: 'song-7',
+    embedId: '4ywS4E5NmIk',
+    title: 'Funk Radio Pick 7',
+    artist: 'YouTube Music',
+    source: 'YouTube Radio',
+    moods: ['Party', 'Drive'],
+    url: 'https://www.youtube.com/watch?v=4ywS4E5NmIk&list=RD4ywS4E5NmIk&start_radio=1',
+    category: 'Funk Songs',
+  },
+  {
+    id: 'song-8',
+    embedId: 'uzcUJcqGQPw',
+    title: 'MATADORA',
+    artist: 'MarkoTNN',
+    source: 'YouTube Radio',
+    moods: ['Coding', 'Focus'],
+    url: 'https://www.youtube.com/watch?v=uzcUJcqGQPw&list=RDuzcUJcqGQPw&start_radio=1',
+    category: 'Funk Songs',
+  },
+  {
+    id: 'song-9',
+    embedId: 'qlzcHe_gusE',
+    title: 'SLAY!',
+    artist: 'Eternxlkz',
+    source: 'YouTube Radio',
+    moods: ['Chill', 'Party'],
+    url: 'https://www.youtube.com/watch?v=qlzcHe_gusE&list=RDqlzcHe_gusE&start_radio=1',
+    category: 'Funk Songs',
+  },
+  {
+    id: 'song-10',
+    embedId: 'gvGQ27rWmg0',
+    title: 'Funk Radio Pick 10',
+    artist: 'YouTube Music',
+    source: 'YouTube Radio',
+    moods: ['Workout', 'Party'],
+    url: 'https://www.youtube.com/watch?v=gvGQ27rWmg0&list=RDgvGQ27rWmg0&start_radio=1',
+    category: 'Funk Songs',
+  },
+  {
+    id: 'song-11',
+    embedId: '8mtxEbvzkHs',
+    title: 'Matushka',
+    artist: 'Tatyana Kurtukova',
+    source: 'YouTube Radio',
+    moods: ['Coding', 'Drive'],
+    url: 'https://www.youtube.com/watch?v=8mtxEbvzkHs&list=RDGzExS7WybJg&index=3',
+    category: 'Funk Songs',
+  },
+];
+const songSortOptions = ['Playlist Order', 'Title', 'Most Played', 'Favorites First'];
+const repeatOptions = ['Repeat All', 'Repeat One', 'No Repeat'];
 
 const readStoredValue = (key, fallback) => {
   if (typeof window === 'undefined') {
@@ -68,6 +184,7 @@ const enrichGadget = (gadget, index) => ({
 });
 
 const getGadgetState = (gadgetState, id) => gadgetState[id] || { status: 'Researching', rating: 0 };
+const getSongState = (songState, id) => songState[id] || { favorite: false, listenCount: 0, notes: '' };
 
 const StarRating = ({ value, onChange }) => (
   <div className="flex gap-1" aria-label={`${value} star rating`}>
@@ -225,6 +342,375 @@ GadgetCard.propTypes = {
   onRatingChange: PropTypes.func.isRequired,
 };
 
+const FavSongs = ({ setActiveTab }) => {
+  const [activeSongIndex, setActiveSongIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [songState, setSongState] = useState(() => readStoredValue(songStateStorageKey, {}));
+  const [recentSongIds, setRecentSongIds] = useState(() => readStoredValue(recentSongsStorageKey, []));
+  const [songSearch, setSongSearch] = useState('');
+  const [selectedMood, setSelectedMood] = useState('all');
+  const [songSortMode, setSongSortMode] = useState('Playlist Order');
+  const [repeatMode, setRepeatMode] = useState('Repeat All');
+  const activeSong = favoriteSongs[activeSongIndex];
+  const activeSongState = getSongState(songState, activeSong.id);
+  const moodOptions = useMemo(() => ['all', ...new Set(favoriteSongs.flatMap((song) => song.moods))], []);
+  const filteredSongs = useMemo(() => {
+    const normalizedSearch = songSearch.trim().toLowerCase();
+
+    const matchedSongs = favoriteSongs.filter((song) => {
+      const matchesMood = selectedMood === 'all' || song.moods.includes(selectedMood);
+      const matchesSearch =
+        !normalizedSearch ||
+        [song.title, song.artist, song.source, song.category, song.embedId, song.moods.join(' ')]
+          .join(' ')
+          .toLowerCase()
+          .includes(normalizedSearch);
+
+      return matchesMood && matchesSearch;
+    });
+
+    return [...matchedSongs].sort((firstSong, secondSong) => {
+      const firstState = getSongState(songState, firstSong.id);
+      const secondState = getSongState(songState, secondSong.id);
+
+      if (songSortMode === 'Title') {
+        return firstSong.title.localeCompare(secondSong.title);
+      }
+
+      if (songSortMode === 'Most Played') {
+        return secondState.listenCount - firstState.listenCount || firstSong.title.localeCompare(secondSong.title);
+      }
+
+      if (songSortMode === 'Favorites First') {
+        return Number(Boolean(secondState.favorite)) - Number(Boolean(firstState.favorite)) || firstSong.title.localeCompare(secondSong.title);
+      }
+
+      return favoriteSongs.findIndex((song) => song.id === firstSong.id) - favoriteSongs.findIndex((song) => song.id === secondSong.id);
+    });
+  }, [selectedMood, songSearch, songSortMode, songState]);
+  const recentSongs = recentSongIds.map((songId) => favoriteSongs.find((song) => song.id === songId)).filter(Boolean).slice(0, 5);
+  const savedSongCount = favoriteSongs.filter((song) => getSongState(songState, song.id).favorite).length;
+  const totalListenCount = favoriteSongs.reduce((total, song) => total + getSongState(songState, song.id).listenCount, 0);
+
+  const updateSongState = (id, changes) => {
+    setSongState((currentState) => {
+      const nextState = {
+        ...currentState,
+        [id]: {
+          ...getSongState(currentState, id),
+          ...changes,
+        },
+      };
+
+      writeStoredValue(songStateStorageKey, nextState);
+      return nextState;
+    });
+  };
+
+  const rememberSong = (id) => {
+    setRecentSongIds((currentIds) => {
+      const nextIds = [id, ...currentIds.filter((currentId) => currentId !== id)].slice(0, 5);
+      writeStoredValue(recentSongsStorageKey, nextIds);
+      return nextIds;
+    });
+  };
+
+  const playSong = (index) => {
+    const nextSong = favoriteSongs[index];
+
+    setActiveSongIndex(index);
+    setIsPlaying(true);
+    rememberSong(nextSong.id);
+    updateSongState(nextSong.id, {
+      listenCount: getSongState(songState, nextSong.id).listenCount + 1,
+    });
+  };
+
+  const showSongAtOffset = (offset) => {
+    if (repeatMode === 'Repeat One') {
+      playSong(activeSongIndex);
+      return;
+    }
+
+    const nextIndex = activeSongIndex + offset;
+
+    if (repeatMode === 'No Repeat' && (nextIndex < 0 || nextIndex >= favoriteSongs.length)) {
+      setIsPlaying(false);
+      return;
+    }
+
+    playSong((nextIndex + favoriteSongs.length) % favoriteSongs.length);
+  };
+
+  const selectSong = (index) => {
+    playSong(index);
+  };
+
+  const shuffleSong = () => {
+    if (favoriteSongs.length <= 1) return;
+
+    let nextIndex = activeSongIndex;
+
+    while (nextIndex === activeSongIndex) {
+      nextIndex = Math.floor(Math.random() * favoriteSongs.length);
+    }
+
+    playSong(nextIndex);
+  };
+
+  const toggleSongFavorite = (id) => {
+    updateSongState(id, {
+      favorite: !getSongState(songState, id).favorite,
+    });
+  };
+
+  return (
+    <div className="relative z-0 min-h-screen pt-[120px] pb-20">
+      <div className={`${styles.padding} max-w-7xl mx-auto`}>
+        <motion.div variants={textVariant()} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.25 }}>
+          <p className={`${styles.sectionSubText}`}>Funk Songs</p>
+          <h2 className={`${styles.sectionHeadTextLight}`}>Fav Songs.</h2>
+        </motion.div>
+
+        <div className="mt-8 flex flex-wrap gap-4">
+          <button
+            onClick={() => setActiveTab('gadgets')}
+            className="px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 glass-button text-taupe">
+            Gadgets
+          </button>
+          <button
+            onClick={() => setActiveTab('software')}
+            className="px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 glass-button text-taupe">
+            Applications
+          </button>
+          <button
+            onClick={() => setActiveTab('songs')}
+            className="px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 glass-button-active text-white shadow-lg">
+            Fav Songs
+          </button>
+        </div>
+
+        <div className="mt-8 glass-card rounded-[20px] p-5 sm:p-7">
+          <iframe
+            key={`${activeSong.embedId}-${isPlaying ? 'playing' : 'paused'}`}
+            title={activeSong.title}
+            src={`https://www.youtube.com/embed/${activeSong.embedId}?autoplay=${isPlaying ? 1 : 0}&controls=0&modestbranding=1&rel=0`}
+            allow="autoplay; encrypted-media"
+            className="absolute h-px w-px opacity-0 pointer-events-none"
+          />
+
+          <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
+            <div>
+              <span className="inline-flex rounded-full bg-blue-500/70 px-3 py-1 text-xs font-bold uppercase text-white">
+                {activeSong.category}
+              </span>
+              <h3 className="mt-4 text-white text-[32px] sm:text-[42px] font-beckman font-bold">
+                {activeSong.title}
+              </h3>
+              <p className="mt-2 text-blue-200 text-[16px]">
+                {activeSong.artist} | {activeSong.source}
+              </p>
+              <p className="mt-3 text-taupe text-[16px] leading-7">
+                Audio-only playlist powered by your YouTube links.
+              </p>
+
+              <div className="mt-7 flex flex-wrap gap-3">
+                <button type="button" onClick={() => showSongAtOffset(-1)} className="glass-button px-5 py-3 rounded-lg text-white">
+                  Prev
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (isPlaying) {
+                      setIsPlaying(false);
+                      return;
+                    }
+
+                    playSong(activeSongIndex);
+                  }}
+                  className="glass-button-active px-6 py-3 rounded-lg text-white font-semibold"
+                >
+                  {isPlaying ? 'Pause' : 'Play'}
+                </button>
+                <button type="button" onClick={() => showSongAtOffset(1)} className="glass-button px-5 py-3 rounded-lg text-white">
+                  Next
+                </button>
+                <button type="button" onClick={shuffleSong} className="glass-button px-5 py-3 rounded-lg text-white">
+                  Shuffle
+                </button>
+                <button
+                  type="button"
+                  onClick={() => toggleSongFavorite(activeSong.id)}
+                  className={`px-5 py-3 rounded-lg text-white ${activeSongState.favorite ? 'glass-button-active' : 'glass-button'}`}
+                >
+                  {activeSongState.favorite ? 'Saved' : 'Save'}
+                </button>
+              </div>
+
+              <div className="mt-5 flex flex-wrap gap-3">
+                {repeatOptions.map((option) => (
+                  <button
+                    key={option}
+                    type="button"
+                    onClick={() => setRepeatMode(option)}
+                    className={`rounded-full px-3 py-2 text-xs font-semibold ${
+                      repeatMode === option ? 'glass-button-active text-white' : 'glass-button text-gray-300'
+                    }`}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+
+              <div className="mt-6 flex flex-wrap gap-3 text-sm text-gray-300">
+                <span>Song {activeSongIndex + 1} of {favoriteSongs.length}</span>
+                <span>|</span>
+                <span>{activeSongState.listenCount} listens</span>
+                <span>|</span>
+                <span>{savedSongCount} saved</span>
+              </div>
+            </div>
+
+            <div className="rounded-[14px] border border-white/10 bg-white/10 p-4">
+              <h4 className="text-white text-lg font-semibold">Now Playing</h4>
+              <p className="mt-2 text-blue-200 text-sm">{activeSong.embedId}</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {activeSong.moods.map((mood) => (
+                  <span key={mood} className="rounded-full bg-white/10 px-3 py-1 text-xs text-gray-200">
+                    {mood}
+                  </span>
+                ))}
+              </div>
+              <textarea
+                value={activeSongState.notes}
+                onChange={(event) => updateSongState(activeSong.id, { notes: event.target.value })}
+                placeholder="Notes or favorite lyric snippet"
+                rows="4"
+                className="mt-4 w-full resize-y rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-sm text-white placeholder:text-gray-400 outline-none focus:border-blue-300"
+              />
+              <a href={activeSong.url} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex text-blue-300 hover:text-blue-100 text-sm">
+                Open on YouTube
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-8 glass-card rounded-[20px] p-5">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_180px_180px] gap-4">
+            <input
+              type="search"
+              value={songSearch}
+              onChange={(event) => setSongSearch(event.target.value)}
+              placeholder="Search song, artist, source, tag, or video ID"
+              className="w-full rounded-lg border border-white/10 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-gray-400 outline-none focus:border-blue-300"
+            />
+            <select value={songSortMode} onChange={(event) => setSongSortMode(event.target.value)} className="rounded-lg border border-white/10 bg-white/10 px-4 py-3 text-sm text-white outline-none">
+              {songSortOptions.map((option) => (
+                <option key={option} className="text-black" value={option}>{option}</option>
+              ))}
+            </select>
+            <div className="rounded-lg border border-white/10 bg-white/10 px-4 py-3 text-sm text-gray-200">
+              {filteredSongs.length} songs | {totalListenCount} plays
+            </div>
+          </div>
+
+          <div className="mt-5 flex flex-wrap gap-3">
+            {moodOptions.map((mood) => (
+              <button
+                key={mood}
+                type="button"
+                onClick={() => setSelectedMood(mood)}
+                className={`px-3 py-2 rounded-full text-xs sm:text-sm font-medium ${
+                  selectedMood === mood ? 'glass-button-active text-white' : 'glass-button text-gray-300'
+                }`}
+              >
+                {mood === 'all' ? 'All moods' : mood}
+              </button>
+            ))}
+          </div>
+
+          {recentSongs.length > 0 && (
+            <div className="mt-5 flex flex-wrap gap-3 text-sm text-gray-300">
+              <span>Recently played:</span>
+              {recentSongs.map((song) => (
+                <button
+                  key={song.id}
+                  type="button"
+                  onClick={() => selectSong(favoriteSongs.findIndex((currentSong) => currentSong.id === song.id))}
+                  className="text-blue-300 hover:text-blue-100"
+                >
+                  {song.title}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+          {filteredSongs.map((song) => {
+            const songIndex = favoriteSongs.findIndex((currentSong) => currentSong.id === song.id);
+            const currentSongState = getSongState(songState, song.id);
+
+            return (
+            <article
+              key={song.id}
+              className={`rounded-[16px] p-5 transition-all duration-300 ${
+                activeSong.id === song.id ? 'glass-button-active text-white' : 'glass-card text-taupe hover:text-white'
+              }`}
+            >
+              <div className="flex items-start justify-between gap-3">
+                <button type="button" onClick={() => selectSong(songIndex)} className="min-w-0 text-left">
+                  <span className="text-xs uppercase tracking-[2px] text-blue-200">{song.category}</span>
+                  <h4 className="mt-3 text-[20px] font-beckman font-bold">{song.title}</h4>
+                  <p className="mt-2 text-sm opacity-90">{song.artist} | {song.source}</p>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => toggleSongFavorite(song.id)}
+                  className={`h-9 w-9 shrink-0 rounded-full border border-white/20 text-sm font-bold ${
+                    currentSongState.favorite ? 'glass-button-active text-white' : 'glass-button text-timberWolf'
+                  }`}
+                  aria-label={currentSongState.favorite ? `Remove ${song.title} from saved songs` : `Save ${song.title}`}
+                >
+                  {currentSongState.favorite ? 'S' : '+'}
+                </button>
+              </div>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {song.moods.map((mood) => (
+                  <span key={mood} className="rounded-full bg-white/10 px-3 py-1 text-xs text-gray-200">
+                    {mood}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-4 flex items-center justify-between gap-3 text-sm">
+                <span>{currentSongState.listenCount} listens</span>
+                <button type="button" onClick={() => selectSong(songIndex)} className="text-blue-300 hover:text-blue-100">
+                  Listen
+                </button>
+              </div>
+
+              <textarea
+                value={currentSongState.notes}
+                onChange={(event) => updateSongState(song.id, { notes: event.target.value })}
+                placeholder="Notes or lyric snippet"
+                rows="3"
+                className="mt-4 w-full resize-y rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-sm text-white placeholder:text-gray-400 outline-none focus:border-blue-300"
+              />
+            </article>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+FavSongs.propTypes = {
+  setActiveTab: PropTypes.func.isRequired,
+};
+
 const Gadgets = () => {
   const [activeTab, setActiveTab] = useState('gadgets');
   const [searchTerm, setSearchTerm] = useState('');
@@ -337,6 +823,10 @@ const Gadgets = () => {
     return <Applications setActiveTab={setActiveTab} />;
   }
 
+  if (activeTab === 'songs') {
+    return <FavSongs setActiveTab={setActiveTab} />;
+  }
+
   return (
     <div className="relative z-0 min-h-screen pt-[120px] pb-20">
       <div className={`${styles.padding} max-w-7xl mx-auto`}>
@@ -359,6 +849,13 @@ const Gadgets = () => {
               activeTab === 'software' ? 'glass-button-active text-white shadow-lg' : 'glass-button text-taupe'
             }`}>
             Applications
+          </button>
+          <button
+            onClick={() => setActiveTab('songs')}
+            className={`px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 ${
+              activeTab === 'songs' ? 'glass-button-active text-white shadow-lg' : 'glass-button text-taupe'
+            }`}>
+            Fav Songs
           </button>
         </div>
 
