@@ -607,12 +607,23 @@ const YouTube = () => {
   }, [searchTerm, selectedCategory, sortMode, videoState]);
 
   const featuredVideo = videos.find((video) => video.id === featuredId) || filteredVideos[0] || videos[0];
+  const featuredIndex = filteredVideos.findIndex((video) => video.id === featuredVideo.id);
+  const canNavigateFeatured = filteredVideos.length > 1 && featuredIndex >= 0;
 
   useEffect(() => {
     if (filteredVideos.length > 0 && !filteredVideos.some((video) => video.id === featuredId)) {
       setFeaturedId(filteredVideos[0].id);
     }
   }, [featuredId, filteredVideos]);
+
+  const showFeaturedVideoAtOffset = (offset) => {
+    if (!canNavigateFeatured) {
+      return;
+    }
+
+    const nextIndex = (featuredIndex + offset + filteredVideos.length) % filteredVideos.length;
+    setFeaturedId(filteredVideos[nextIndex].id);
+  };
 
   const groupedVideos = useMemo(() => {
     const groups = [];
@@ -692,6 +703,22 @@ const YouTube = () => {
           </div>
 
           <div className="flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={() => showFeaturedVideoAtOffset(-1)}
+              disabled={!canNavigateFeatured}
+              className="glass-button px-4 py-2 rounded-full text-sm text-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Previous
+            </button>
+            <button
+              type="button"
+              onClick={() => showFeaturedVideoAtOffset(1)}
+              disabled={!canNavigateFeatured}
+              className="glass-button px-4 py-2 rounded-full text-sm text-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Next
+            </button>
             <a
               href={featuredVideo.url}
               target="_blank"
@@ -712,6 +739,11 @@ const YouTube = () => {
               {getVideoState(videoState, featuredVideo.id).watched ? 'Watched' : 'Mark watched'}
             </button>
           </div>
+          {filteredVideos.length > 0 && featuredIndex >= 0 && (
+            <p className="text-xs text-gray-400">
+              Video {featuredIndex + 1} of {filteredVideos.length}
+            </p>
+          )}
         </div>
       </div>
 
