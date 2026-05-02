@@ -34,6 +34,72 @@ const govLinks = [
     description: 'Initiative for digital services, records, and governance resources.',
     url: 'https://www.digitalindia.gov.in',
   },
+  {
+    id: 6,
+    title: 'Election Commission of India',
+    description: 'Voter information, election updates, forms, and official ECI resources.',
+    url: 'https://www.eci.gov.in/',
+  },
+  {
+    id: 7,
+    title: 'MF Central',
+    description: 'Investor sign-in for mutual fund portfolio and service requests.',
+    url: 'https://app.mfcentral.com/investor/signin',
+  },
+  {
+    id: 8,
+    title: 'EPFO Member Passbook',
+    description: 'View EPF passbook details and member contribution history.',
+    url: 'https://passbook.epfindia.gov.in/MemberPassBook/Login',
+  },
+  {
+    id: 9,
+    title: 'EPFO Unified Member Portal',
+    description: 'Member services for UAN, EPF claims, profile, and account details.',
+    url: 'https://unifiedportal-mem.epfindia.gov.in/memberinterface/',
+  },
+  {
+    id: 10,
+    title: 'Ministry of Corporate Affairs',
+    description: 'Company services, MCA filings, master data, and corporate resources.',
+    url: 'https://www.mca.gov.in/content/mca/global/en/home.html',
+  },
+  {
+    id: 11,
+    title: 'Sanchar Saathi',
+    description: 'Telecom safety services for mobile connections and device reporting.',
+    url: 'https://www.sancharsaathi.gov.in/',
+  },
+  {
+    id: 12,
+    title: 'ABHA Health ID',
+    description: 'Create or manage ABHA health ID under India digital health services.',
+    url: 'https://healthid.ndhm.gov.in/',
+  },
+  {
+    id: 13,
+    title: 'VTU EDDTS',
+    description: 'VTU electronic document delivery and tracking system.',
+    url: 'https://eddts.vtu.ac.in/',
+  },
+  {
+    id: 14,
+    title: 'Bihar Bhumi',
+    description: 'Bihar land records, mutation services, and property information.',
+    url: 'https://biharbhumi.bihar.gov.in/Biharbhumi/',
+  },
+  {
+    id: 15,
+    title: 'Experian Credit Report',
+    description: 'Consumer portal for Experian credit report and verification services.',
+    url: 'https://consumer.experian.in/ECV-OLN/view/angular/#/',
+  },
+  {
+    id: 16,
+    title: 'PMMVY',
+    description: 'Pradhan Mantri Matru Vandana Yojana portal for maternity benefit services.',
+    url: 'https://pmmvy.wcd.gov.in/',
+  },
 ];
 
 const Gov = () => {
@@ -66,7 +132,7 @@ const Gov = () => {
             <p className="text-slate-600 text-[15px] leading-[24px] mb-4">
               {link.description}
             </p>
-            <span className="text-blue-200 font-bold text-[14px]">Visit site →</span>
+            <span className="text-blue-200 font-bold text-[14px]">Visit site &rarr;</span>
           </motion.a>
         ))}
       </div>
