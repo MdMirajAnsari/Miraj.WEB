@@ -1,19 +1,22 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import emailjs from '@emailjs/browser';
 import { styles } from '../styles';
 import { SectionWrapper } from '../hoc';
 import { slideIn } from '../utils/motion';
 import { send, sendHover } from '../assets';
 
+const contactEmail = import.meta.env.VITE_CONTACT_EMAIL;
+const formSubmitEndpoint = import.meta.env.VITE_FORMSUBMIT_ENDPOINT;
+
 const Contact = () => {
-  const formRef = useRef();
   const [form, setForm] = useState({
     name: '',
     email: '',
     message: '',
+    company: '',
   });
   const [loading, setLoading] = useState(false);
+  const [notice, setNotice] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,42 +24,66 @@ const Contact = () => {
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (form.company) {
+      return;
+    }
+
+    if (!formSubmitEndpoint) {
+      setNotice({
+        type: 'error',
+        title: 'Contact form not configured',
+        message: `Please email me directly at ${contactEmail}.`,
+      });
+      return;
+    }
+
     setLoading(true);
 
-    // sign up on emailjs.com (select the gmail service and connect your account).
-    //click on create a new template then click on save.
-    emailjs
-      .send(
-        'serviceID', // paste your ServiceID here (you'll get one when your service is created).
-        'templateID', // paste your TemplateID here (you'll find it under email templates).
-        {
-          from_name: form.name,
-          to_name: 'YourName', // put your name here.
-          from_email: form.email,
-          to_email: 'youremail@gmail.com', //put your email here.
+    try {
+      const response = await fetch(formSubmitEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
           message: form.message,
-        },
-        'yourpublickey' //paste your Public Key here. You'll get it in your profile section.
-      )
-      .then(
-        () => {
-          setLoading(false);
-          alert('Thank you. I will get back to you as soon as possible.');
+          _subject: `Portfolio contact from ${form.name}`,
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      });
 
-          setForm({
-            name: '',
-            email: '',
-            message: '',
-          });
-        },
-        (error) => {
-          setLoading(false);
-          console.log(error);
-          alert('Something went wrong. Please try again.');
-        }
-      );
+      if (!response.ok) {
+        throw new Error('Unable to send message');
+      }
+
+      setNotice({
+        type: 'success',
+        title: 'Message sent',
+        message: 'Thank you. I will get back to you as soon as possible.',
+      });
+      setForm({
+        name: '',
+        email: '',
+        message: '',
+        company: '',
+      });
+    } catch (error) {
+      console.error(error);
+      setNotice({
+        type: 'error',
+        title: 'Message not sent',
+        message: `Something went wrong. You can email me directly at ${contactEmail}.`,
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -69,10 +96,59 @@ const Contact = () => {
         <p className={styles.sectionSubText}>Get in touch</p>
         <h3 className={styles.sectionHeadTextLight}>Contact.</h3>
 
+        {notice && (
+          <motion.div
+            initial={{ opacity: 0, y: -12, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            className={`mt-6 rounded-2xl border p-4 shadow-xl backdrop-blur-md ${
+              notice.type === 'success'
+                ? 'border-emerald-300/30 bg-emerald-400/15'
+                : 'border-rose-300/30 bg-rose-400/15'
+            }`}
+            role="status"
+          >
+            <div className="flex items-start gap-3">
+              <div
+                className={`mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[18px] font-bold ${
+                  notice.type === 'success'
+                    ? 'bg-emerald-400/25 text-emerald-100'
+                    : 'bg-rose-400/25 text-rose-100'
+                }`}
+              >
+                {notice.type === 'success' ? 'OK' : '!'}
+              </div>
+              <div className="min-w-0 flex-1">
+                <h4 className="font-beckman text-[18px] font-bold text-white">
+                  {notice.title}
+                </h4>
+                <p className="mt-1 text-[14px] leading-6 text-timberWolf">
+                  {notice.message}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setNotice(null)}
+                className="rounded-full px-3 py-1 text-[18px] leading-none text-white/80 transition hover:bg-white/10 hover:text-white"
+                aria-label="Dismiss message"
+              >
+                x
+              </button>
+            </div>
+          </motion.div>
+        )}
+
         <form
-          ref={formRef}
           onSubmit={handleSubmit}
           className="mt-10 flex flex-col gap-6 font-poppins">
+          <input
+            type="text"
+            name="company"
+            value={form.company}
+            onChange={handleChange}
+            tabIndex="-1"
+            autoComplete="off"
+            className="hidden"
+          />
           <label className="flex flex-col">
             <span className="text-timberWolf font-medium mb-4">Your Name</span>
             <input
@@ -80,6 +156,7 @@ const Contact = () => {
               name="name"
               value={form.name}
               onChange={handleChange}
+              required
               placeholder="What's your name?"
               className="glass-button py-4 px-6
               placeholder:text-taupe
@@ -94,6 +171,7 @@ const Contact = () => {
               name="email"
               value={form.email}
               onChange={handleChange}
+              required
               placeholder="What's your email?"
               className="glass-button py-4 px-6
               placeholder:text-taupe
@@ -110,6 +188,7 @@ const Contact = () => {
               name="message"
               value={form.message}
               onChange={handleChange}
+              required
               placeholder="What's your message?"
               className="glass-button py-4 px-6
               placeholder:text-taupe
@@ -120,13 +199,14 @@ const Contact = () => {
 
           <button
             type="submit"
+            disabled={loading}
             className="live-demo flex justify-center sm:gap-4 
             gap-3 sm:text-[20px] text-[16px] text-timberWolf 
             font-bold font-beckman items-center py-5
             whitespace-nowrap sm:w-[130px] sm:h-[50px] 
             w-[100px] h-[45px] rounded-[10px] glass-button
             hover:text-white 
-            transition duration-[0.2s] ease-in-out"
+            transition duration-[0.2s] ease-in-out disabled:opacity-60 disabled:cursor-not-allowed"
             onMouseOver={() => {
               document
                 .querySelector('.contact-btn')
