@@ -72,7 +72,7 @@ const App = () => {
   }, [theme]);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <div
         className={`theme-${theme} ${
           theme === 'glass' ? 'glass-theme' : ''
