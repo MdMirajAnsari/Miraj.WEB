@@ -1387,5 +1387,434 @@ These directives make Angular powerful for building dynamic, interactive user in
     markdownUrl:
       "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/Interview/dotnet_L3.MD",
   },
+  38: {
+    id: 38,
+    title: "ADO.NET Interview Notes",
+    excerpt:
+      "ADO.NET interview preparation notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "C# / .NET",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/ado.net.md",
+  },
+  39: {
+    id: 39,
+    title: "Angular Dev Interview Notes",
+    excerpt:
+      "Angular developer interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "Angular",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/angular.md",
+  },
+  40: {
+    id: 40,
+    title: "AngularJS Dev Interview Notes",
+    excerpt:
+      "AngularJS developer interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "Angular",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/angularjs.md",
+  },
+  41: {
+    id: 41,
+    title: "API Design Interview Notes",
+    excerpt:
+      "API design interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "API Design",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/apidesign.md",
+  },
+  42: {
+    id: 42,
+    title: "ASP.NET MVC Interview Notes",
+    excerpt:
+      "ASP.NET MVC interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "C# / .NET",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/asp.net-mvc.md",
+  },
+  43: {
+    id: 43,
+    title: "ASP.NET Web API Interview Notes",
+    excerpt:
+      "ASP.NET Web API interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "C# / .NET",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/asp.net-web-api.md",
+  },
+  44: {
+    id: 44,
+    title: "ASP.NET Interview Notes",
+    excerpt:
+      "ASP.NET interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "C# / .NET",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/asp.net.md",
+  },
+  45: {
+    id: 45,
+    title: "Aspose.Slides Interview Notes",
+    excerpt:
+      "Aspose.Slides interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "C# / .NET",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/aspose-slides.md",
+  },
+  46: {
+    id: 46,
+    title: "Azure Interview Notes",
+    excerpt:
+      "Azure interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "Azure",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/azure.md",
+  },
+  47: {
+    id: 47,
+    title: "C# Dev Interview Notes",
+    excerpt:
+      "C# developer interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "C# / .NET",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/c-sharp.md",
+  },
+  48: {
+    id: 48,
+    title: "CSS Dev Interview Notes",
+    excerpt:
+      "CSS developer interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "CSS",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1523437113738-bbd3cc89fb19?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/css.md",
+  },
+  49: {
+    id: 49,
+    title: "Database Interview Notes",
+    excerpt:
+      "Database interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "Database",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/database.md",
+  },
+  50: {
+    id: 50,
+    title: "Dependency Injection Interview Notes",
+    excerpt:
+      "Dependency injection interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "Architecture",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/dependency-injection.md",
+  },
+  51: {
+    id: 51,
+    title: "Docker Interview Notes",
+    excerpt:
+      "Docker interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "DevOps",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/docker.md",
+  },
+  52: {
+    id: 52,
+    title: ".NET Core Interview Notes",
+    excerpt:
+      ".NET Core interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "C# / .NET",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/dot.net-core.md",
+  },
+  53: {
+    id: 53,
+    title: "Entity Framework Interview Notes",
+    excerpt:
+      "Entity Framework interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "C# / .NET",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/entity-framework.md",
+  },
+  54: {
+    id: 54,
+    title: "Git Dev Interview Notes",
+    excerpt:
+      "Git developer interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "Git",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/git.md",
+  },
+  55: {
+    id: 55,
+    title: "HTML5 Interview Notes",
+    excerpt:
+      "HTML5 interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "HTML",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/html5.md",
+  },
+  56: {
+    id: 56,
+    title: "Java Interview Notes",
+    excerpt:
+      "Java interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "Java",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/java.md",
+  },
+  57: {
+    id: 57,
+    title: "JavaScript Dev Interview Notes",
+    excerpt:
+      "JavaScript developer interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "JavaScript",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/javascript.md",
+  },
+  58: {
+    id: 58,
+    title: "jQuery Interview Notes",
+    excerpt:
+      "jQuery interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "JavaScript",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/jquery.md",
+  },
+  59: {
+    id: 59,
+    title: "Kubernetes Interview Notes",
+    excerpt:
+      "Kubernetes interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "DevOps",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/kubernetes.md",
+  },
+  60: {
+    id: 60,
+    title: "LINQ Dev Interview Notes",
+    excerpt:
+      "LINQ developer interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "C# / .NET",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/linq.md",
+  },
+  61: {
+    id: 61,
+    title: "Load Balancing Interview Notes",
+    excerpt:
+      "Load balancing interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "System Design",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/load-balancing.md",
+  },
+  62: {
+    id: 62,
+    title: "Microservice Interview Notes",
+    excerpt:
+      "Microservice interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "Architecture",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/microservice.md",
+  },
+  63: {
+    id: 63,
+    title: "Node.js Interview Notes",
+    excerpt:
+      "Node.js interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "Node.js",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/node.md",
+  },
+  64: {
+    id: 64,
+    title: "OOP Dev Interview Notes",
+    excerpt:
+      "Object-oriented programming developer interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "Programming",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/oops.md",
+  },
+  65: {
+    id: 65,
+    title: "React Native Interview Notes",
+    excerpt:
+      "React Native interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "React",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/react-native.md",
+  },
+  66: {
+    id: 66,
+    title: "Redis Interview Notes",
+    excerpt:
+      "Redis interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "Database",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/redis.md",
+  },
+  67: {
+    id: 67,
+    title: "Redux Interview Notes",
+    excerpt:
+      "Redux interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "React",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/redux.md",
+  },
+  68: {
+    id: 68,
+    title: "Ruby on Rails Interview Notes",
+    excerpt:
+      "Ruby on Rails interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "Ruby",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/ruby-rails.md",
+  },
+  69: {
+    id: 69,
+    title: "Ruby Interview Notes",
+    excerpt:
+      "Ruby interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "Ruby",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/ruby.md",
+  },
+  70: {
+    id: 70,
+    title: "Spring Interview Notes",
+    excerpt:
+      "Spring interview notes loaded directly from a Markdown file in the InterviewNavigator repository.",
+    date: "May 09, 2026",
+    category: "Java",
+    readTime: 20,
+    image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/spring.md",
+  },
 
 };
