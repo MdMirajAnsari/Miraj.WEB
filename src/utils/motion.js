@@ -1,3 +1,4 @@
+/** @returns {any} */
 export const textVariant = (delay) => {
   return {
     hidden: {
@@ -16,6 +17,7 @@ export const textVariant = (delay) => {
   };
 };
 
+/** @returns {any} */
 export const fadeIn = (direction, type, delay, duration) => {
   return {
     hidden: {
@@ -37,6 +39,7 @@ export const fadeIn = (direction, type, delay, duration) => {
   };
 };
 
+/** @returns {any} */
 export const zoomIn = (delay, duration) => {
   return {
     hidden: {
@@ -56,6 +59,7 @@ export const zoomIn = (delay, duration) => {
   };
 };
 
+/** @returns {any} */
 export const slideIn = (direction, type, delay, duration) => {
   return {
     hidden: {
@@ -75,6 +79,7 @@ export const slideIn = (direction, type, delay, duration) => {
   };
 };
 
+/** @returns {any} */
 export const staggerContainer = (staggerChildren, delayChildren) => {
   return {
     hidden: {},

@@ -3,13 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { styles } from '../styles';
 import { navLinks } from '../constants';
 import { close, menu } from '../assets';
+import type { NavLink } from '../models';
 
 const Navbar = () => {
   const [active, setActive] = useState('');
   const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
 
-  const handleNavClick = (nav) => {
+  const handleNavClick = (nav: NavLink) => {
     if (nav.id === 'blog') {
       navigate('/blog');
       setActive(nav.title);
@@ -68,7 +69,7 @@ const Navbar = () => {
           </div> */}
         </Link>
         <ul className="list-none hidden sm:flex flex-row flex-wrap gap-4 md:gap-8 lg:gap-12 mt-2 items-center">
-          {navLinks.map((nav) => (
+          {(navLinks as NavLink[]).map((nav) => (
             <li
               key={nav.id}
               className={`${
@@ -106,7 +107,7 @@ const Navbar = () => {
                 className="list-none flex flex-col gap-5 
                 items-center justify-center mt-10 px-4"
               >
-                {navLinks.map((nav) => (
+                {(navLinks as NavLink[]).map((nav) => (
                   <li
                     key={nav.id}
                     className={`${

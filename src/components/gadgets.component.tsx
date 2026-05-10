@@ -5,6 +5,7 @@ import { styles } from '../styles';
 import { gadgets } from '../constants';
 import { fadeIn, textVariant } from '../utils/motion';
 import Applications from './applications.component';
+import type { EnrichedGadget, Gadget, GadgetState, SetActiveTabProps, Song, SongState } from '../models';
 
 const favoriteStorageKey = 'miraj-gadget-favorites';
 const gadgetStateStorageKey = 'miraj-gadget-state';
@@ -12,7 +13,7 @@ const recentStorageKey = 'miraj-gadget-recently-viewed';
 const songStateStorageKey = 'miraj-fav-song-state';
 const recentSongsStorageKey = 'miraj-fav-song-recent';
 const ownershipOptions = ['Researching', 'Wishlist', 'Owned', 'Recommended'];
-const favoriteSongs = [
+const favoriteSongs: Song[] = [
   {
     id: 'song-1',
     embedId: 'dMa_DDiTGKc',
@@ -183,10 +184,18 @@ const enrichGadget = (gadget, index) => ({
   addedIndex: index,
 });
 
-const getGadgetState = (gadgetState, id) => gadgetState[id] || { status: 'Researching', rating: 0 };
-const getSongState = (songState, id) => songState[id] || { favorite: false, listenCount: 0, notes: '' };
+type GadgetStateMap = Record<string, GadgetState>;
+type SongStateMap = Record<string, SongState>;
 
-const StarRating = ({ value, onChange }) => (
+const getGadgetState = (gadgetState: GadgetStateMap, id: string): GadgetState => gadgetState[id] || { status: 'Researching', rating: 0 };
+const getSongState = (songState: SongStateMap, id: string): SongState => songState[id] || { favorite: false, listenCount: 0, notes: '' };
+
+interface StarRatingProps {
+  value: number;
+  onChange: (rating: number) => void;
+}
+
+const StarRating = ({ value, onChange }: StarRatingProps) => (
   <div className="flex gap-1" aria-label={`${value} star rating`}>
     {[1, 2, 3, 4, 5].map((rating) => (
       <button
@@ -207,6 +216,20 @@ StarRating.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
+interface GadgetCardProps {
+  gadget: EnrichedGadget;
+  index: number;
+  viewMode: string;
+  isFavorite: boolean;
+  isCompared: boolean;
+  state: GadgetState;
+  onOpen: () => void;
+  onToggleFavorite: () => void;
+  onToggleCompare: () => void;
+  onStatusChange: (status: string) => void;
+  onRatingChange: (rating: number) => void;
+}
+
 const GadgetCard = ({
   gadget,
   index,
@@ -219,7 +242,7 @@ const GadgetCard = ({
   onToggleCompare,
   onStatusChange,
   onRatingChange,
-}) => {
+}: GadgetCardProps) => {
   const compact = viewMode === 'list';
 
   return (
@@ -342,11 +365,11 @@ GadgetCard.propTypes = {
   onRatingChange: PropTypes.func.isRequired,
 };
 
-const FavSongs = ({ setActiveTab }) => {
+const FavSongs = ({ setActiveTab }: SetActiveTabProps) => {
   const [activeSongIndex, setActiveSongIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [songState, setSongState] = useState(() => readStoredValue(songStateStorageKey, {}));
-  const [recentSongIds, setRecentSongIds] = useState(() => readStoredValue(recentSongsStorageKey, []));
+  const [songState, setSongState] = useState<SongStateMap>(() => readStoredValue(songStateStorageKey, {}));
+  const [recentSongIds, setRecentSongIds] = useState<string[]>(() => readStoredValue(recentSongsStorageKey, []));
   const [songSearch, setSongSearch] = useState('');
   const [selectedMood, setSelectedMood] = useState('all');
   const [songSortMode, setSongSortMode] = useState('Playlist Order');
@@ -392,7 +415,7 @@ const FavSongs = ({ setActiveTab }) => {
   const savedSongCount = favoriteSongs.filter((song) => getSongState(songState, song.id).favorite).length;
   const totalListenCount = favoriteSongs.reduce((total, song) => total + getSongState(songState, song.id).listenCount, 0);
 
-  const updateSongState = (id, changes) => {
+  const updateSongState = (id: string, changes: Partial<SongState>) => {
     setSongState((currentState) => {
       const nextState = {
         ...currentState,
@@ -407,7 +430,7 @@ const FavSongs = ({ setActiveTab }) => {
     });
   };
 
-  const rememberSong = (id) => {
+  const rememberSong = (id: string) => {
     setRecentSongIds((currentIds) => {
       const nextIds = [id, ...currentIds.filter((currentId) => currentId !== id)].slice(0, 5);
       writeStoredValue(recentSongsStorageKey, nextIds);
@@ -415,7 +438,7 @@ const FavSongs = ({ setActiveTab }) => {
     });
   };
 
-  const playSong = (index) => {
+  const playSong = (index: number) => {
     const nextSong = favoriteSongs[index];
 
     setActiveSongIndex(index);
@@ -426,7 +449,7 @@ const FavSongs = ({ setActiveTab }) => {
     });
   };
 
-  const showSongAtOffset = (offset) => {
+  const showSongAtOffset = (offset: number) => {
     if (repeatMode === 'Repeat One') {
       playSong(activeSongIndex);
       return;
@@ -442,7 +465,7 @@ const FavSongs = ({ setActiveTab }) => {
     playSong((nextIndex + favoriteSongs.length) % favoriteSongs.length);
   };
 
-  const selectSong = (index) => {
+  const selectSong = (index: number) => {
     playSong(index);
   };
 
@@ -458,7 +481,7 @@ const FavSongs = ({ setActiveTab }) => {
     playSong(nextIndex);
   };
 
-  const toggleSongFavorite = (id) => {
+  const toggleSongFavorite = (id: string) => {
     updateSongState(id, {
       favorite: !getSongState(songState, id).favorite,
     });
@@ -585,7 +608,7 @@ const FavSongs = ({ setActiveTab }) => {
                 value={activeSongState.notes}
                 onChange={(event) => updateSongState(activeSong.id, { notes: event.target.value })}
                 placeholder="Notes or favorite lyric snippet"
-                rows="4"
+                rows={4}
                 className="mt-4 w-full resize-y rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-sm text-white placeholder:text-gray-400 outline-none focus:border-blue-300"
               />
               <a href={activeSong.url} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex text-blue-300 hover:text-blue-100 text-sm">
@@ -695,7 +718,7 @@ const FavSongs = ({ setActiveTab }) => {
                 value={currentSongState.notes}
                 onChange={(event) => updateSongState(song.id, { notes: event.target.value })}
                 placeholder="Notes or lyric snippet"
-                rows="3"
+                rows={3}
                 className="mt-4 w-full resize-y rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-sm text-white placeholder:text-gray-400 outline-none focus:border-blue-300"
               />
             </article>
@@ -718,13 +741,13 @@ const Gadgets = () => {
   const [selectedBrand, setSelectedBrand] = useState('all');
   const [sortMode, setSortMode] = useState('newest');
   const [viewMode, setViewMode] = useState('grid');
-  const [favoriteIds, setFavoriteIds] = useState(() => readStoredValue(favoriteStorageKey, []));
-  const [gadgetState, setGadgetState] = useState(() => readStoredValue(gadgetStateStorageKey, {}));
-  const [recentIds, setRecentIds] = useState(() => readStoredValue(recentStorageKey, []));
-  const [compareIds, setCompareIds] = useState([]);
-  const [activeGadgetId, setActiveGadgetId] = useState(null);
+  const [favoriteIds, setFavoriteIds] = useState<string[]>(() => readStoredValue(favoriteStorageKey, []));
+  const [gadgetState, setGadgetState] = useState<GadgetStateMap>(() => readStoredValue(gadgetStateStorageKey, {}));
+  const [recentIds, setRecentIds] = useState<string[]>(() => readStoredValue(recentStorageKey, []));
+  const [compareIds, setCompareIds] = useState<string[]>([]);
+  const [activeGadgetId, setActiveGadgetId] = useState<string | null>(null);
 
-  const enrichedGadgets = useMemo(() => gadgets.map(enrichGadget), []);
+  const enrichedGadgets = useMemo(() => (gadgets as Gadget[]).map(enrichGadget), []);
   const categories = useMemo(() => ['all', ...new Set(enrichedGadgets.map((gadget) => gadget.category))], [enrichedGadgets]);
   const brands = useMemo(() => ['all', ...new Set(enrichedGadgets.map((gadget) => gadget.brand))], [enrichedGadgets]);
 
@@ -769,7 +792,7 @@ const Gadgets = () => {
   const activeGadget = enrichedGadgets.find((gadget) => gadget.id === activeGadgetId);
   const comparedGadgets = compareIds.map((id) => enrichedGadgets.find((gadget) => gadget.id === id)).filter(Boolean);
 
-  const updateGadgetState = (id, changes) => {
+  const updateGadgetState = (id: string, changes: Partial<GadgetState>) => {
     setGadgetState((currentState) => {
       const nextState = {
         ...currentState,
@@ -784,7 +807,7 @@ const Gadgets = () => {
     });
   };
 
-  const toggleFavorite = (id) => {
+  const toggleFavorite = (id: string) => {
     setFavoriteIds((currentIds) => {
       const nextIds = currentIds.includes(id) ? currentIds.filter((currentId) => currentId !== id) : [id, ...currentIds];
       writeStoredValue(favoriteStorageKey, nextIds);
@@ -792,7 +815,7 @@ const Gadgets = () => {
     });
   };
 
-  const rememberGadget = (id) => {
+  const rememberGadget = (id: string) => {
     setRecentIds((currentIds) => {
       const nextIds = [id, ...currentIds.filter((currentId) => currentId !== id)].slice(0, 8);
       writeStoredValue(recentStorageKey, nextIds);
@@ -800,12 +823,12 @@ const Gadgets = () => {
     });
   };
 
-  const openGadget = (id) => {
+  const openGadget = (id: string) => {
     setActiveGadgetId(id);
     rememberGadget(id);
   };
 
-  const toggleCompare = (id) => {
+  const toggleCompare = (id: string) => {
     setCompareIds((currentIds) => {
       if (currentIds.includes(id)) {
         return currentIds.filter((currentId) => currentId !== id);

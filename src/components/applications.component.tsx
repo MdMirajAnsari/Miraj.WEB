@@ -2,8 +2,9 @@ import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { styles } from '../styles';
 import { fadeIn, textVariant } from '../utils/motion';
+import type { SetActiveTabProps } from '../models';
 
-const Applications = ({ setActiveTab }) => {
+const Applications = ({ setActiveTab }: SetActiveTabProps) => {
   return (
     <div className="relative z-0 min-h-screen pt-[120px] pb-20">
       <div className={`${styles.padding} max-w-7xl mx-auto`}>

@@ -18,8 +18,9 @@ import Blog from './components/blog.component';
 import BlogDetail from './components/blog-detail.component';
 import Footer from './components/footer.component';
 import PropTypes from 'prop-types';
+import type { Theme, ThemeProps } from './models';
 
-const HomePage = ({ theme, onThemeChange }) => (
+const HomePage = ({ theme, onThemeChange }: ThemeProps) => (
   <>
     <div>
       <Hero />
@@ -59,12 +60,12 @@ HomePage.propTypes = {
 };
 
 const App = () => {
-  const [theme, setTheme] = useState(() => {
+  const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window === 'undefined') return 'glass';
 
     const savedTheme = window.localStorage.getItem('theme');
 
-    return ['dark', 'light', 'glass'].includes(savedTheme) ? savedTheme : 'glass';
+    return ['dark', 'light', 'glass'].includes(savedTheme as Theme) ? (savedTheme as Theme) : 'glass';
   });
 
   useEffect(() => {

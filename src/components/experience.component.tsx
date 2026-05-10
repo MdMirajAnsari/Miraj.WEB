@@ -10,8 +10,13 @@ import { experiences } from '../constants';
 import { SectionWrapper } from '../hoc';
 import { download, resume } from '../assets';
 import { textVariant } from '../utils/motion';
+import type { Experience as ExperienceModel } from '../models';
 
-const ExperienceCard = ({ experience }) => (
+interface ExperienceCardProps {
+  experience: ExperienceModel;
+}
+
+const ExperienceCard = ({ experience }: ExperienceCardProps) => (
   <VerticalTimelineElement
     contentStyle={{
       background: 'rgba(15, 23, 42, 0.58)',
@@ -77,7 +82,7 @@ const Experience = () => {
 
       <div className="mt-20 flex flex-col">
         <VerticalTimeline className="vertical-timeline-custom-line">
-          {experiences.map((experience, index) => (
+          {(experiences as ExperienceModel[]).map((experience, index) => (
             <ExperienceCard key={index} experience={experience} />
           ))}
           <VerticalTimelineElement

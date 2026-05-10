@@ -7,6 +7,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import { blogPosts } from '../constants/blogData';
 import { toRawMarkdownUrl } from '../utils/markdown';
+import type { BlogPost } from '../models';
 
 const favoriteStorageKey = 'miraj-blog-favorites';
 const recentStorageKey = 'miraj-blog-recently-viewed';
@@ -34,7 +35,7 @@ const slugify = (value) =>
     .trim()
     .replace(/\s+/g, '-');
 
-const getPostTags = (post) => {
+const getPostTags = (post: BlogPost) => {
   const text = `${post.title} ${post.category} ${post.excerpt} ${post.content || ''}`.toLowerCase();
   const tags = new Set(post.tags || []);
 
@@ -135,7 +136,7 @@ CopyableCode.defaultProps = {
 const BlogDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const blog = blogPosts[id];
+  const blog = (blogPosts as Record<string, BlogPost>)[id || ''];
   const [content, setContent] = useState(blog?.content || '');
   const [isLoadingContent, setIsLoadingContent] = useState(false);
   const [contentError, setContentError] = useState('');
@@ -145,7 +146,7 @@ const BlogDetail = () => {
 
   const posts = useMemo(
     () =>
-      Object.values(blogPosts).map((post) => ({
+      Object.values(blogPosts as Record<string, BlogPost>).map((post) => ({
         ...post,
         tags: getPostTags(post),
       })),

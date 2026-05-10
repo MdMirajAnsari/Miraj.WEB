@@ -9,7 +9,15 @@ import {
 } from '@react-three/drei';
 import Loader from '../loader.component';
 
-const Ball = (props) => {
+interface BallProps {
+  imgUrl: string;
+}
+
+interface BallCanvasProps {
+  icon: string;
+}
+
+const Ball = (props: BallProps) => {
   const [decal] = useTexture([props.imgUrl]);
 
   return (
@@ -27,7 +35,6 @@ const Ball = (props) => {
         <Decal
           position={[0, 0, 1]}
           rotation={[2 * Math.PI, 0, 6.25]}
-          flatShading
           map={decal}
         />
       </mesh>
@@ -35,7 +42,7 @@ const Ball = (props) => {
   );
 };
 
-const BallCanvas = ({ icon }) => {
+const BallCanvas = ({ icon }: BallCanvasProps) => {
   return (
     <Canvas frameloop="always" gl={{ preserveDrawingBuffer: true }}>
       <Suspense fallback={<Loader />}>

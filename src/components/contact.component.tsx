@@ -136,7 +136,7 @@ const Contact = () => {
             name="company"
             value={form.company}
             onChange={handleChange}
-            tabIndex="-1"
+            tabIndex={-1}
             autoComplete="off"
             className="hidden"
           />
@@ -175,7 +175,7 @@ const Contact = () => {
               Your Message
             </span>
             <textarea
-              rows="7"
+              rows={7}
               name="message"
               value={form.message}
               onChange={handleChange}

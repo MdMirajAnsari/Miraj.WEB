@@ -23,11 +23,11 @@ const NetworkWebBackground = () => {
     });
   }, []);
 
-  const particlesLoaded = (container) => {
+  const particlesLoaded = async (container: any) => {
     console.log(container);
   };
 
-  const options = useMemo(
+  const options = useMemo<any>(
     () => ({
       background: {
         color: {

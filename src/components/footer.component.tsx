@@ -1,10 +1,10 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { styles } from '../styles';
+import type { Theme, ThemeProps } from '../models';
 
-const themes = ['dark', 'light', 'glass'];
+const themes: Theme[] = ['dark', 'light', 'glass'];
 
-const Footer = ({ theme, onThemeChange }) => {
+const Footer = ({ theme, onThemeChange }: ThemeProps) => {
   return (
     <footer className={`${styles.paddingX} glass-surface py-8 mt-32 border-t border-white/10 relative z-[60]`}>
       <div className="max-w-7xl mx-auto">

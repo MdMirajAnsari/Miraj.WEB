@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { styles } from '../styles';
+import type { GalleryImageModel } from '../models';
 
 const favoriteStorageKey = 'miraj-gallery-favorites';
 const recentStorageKey = 'miraj-gallery-recently-viewed';
 
-const galleryImages = [
+const galleryImages: GalleryImageModel[] = [
   {
     id: 1,
     url: 'https://res.cloudinary.com/dj6ebo4as/image/upload/v1777654842/GalaryScene/IMG_20231227_070256752_ljlbp8.jpg',
@@ -248,7 +249,14 @@ const formatLabel = (value) =>
 
 const parseDate = (date) => new Date(date).getTime() || 0;
 
-const GalleryImage = ({ image, isFavorite, onOpen, onToggleFavorite }) => {
+interface GalleryImageProps {
+  image: GalleryImageModel;
+  isFavorite: boolean;
+  onOpen: () => void;
+  onToggleFavorite: () => void;
+}
+
+const GalleryImage = ({ image, isFavorite, onOpen, onToggleFavorite }: GalleryImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
@@ -327,9 +335,9 @@ const Gallery = () => {
   const [selectedAlbum, setSelectedAlbum] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [sortMode, setSortMode] = useState('newest');
-  const [favoriteIds, setFavoriteIds] = useState(() => readStoredArray(favoriteStorageKey));
-  const [recentIds, setRecentIds] = useState(() => readStoredArray(recentStorageKey));
-  const [activeImageId, setActiveImageId] = useState(null);
+  const [favoriteIds, setFavoriteIds] = useState<number[]>(() => readStoredArray(favoriteStorageKey));
+  const [recentIds, setRecentIds] = useState<number[]>(() => readStoredArray(recentStorageKey));
+  const [activeImageId, setActiveImageId] = useState<number | null>(null);
   const [isSlideshowRunning, setIsSlideshowRunning] = useState(false);
 
   const categoryCounts = useMemo(

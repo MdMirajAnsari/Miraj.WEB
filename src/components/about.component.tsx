@@ -4,8 +4,13 @@ import PropTypes from "prop-types";
 import { services } from "../constants";
 import { fadeIn, textVariant } from "../utils/motion";
 import { SectionWrapper } from "../hoc";
+import type { Service } from "../models";
 
-const ServiceCard = ({ index, title, icon }) => {
+interface ServiceCardProps extends Service {
+  index: number;
+}
+
+const ServiceCard = ({ index, title, icon }: ServiceCardProps) => {
   return (
     <motion.div
       variants={fadeIn("right", "spring", 0.5 * index, 0.75)}
@@ -52,7 +57,7 @@ const About = () => {
       </motion.p>
 
       <div className="mt-20 flex flex-wrap gap-6 sm:gap-10 justify-center">
-        {services.map((service, index) => (
+        {(services as Service[]).map((service, index) => (
           <ServiceCard key={service.title} index={index} {...service} />
         ))}
       </div>

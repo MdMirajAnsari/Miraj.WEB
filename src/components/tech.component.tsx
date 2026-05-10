@@ -4,6 +4,7 @@ import { SectionWrapper } from '../hoc';
 import { technologies } from '../constants';
 import { styles } from '../styles';
 import { textVariant } from '../utils/motion';
+import type { Technology } from '../models';
 
 const Tech = () => {
   return (
@@ -14,7 +15,7 @@ const Tech = () => {
       </motion.div>
 
       <div className="flex flex-wrap justify-center gap-6 sm:gap-10 mt-14">
-        {technologies.map((technology) => (
+        {(technologies as Technology[]).map((technology) => (
           <motion.div
             className="w-20 h-20 sm:w-28 sm:h-28 flex items-center justify-center relative group cursor-pointer"
             key={technology.name}

@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import { styles } from '../styles';
+import type { VideoState, YouTubePlaylist, YouTubeVideo } from '../models';
 
 const storageKey = 'miraj-youtube-video-state';
 
-const playlists = {
+const playlists: Record<string, YouTubePlaylist> = {
   'mern-project': {
     title: 'MERN Project Series',
     description: 'Build a MERN project step by step from the same playlist.',
@@ -11,7 +12,7 @@ const playlists = {
   },
 };
 
-const videos = [
+const videos: YouTubeVideo[] = [
   {
     id: 1,
     embedId: 'lFeYU31TnQ8',
@@ -554,14 +555,16 @@ const formatCategory = (category) =>
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
 
-const getVideoState = (videoState, id) => videoState[id] || {};
+type VideoStateMap = Record<number, Partial<VideoState>>;
+
+const getVideoState = (videoState: VideoStateMap, id: number): Partial<VideoState> => videoState[id] || {};
 
 const YouTube = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [sortMode, setSortMode] = useState('newest');
   const [featuredId, setFeaturedId] = useState(videos[0].id);
-  const [videoState, setVideoState] = useState(readSavedVideoState);
+  const [videoState, setVideoState] = useState<VideoStateMap>(readSavedVideoState);
 
   useEffect(() => {
     window.localStorage.setItem(storageKey, JSON.stringify(videoState));
@@ -893,7 +896,7 @@ const YouTube = () => {
                           value={currentState.notes || ''}
                           onChange={(event) => updateVideoState(video.id, { notes: event.target.value })}
                           placeholder="Notes for this video"
-                          rows="3"
+                          rows={3}
                           className="w-full resize-y rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-sm text-white placeholder:text-gray-400 outline-none focus:border-blue-300"
                         />
 

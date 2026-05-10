@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { styles } from '../styles';
 import { blogPosts } from '../constants/blogData';
+import type { BlogPost, DecoratedBlogPost } from '../models';
 
 const favoriteStorageKey = 'miraj-blog-favorites';
 const recentStorageKey = 'miraj-blog-recently-viewed';
@@ -24,7 +25,7 @@ const writeStoredArray = (key, value) => {
   window.localStorage.setItem(key, JSON.stringify(value));
 };
 
-const getPostTags = (post) => {
+const getPostTags = (post: BlogPost) => {
   const text = `${post.title} ${post.category} ${post.excerpt} ${post.content || ''}`.toLowerCase();
   const tags = new Set(post.tags || []);
 
@@ -51,7 +52,7 @@ const getPostTags = (post) => {
   return [...tags].slice(0, 5);
 };
 
-const decoratePost = (post) => ({
+const decoratePost = (post: BlogPost): DecoratedBlogPost => ({
   ...post,
   tags: getPostTags(post),
   isPinned: pinnedCategories.includes(post.category),
@@ -62,7 +63,13 @@ const formatCategory = (category) =>
 
 const parseDate = (date) => new Date(date).getTime() || 0;
 
-const BlogCard = ({ post, isFavorite, onToggleFavorite }) => {
+interface BlogCardProps {
+  post: DecoratedBlogPost;
+  isFavorite: boolean;
+  onToggleFavorite: () => void;
+}
+
+const BlogCard = ({ post, isFavorite, onToggleFavorite }: BlogCardProps) => {
   const navigate = useNavigate();
 
   const openPost = () => navigate(`/blog/${post.id}`);
@@ -167,13 +174,13 @@ BlogCard.propTypes = {
 };
 
 const Blog = () => {
-  const posts = useMemo(() => Object.values(blogPosts).map(decoratePost), []);
+  const posts = useMemo(() => Object.values(blogPosts as Record<number, BlogPost>).map(decoratePost), []);
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [sortMode, setSortMode] = useState('latest');
-  const [favoriteIds, setFavoriteIds] = useState(() => readStoredArray(favoriteStorageKey));
-  const [recentIds] = useState(() => readStoredArray(recentStorageKey));
+  const [favoriteIds, setFavoriteIds] = useState<number[]>(() => readStoredArray(favoriteStorageKey));
+  const [recentIds] = useState<number[]>(() => readStoredArray(recentStorageKey));
 
   const categoryCounts = useMemo(
     () =>

@@ -6,6 +6,13 @@ import { styles } from '../styles';
 import { github, pineapple, pineappleHover } from '../assets';
 import { projects } from '../constants';
 import { fadeIn, textVariant, staggerContainer } from '../utils/motion';
+import type { Project } from '../models';
+
+interface ProjectCardProps extends Project {
+  index: number;
+  active: string;
+  handleClick: (id: string) => void;
+}
 
 const ProjectCard = ({
   id,
@@ -17,7 +24,8 @@ const ProjectCard = ({
   index,
   active,
   handleClick,
-}) => {
+}: ProjectCardProps) => {
+  const sourceUrl = repo || demo;
   return (
     <motion.div
       variants={fadeIn('right', 'spring', index * 0.5, 0.75)}
@@ -54,7 +62,7 @@ const ProjectCard = ({
             rounded-b-[24px] z-20 backdrop-blur-sm border-t border-white/10">
             <div className="absolute inset-0 flex justify-end m-3">
               <div
-                onClick={() => window.open(repo, '_blank')}
+                onClick={() => window.open(sourceUrl, '_blank')}
                 className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700
                   sm:w-11 sm:h-11 w-10 h-10 rounded-full
                   flex justify-center items-center cursor-pointer
@@ -147,13 +155,13 @@ const Projects = () => {
       </div>
 
       <motion.div
-        variants={staggerContainer}
+        variants={staggerContainer()}
         initial="hidden"
         whileInView="show"
         viewport={{ once: false, amount: 0.25 }}
         className={`${styles.innerWidth} mx-auto flex flex-col`}>
       <div className="mt-[50px] flex lg:flex-row flex-col min-h-[70vh] gap-5">
-        {projects.map((project, index) => (
+        {(projects as Project[]).map((project, index) => (
           <ProjectCard
             key={project.id}
             id={project.id} // Ensure id is explicitly passed

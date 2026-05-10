@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { styles } from '../styles';
 import { SectionWrapper } from '../hoc';
 import { fadeIn, textVariant, staggerContainer } from '../utils/motion';
+import type { CoursePhase, CourseReason, CourseTopic } from '../models';
 
 const CourseHero = () => {
   return (
@@ -12,7 +13,7 @@ const CourseHero = () => {
           variants={staggerContainer()}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, threshold: 0.2 }}
+          viewport={{ once: false, amount: 0.2 }}
           className="flex flex-col items-center justify-center text-center gap-4 py-20"
         >
           <motion.h1
@@ -85,7 +86,7 @@ const CourseHero = () => {
 };
 
 const WhyChoose = () => {
-  const reasons = [
+  const reasons: CourseReason[] = [
     {
       icon: '🎥',
       title: 'Live Interactive Sessions',
@@ -125,7 +126,7 @@ const WhyChoose = () => {
           variants={staggerContainer()}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, threshold: 0.2 }}
+          viewport={{ once: false, amount: 0.2 }}
           className="flex flex-col"
         >
           <motion.h2
@@ -170,7 +171,11 @@ const WhyChoose = () => {
   );
 };
 
-const CurriculumPhase = ({ phase, title, topics, index }) => {
+interface CurriculumPhaseProps extends CoursePhase {
+  index: number;
+}
+
+const CurriculumPhase = ({ phase, title, topics, index }: CurriculumPhaseProps) => {
   const [expanded, setExpanded] = useState(index === 0);
 
   const colors = [
@@ -319,7 +324,7 @@ const Curriculum = () => {
           variants={staggerContainer()}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, threshold: 0.2 }}
+          viewport={{ once: false, amount: 0.2 }}
           className="flex flex-col"
         >
           <motion.h2
@@ -382,7 +387,7 @@ const StudentSuccess = () => {
           variants={staggerContainer()}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, threshold: 0.2 }}
+          viewport={{ once: false, amount: 0.2 }}
           className="flex flex-col"
         >
           <motion.h2
@@ -443,7 +448,7 @@ const CTA = () => {
           variants={staggerContainer()}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, threshold: 0.2 }}
+          viewport={{ once: false, amount: 0.2 }}
           className="flex flex-col items-center justify-center text-center gap-8"
         >
           <motion.h2
@@ -536,7 +541,7 @@ const FAQ = () => {
           variants={staggerContainer()}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, threshold: 0.2 }}
+          viewport={{ once: false, amount: 0.2 }}
           className="flex flex-col"
         >
           <motion.h2

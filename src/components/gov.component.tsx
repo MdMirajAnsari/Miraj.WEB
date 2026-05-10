@@ -4,12 +4,13 @@ import { motion } from 'framer-motion';
 import { SectionWrapper } from '../hoc';
 import { styles } from '../styles';
 import { fadeIn, textVariant } from '../utils/motion';
+import type { EnrichedGovLink, GovLink } from '../models';
 
 const favoriteStorageKey = 'miraj-gov-favorites';
 const recentStorageKey = 'miraj-gov-recent-links';
 const pinnedIds = [3, 8, 9, 10, 12, 6];
 
-const govLinks = [
+const govLinks: GovLink[] = [
   {
     id: 1,
     title: 'Official Government Portal',
@@ -210,6 +211,17 @@ const writeStoredArray = (key, value) => {
 
 const formatLabel = (value) => value.charAt(0).toUpperCase() + value.slice(1);
 
+interface GovCardProps {
+  link: EnrichedGovLink;
+  index: number;
+  viewMode: string;
+  isFavorite: boolean;
+  onOpen: () => void;
+  onDetails: () => void;
+  onFavorite: () => void;
+  onCopy: () => void;
+}
+
 const GovCard = ({
   link,
   index,
@@ -219,7 +231,7 @@ const GovCard = ({
   onDetails,
   onFavorite,
   onCopy,
-}) => {
+}: GovCardProps) => {
   const compact = viewMode === 'list';
 
   return (
@@ -293,13 +305,13 @@ const Gov = () => {
   const [selectedScope, setSelectedScope] = useState('all');
   const [sortMode, setSortMode] = useState('pinned');
   const [viewMode, setViewMode] = useState('grid');
-  const [favoriteIds, setFavoriteIds] = useState(() => readStoredArray(favoriteStorageKey));
-  const [recentIds, setRecentIds] = useState(() => readStoredArray(recentStorageKey));
-  const [activeLinkId, setActiveLinkId] = useState(null);
-  const [copiedId, setCopiedId] = useState(null);
+  const [favoriteIds, setFavoriteIds] = useState<number[]>(() => readStoredArray(favoriteStorageKey));
+  const [recentIds, setRecentIds] = useState<number[]>(() => readStoredArray(recentStorageKey));
+  const [activeLinkId, setActiveLinkId] = useState<number | null>(null);
+  const [copiedId, setCopiedId] = useState<number | null>(null);
 
   const enrichedLinks = useMemo(
-    () => govLinks.map((link, index) => ({ ...link, addedIndex: index, isPinned: pinnedIds.includes(link.id) })),
+    () => govLinks.map((link, index): EnrichedGovLink => ({ ...link, addedIndex: index, isPinned: pinnedIds.includes(link.id) })),
     [],
   );
 
