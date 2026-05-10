@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { styles } from '../styles';
 import { gadgets } from '../constants';
 import { fadeIn, textVariant } from '../utils/motion';
-import Applications from './Applications';
+import Applications from './applications.component';
 
 const favoriteStorageKey = 'miraj-gadget-favorites';
 const gadgetStateStorageKey = 'miraj-gadget-state';

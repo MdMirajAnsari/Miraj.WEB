@@ -14,9 +14,9 @@ import {
   YouTube,
   Course,
 } from './components';
-import Blog from './components/Blog';
-import BlogDetail from './components/BlogDetail';
-import Footer from './components/Footer';
+import Blog from './components/blog.component';
+import BlogDetail from './components/blog-detail.component';
+import Footer from './components/footer.component';
 import PropTypes from 'prop-types';
 
 const HomePage = ({ theme, onThemeChange }) => (
