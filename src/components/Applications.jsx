@@ -17,7 +17,7 @@ const Applications = ({ setActiveTab }) => {
         </motion.div>
 
         {/* Toggle Buttons */}
-        <div className="mt-8 flex gap-4">
+        <div className="mt-8 flex flex-wrap gap-4">
           <button
             onClick={() => setActiveTab('gadgets')}
             className="px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 glass-button text-taupe">
@@ -27,6 +27,11 @@ const Applications = ({ setActiveTab }) => {
             onClick={() => setActiveTab('software')}
             className="px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 glass-button-active text-white shadow-lg">
             Applications
+          </button>
+          <button
+            onClick={() => setActiveTab('songs')}
+            className="px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 glass-button text-taupe">
+            Fav Songs
           </button>
         </div>
 
