@@ -414,6 +414,7 @@ const FavSongs = ({ setActiveTab }: SetActiveTabProps) => {
   const recentSongs = recentSongIds.map((songId) => favoriteSongs.find((song) => song.id === songId)).filter(Boolean).slice(0, 5);
   const savedSongCount = favoriteSongs.filter((song) => getSongState(songState, song.id).favorite).length;
   const totalListenCount = favoriteSongs.reduce((total, song) => total + getSongState(songState, song.id).listenCount, 0);
+  const playlistProgress = ((activeSongIndex + 1) / favoriteSongs.length) * 100;
 
   const updateSongState = (id: string, changes: Partial<SongState>) => {
     setSongState((currentState) => {
@@ -537,10 +538,24 @@ const FavSongs = ({ setActiveTab }: SetActiveTabProps) => {
                 Audio-only playlist powered by your YouTube links.
               </p>
 
-              <div className="mt-7 flex flex-wrap gap-3">
-                <button type="button" onClick={() => showSongAtOffset(-1)} className="glass-button px-5 py-3 rounded-lg text-white">
-                  Prev
-                </button>
+              <div className="mt-7 rounded-[18px] border border-white/15 bg-black/20 p-3 shadow-[0_18px_45px_rgba(2,6,23,0.25)]">
+                <div className="mb-3 h-1.5 overflow-hidden rounded-full bg-white/10">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-blue-300 via-indigo-300 to-fuchsia-300 transition-all duration-500"
+                    style={{ width: `${playlistProgress}%` }}
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center">
+                  <button
+                    type="button"
+                    onClick={() => showSongAtOffset(-1)}
+                    className="group rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/20 hover:shadow-lg sm:px-5"
+                    aria-label="Play previous song"
+                  >
+                    <span className="block text-[11px] uppercase tracking-[2px] text-blue-200">Back</span>
+                    <span className="mt-1 block text-sm font-semibold">Prev</span>
+                  </button>
                 <button
                   type="button"
                   onClick={() => {
@@ -551,23 +566,44 @@ const FavSongs = ({ setActiveTab }: SetActiveTabProps) => {
 
                     playSong(activeSongIndex);
                   }}
-                  className="glass-button-active px-6 py-3 rounded-lg text-white font-semibold"
+                  className="col-span-2 rounded-2xl border border-blue-200/50 bg-gradient-to-r from-blue-500/90 via-indigo-500/90 to-fuchsia-500/90 px-6 py-4 text-white shadow-[0_16px_40px_rgba(79,70,229,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_50px_rgba(79,70,229,0.45)] sm:col-span-1"
+                  aria-label={isPlaying ? 'Pause song' : 'Play song'}
                 >
-                  {isPlaying ? 'Pause' : 'Play'}
+                  <span className="block text-[11px] uppercase tracking-[2px] text-blue-100">{isPlaying ? 'Playing' : 'Ready'}</span>
+                  <span className="mt-1 block text-base font-bold">{isPlaying ? 'Pause' : 'Play'}</span>
                 </button>
-                <button type="button" onClick={() => showSongAtOffset(1)} className="glass-button px-5 py-3 rounded-lg text-white">
-                  Next
-                </button>
-                <button type="button" onClick={shuffleSong} className="glass-button px-5 py-3 rounded-lg text-white">
-                  Shuffle
-                </button>
+                  <button
+                    type="button"
+                    onClick={() => showSongAtOffset(1)}
+                    className="rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/20 hover:shadow-lg sm:px-5"
+                    aria-label="Play next song"
+                  >
+                    <span className="block text-[11px] uppercase tracking-[2px] text-blue-200">Forward</span>
+                    <span className="mt-1 block text-sm font-semibold">Next</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={shuffleSong}
+                    className="rounded-2xl border border-cyan-200/30 bg-cyan-400/10 px-4 py-3 text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-cyan-400/20 hover:shadow-lg sm:px-5"
+                    aria-label="Shuffle songs"
+                  >
+                    <span className="block text-[11px] uppercase tracking-[2px] text-cyan-100">Random</span>
+                    <span className="mt-1 block text-sm font-semibold">Shuffle</span>
+                  </button>
                 <button
                   type="button"
                   onClick={() => toggleSongFavorite(activeSong.id)}
-                  className={`px-5 py-3 rounded-lg text-white ${activeSongState.favorite ? 'glass-button-active' : 'glass-button'}`}
+                    className={`rounded-2xl border px-4 py-3 text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg sm:px-5 ${
+                      activeSongState.favorite
+                        ? 'border-amber-200/50 bg-gradient-to-r from-amber-400/80 to-pink-500/80 shadow-[0_14px_35px_rgba(245,158,11,0.25)]'
+                        : 'border-white/15 bg-white/10 hover:bg-white/20'
+                    }`}
+                    aria-label={activeSongState.favorite ? 'Remove song from saved songs' : 'Save song'}
                 >
-                  {activeSongState.favorite ? 'Saved' : 'Save'}
+                    <span className="block text-[11px] uppercase tracking-[2px] text-amber-100">Library</span>
+                    <span className="mt-1 block text-sm font-semibold">{activeSongState.favorite ? 'Saved' : 'Save'}</span>
                 </button>
+                </div>
               </div>
 
               <div className="mt-5 flex flex-wrap gap-3">
@@ -586,11 +622,9 @@ const FavSongs = ({ setActiveTab }: SetActiveTabProps) => {
               </div>
 
               <div className="mt-6 flex flex-wrap gap-3 text-sm text-gray-300">
-                <span>Song {activeSongIndex + 1} of {favoriteSongs.length}</span>
-                <span>|</span>
-                <span>{activeSongState.listenCount} listens</span>
-                <span>|</span>
-                <span>{savedSongCount} saved</span>
+                <span className="rounded-full bg-white/10 px-3 py-2">Song {activeSongIndex + 1} of {favoriteSongs.length}</span>
+                <span className="rounded-full bg-white/10 px-3 py-2">{activeSongState.listenCount} listens</span>
+                <span className="rounded-full bg-white/10 px-3 py-2">{savedSongCount} saved</span>
               </div>
             </div>
 
