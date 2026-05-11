@@ -87,7 +87,7 @@ const Navbar = () => {
         <div className="sm:hidden flex flex-1 justify-end items-center">
           {toggle ? (
             <div
-              className="fixed inset-0 z-50 bg-black/60 backdrop-blur-md p-6 min-h-screen overflow-y-auto animate-in fade-in duration-300"
+              className="fixed inset-0 z-50 bg-black/60 backdrop-blur-2xl p-6 min-h-screen overflow-y-auto animate-in fade-in duration-300"
             >
               <div className="flex justify-end mb-6">
                 <button

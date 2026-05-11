@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
-import { SectionWrapper } from '../hoc';
 import { styles } from '../styles';
 import { fadeIn, textVariant } from '../utils/motion';
 import type { EnrichedGovLink, GovLink } from '../models';
@@ -387,17 +386,18 @@ const Gov = () => {
   };
 
   return (
-    <div className="glass-card mt-12 mb-20 rounded-[30px] p-6">
-      <motion.div variants={textVariant()}>
-        <p className={`${styles.sectionSubText} text-slate-300`}>Government Links</p>
-        <h2 className={`${styles.sectionHeadTextLight} text-white`}>Gov Resources</h2>
-      </motion.div>
+    <main className={`${styles.paddingX} relative z-0 min-h-screen pt-[120px] pb-20`}>
+      <div className="glass-card mx-auto max-w-7xl rounded-[24px] sm:rounded-[30px] p-4 sm:p-6">
+        <motion.div variants={textVariant()}>
+          <p className={`${styles.sectionSubText} text-slate-300`}>Government Links</p>
+          <h2 className={`${styles.sectionHeadTextLight} text-white`}>Gov Resources</h2>
+        </motion.div>
 
-      <motion.p variants={fadeIn('', '', 0.1, 1)} className="mt-4 text-slate-400 text-[18px] max-w-3xl leading-[30px]">
-        Find official government websites and public services in one place.
-      </motion.p>
+        <motion.p variants={fadeIn('', '', 0.1, 1)} className="mt-4 text-slate-400 text-[16px] sm:text-[18px] max-w-3xl leading-[28px] sm:leading-[30px]">
+          Find official government websites and public services in one place.
+        </motion.p>
 
-      <div className="mt-8 glass-card rounded-[20px] p-5">
+      <div className="mt-8 glass-card rounded-[20px] p-4 sm:p-5">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_170px_170px_170px] gap-4">
           <input
             type="search"
@@ -539,8 +539,9 @@ const Gov = () => {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </main>
   );
 };
 
-export default SectionWrapper(Gov, 'gov');
+export default Gov;
