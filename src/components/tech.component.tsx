@@ -5,6 +5,7 @@ import { technologies } from '../constants';
 import { styles } from '../styles';
 import { textVariant } from '../utils/motion';
 import type { Technology } from '../models';
+import LazyImage from './lazy-image.component';
 
 const Tech = () => {
   return (
@@ -35,12 +36,11 @@ const Tech = () => {
             {/* Icon container */}
             <div className="relative z-10 p-2 sm:p-3 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 group-hover:border-white/30 transition-all duration-300">
               {technology.icon.startsWith('http') ? (
-                <motion.img
+                <LazyImage
                   src={technology.icon}
                   alt={technology.name}
                   className="w-12 h-12 sm:w-16 sm:h-16 object-contain filter group-hover:brightness-110 group-hover:drop-shadow-lg"
-                  whileHover={{ rotate: [0, -10, 10, 0] }}
-                  transition={{ duration: 0.5 }}
+                  skeletonClassName="w-12 h-12 sm:w-16 sm:h-16 rounded-full"
                 />
               ) : (
                 <div className="w-12 h-12 sm:w-16 sm:h-16 group-hover:drop-shadow-2xl transition-all duration-300">

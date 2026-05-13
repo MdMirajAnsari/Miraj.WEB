@@ -972,7 +972,7 @@ export class AppComponent {
 - **One-Way Binding:** Data flows either from component to view (interpolation, property binding) or view to component (event binding)
 - **Two-Way Binding:** Requires FormsModule for ngModel and is useful for form inputs
 - **Performance:** Angular's change detection automatically updates the UI when bound data changes, but overuse of two-way binding can impact performance in large applications
-- **Directives:** Structural directives like \*ngIf and \*ngFor often work with data binding to conditionally render or iterate over elements
+- **Directives:** Structural directives like *ngIf and *ngFor often work with data binding to conditionally render or iterate over elements
 
 ---
 
@@ -983,13 +983,13 @@ Angular directives are special markers (attributes or elements) in the DOM that 
 ### Three Main Types of Directives
 
 1. **Component Directives:** Defined using the @Component decorator, they encapsulate HTML, CSS, and TypeScript logic
-2. **Structural Directives:** Identified by a leading asterisk (*) in templates (e.g., \*ngIf, \*ngFor, \*ngSwitch)
+2. **Structural Directives:** Identified by a leading asterisk (*) in templates (e.g., *ngIf, *ngFor, *ngSwitch)
 3. **Attribute Directives:** Modify the behavior or appearance of an element without altering the DOM structure (e.g., ngClass, ngStyle, ngModel)
 
 ### Common Examples
 
-- **\*ngIf:** Conditionally renders elements
-- **\*ngFor:** Iterates over a list
+- **\`*ngIf\`:** Conditionally renders elements
+- **\`*ngFor\`:** Iterates over a list
 - **ngClass:** Dynamically applies CSS classes
 - **ngStyle:** Applies inline styles dynamically
 - **ngModel:** Two-way binding for forms

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { styles } from "../styles";
 import { worldmap } from "../assets";
 import { NetworkWebBackground } from "./canvas";
+import LazyImage from "./lazy-image.component";
 
 const Hero = () => {
   return (
@@ -80,11 +81,12 @@ const Hero = () => {
         {/* Your image comes here. Feel free to remove image if you don't plan to have one.*/}
         {/* Your image comes here. Feel free to remove image if you don't plan to have one.*/}
         <div>
-          <img
+          <LazyImage
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
       sm:h-[90vh] md:h-[70vh] xl:h-[80vh] opacity-10 sm:opacity-10"
             src={worldmap}
             alt="worldmap"
+            skeletonClassName="absolute inset-0"
           />
         </div>
       </section>

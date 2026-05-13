@@ -7,6 +7,8 @@ import { github, pineapple, pineappleHover } from '../assets';
 import { projects } from '../constants';
 import { fadeIn, textVariant, staggerContainer } from '../utils/motion';
 import type { Project } from '../models';
+import LazyImage from './lazy-image.component';
+import { mergeById, readStudioContent } from '../utils/contentStudio';
 
 interface ProjectCardProps extends Project {
   index: number;
@@ -38,10 +40,11 @@ const ProjectCard = ({
         className="absolute top-0 left-0 z-10 bg-gradient-to-t from-black/60 via-transparent to-transparent
       h-full w-full rounded-[24px] opacity-80 hover:opacity-60 transition-opacity duration-300"></div>
 
-      <img
+      <LazyImage
         src={image}
         alt={name}
         className="absolute w-full h-full object-cover rounded-[24px]"
+        skeletonClassName="absolute w-full h-full rounded-[24px]"
       />
 
       {active !== id ? (
@@ -125,7 +128,7 @@ ProjectCard.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
-  repo: PropTypes.string.isRequired,
+  repo: PropTypes.string,
   demo: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   active: PropTypes.string.isRequired,
@@ -134,6 +137,7 @@ ProjectCard.propTypes = {
 
 const Projects = () => {
   const [active, setActive] = useState('project-2');
+  const visibleProjects = mergeById(projects as Project[], readStudioContent().projects);
 
   return (
     <div className="-mt-[6rem]">
@@ -161,7 +165,7 @@ const Projects = () => {
         viewport={{ once: false, amount: 0.25 }}
         className={`${styles.innerWidth} mx-auto flex flex-col`}>
       <div className="mt-[50px] flex lg:flex-row flex-col min-h-[70vh] gap-5">
-        {(projects as Project[]).map((project, index) => (
+        {visibleProjects.map((project, index) => (
           <ProjectCard
             key={project.id}
             id={project.id} // Ensure id is explicitly passed

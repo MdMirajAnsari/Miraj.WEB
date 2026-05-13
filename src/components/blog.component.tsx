@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { styles } from '../styles';
 import { blogPosts } from '../constants/blogData';
 import type { BlogPost, DecoratedBlogPost } from '../models';
+import LazyImage from './lazy-image.component';
 
 const favoriteStorageKey = 'miraj-blog-favorites';
 const recentStorageKey = 'miraj-blog-recently-viewed';
@@ -94,13 +95,11 @@ const BlogCard = ({ post, isFavorite, onToggleFavorite }: BlogCardProps) => {
         </div>
 
         <div className="h-48 overflow-hidden">
-          <img
+          <LazyImage
             src={post.image}
             alt={post.title}
             className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-            onError={(event) => {
-              event.currentTarget.src = 'https://via.placeholder.com/400x300?text=Image+Not+Available';
-            }}
+            skeletonClassName="w-full h-full"
           />
         </div>
       </button>
@@ -271,7 +270,7 @@ const Blog = () => {
       {featuredPost && (
         <section className="glass-card rounded-lg overflow-hidden mb-8 grid grid-cols-1 lg:grid-cols-[1fr_1.1fr]">
           <button type="button" onClick={() => navigate(`/blog/${featuredPost.id}`)} className="block h-64 lg:h-auto">
-            <img src={featuredPost.image} alt={featuredPost.title} className="w-full h-full object-cover" />
+            <LazyImage src={featuredPost.image} alt={featuredPost.title} className="w-full h-full object-cover" skeletonClassName="w-full h-full" />
           </button>
           <div className="p-6 sm:p-8">
             <span className="inline-flex px-3 py-1 rounded-full bg-indigo-500/70 text-white text-xs font-bold uppercase">

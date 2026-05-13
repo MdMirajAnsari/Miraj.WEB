@@ -29,6 +29,9 @@ const Navbar = () => {
     } else if (nav.id === 'gov') {
       navigate('/gov');
       setActive(nav.title);
+    } else if (nav.id === 'content-studio') {
+      navigate('/content-studio');
+      setActive(nav.title);
     } else {
       navigate('/');
       setActive(nav.title);

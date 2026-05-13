@@ -6,6 +6,8 @@ import { gadgets } from '../constants';
 import { fadeIn, textVariant } from '../utils/motion';
 import Applications from './applications.component';
 import type { EnrichedGadget, Gadget, GadgetState, SetActiveTabProps, Song, SongState } from '../models';
+import LazyImage from './lazy-image.component';
+import { mergeById, readStudioContent } from '../utils/contentStudio';
 
 const favoriteStorageKey = 'miraj-gadget-favorites';
 const gadgetStateStorageKey = 'miraj-gadget-state';
@@ -490,7 +492,7 @@ const GadgetCard = ({
       }`}
     >
       <button type="button" onClick={onOpen} className={`relative block w-full ${compact ? 'h-[160px]' : 'h-[200px]'}`}>
-        <img src={gadget.image} alt={gadget.name} className="w-full h-full object-cover rounded-[10px]" />
+        <LazyImage src={gadget.image} alt={gadget.name} className="w-full h-full object-cover rounded-[10px]" skeletonClassName="w-full h-full rounded-[10px]" />
         <span className="absolute left-2 top-2 rounded-full bg-blue-500/70 px-2 py-1 text-xs font-bold uppercase text-white">
           {gadget.category}
         </span>
@@ -1110,7 +1112,7 @@ const Gadgets = () => {
   const [compareIds, setCompareIds] = useState<string[]>([]);
   const [activeGadgetId, setActiveGadgetId] = useState<string | null>(null);
 
-  const enrichedGadgets = useMemo(() => (gadgets as Gadget[]).map(enrichGadget), []);
+  const enrichedGadgets = useMemo(() => mergeById(gadgets as Gadget[], readStudioContent().gadgets).map(enrichGadget), []);
   const categories = useMemo(() => ['all', ...new Set(enrichedGadgets.map((gadget) => gadget.category))], [enrichedGadgets]);
   const brands = useMemo(() => ['all', ...new Set(enrichedGadgets.map((gadget) => gadget.brand))], [enrichedGadgets]);
 
@@ -1390,7 +1392,7 @@ const Gadgets = () => {
                 </button>
               </div>
               <div className="mt-4 grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-8">
-                <img src={activeGadget.image} alt={activeGadget.name} className="w-full max-h-[520px] object-contain rounded-[14px] bg-white/5" />
+                <LazyImage src={activeGadget.image} alt={activeGadget.name} className="w-full max-h-[520px] object-contain rounded-[14px] bg-white/5" skeletonClassName="w-full max-h-[520px] rounded-[14px] bg-white/5" />
                 <div>
                   <div className="flex flex-wrap gap-2">
                     <span className="rounded-full bg-blue-500/70 px-3 py-1 text-xs font-bold uppercase text-white">{activeGadget.category}</span>

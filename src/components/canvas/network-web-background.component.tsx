@@ -7,9 +7,14 @@ import { loadSlim } from "@tsparticles/slim"; // if you are going to use `loadSl
 
 const NetworkWebBackground = () => {
   const [init, setInit] = useState(false);
+  const [isLightweight, setIsLightweight] = useState(false);
 
   // this should be run only once per application lifetime
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const smallViewport = window.matchMedia("(max-width: 768px)").matches;
+    setIsLightweight(prefersReducedMotion || smallViewport);
+
     initParticlesEngine(async (engine) => {
       // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
       // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
@@ -23,10 +28,6 @@ const NetworkWebBackground = () => {
     });
   }, []);
 
-  const particlesLoaded = async (container: any) => {
-    console.log(container);
-  };
-
   const options = useMemo<any>(
     () => ({
       background: {
@@ -34,15 +35,15 @@ const NetworkWebBackground = () => {
           value: "#0d47a1",
         },
       },
-      fpsLimit: 120,
+      fpsLimit: isLightweight ? 30 : 60,
       interactivity: {
         events: {
           onClick: {
-            enable: true,
+            enable: !isLightweight,
             mode: "push",
           },
           onHover: {
-            enable: true,
+            enable: !isLightweight,
             mode: "repulse",
           },
         },
@@ -74,14 +75,14 @@ const NetworkWebBackground = () => {
             default: "bounce",
           },
           random: false,
-          speed: 6,
+          speed: isLightweight ? 1.2 : 3,
           straight: false,
         },
         number: {
           density: {
             enable: true,
           },
-          value: 300,
+          value: isLightweight ? 55 : 140,
         },
         opacity: {
           value: 0.5,
@@ -93,16 +94,15 @@ const NetworkWebBackground = () => {
           value: { min: 1, max: 5 },
         },
       },
-      detectRetina: true,
+      detectRetina: !isLightweight,
     }),
-    [],
+    [isLightweight],
   );
 
   if (init) {
     return (
       <Particles
         id="tsparticles"
-        particlesLoaded={particlesLoaded}
         options={options}
       />
     );

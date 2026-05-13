@@ -8,6 +8,7 @@ import {
   Navbar,
   Tech,
   Projects,
+  GitHubActivity,
   Gadgets,
   Gov,
   Gallery,
@@ -17,6 +18,8 @@ import {
 import Blog from './components/blog.component';
 import BlogDetail from './components/blog-detail.component';
 import Footer from './components/footer.component';
+import ContentStudio from './components/content-studio.component';
+import Seo from './components/seo.component';
 import PropTypes from 'prop-types';
 import type { Theme, ThemeProps } from './models';
 import { notifySiteVisit } from './utils/emailNotifications';
@@ -36,6 +39,8 @@ const HomePage = ({ theme, onThemeChange }: ThemeProps) => (
     </div>
 
     <Projects />
+
+    <GitHubActivity />
 
     <div
       className="bg-experience bg-cover bg-center bg-no-repeat
@@ -79,6 +84,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
+      <Seo />
       <div
         className={`theme-${theme} ${
           theme === 'glass' ? 'glass-theme' : ''
@@ -97,6 +103,7 @@ const App = () => {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/youtube" element={<YouTube />} />
           <Route path="/gov" element={<Gov />} />
+          <Route path="/content-studio" element={<ContentStudio />} />
         </Routes>
       </div>
     </BrowserRouter>
