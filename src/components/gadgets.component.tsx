@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { styles } from '../styles';
@@ -327,6 +327,8 @@ const favoriteSongs: Song[] = [
 ];
 const songSortOptions = ['Playlist Order', 'Title', 'Most Played', 'Favorites First'];
 const repeatOptions = ['Repeat All', 'Repeat One', 'No Repeat'];
+const youtubeIframeApiUrl = 'https://www.youtube.com/iframe_api';
+let youtubeIframeApiLoadingPromise: Promise<void> | null = null;
 
 const readStoredValue = (key, fallback) => {
   if (typeof window === 'undefined') {
@@ -389,6 +391,41 @@ type SongStateMap = Record<string, SongState>;
 
 const getGadgetState = (gadgetState: GadgetStateMap, id: string): GadgetState => gadgetState[id] || { status: 'Researching', rating: 0 };
 const getSongState = (songState: SongStateMap, id: string): SongState => songState[id] || { favorite: false, listenCount: 0, notes: '' };
+
+const loadYoutubeIframeApi = () => {
+  if (typeof window === 'undefined') {
+    return Promise.resolve();
+  }
+
+  const browserWindow = window as typeof window & {
+    YT?: { Player: new (element: HTMLIFrameElement, options: Record<string, unknown>) => unknown };
+    onYouTubeIframeAPIReady?: () => void;
+  };
+
+  if (browserWindow.YT?.Player) {
+    return Promise.resolve();
+  }
+
+  if (!youtubeIframeApiLoadingPromise) {
+    youtubeIframeApiLoadingPromise = new Promise((resolve) => {
+      const previousCallback = browserWindow.onYouTubeIframeAPIReady;
+
+      browserWindow.onYouTubeIframeAPIReady = () => {
+        previousCallback?.();
+        resolve();
+      };
+
+      if (!document.querySelector(`script[src="${youtubeIframeApiUrl}"]`)) {
+        const script = document.createElement('script');
+        script.src = youtubeIframeApiUrl;
+        script.async = true;
+        document.body.appendChild(script);
+      }
+    });
+  }
+
+  return youtubeIframeApiLoadingPromise;
+};
 
 interface StarRatingProps {
   value: number;
@@ -566,6 +603,11 @@ GadgetCard.propTypes = {
 };
 
 const FavSongs = ({ setActiveTab }: SetActiveTabProps) => {
+  const playerElementRef = useRef<HTMLIFrameElement | null>(null);
+  const youtubePlayerRef = useRef<{ destroy?: () => void; playVideo?: () => void; pauseVideo?: () => void; seekTo?: (seconds: number, allowSeekAhead: boolean) => void } | null>(null);
+  const isPlayingRef = useRef(false);
+  const activeSongIndexRef = useRef(0);
+  const showSongAtOffsetRef = useRef<(offset: number) => void>(() => {});
   const [activeSongIndex, setActiveSongIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [songState, setSongState] = useState<SongStateMap>(() => readStoredValue(songStateStorageKey, {}));
@@ -574,6 +616,7 @@ const FavSongs = ({ setActiveTab }: SetActiveTabProps) => {
   const [selectedMood, setSelectedMood] = useState('all');
   const [songSortMode, setSongSortMode] = useState('Playlist Order');
   const [repeatMode, setRepeatMode] = useState('Repeat All');
+  const [shuffleMode, setShuffleMode] = useState(false);
   const activeSong = favoriteSongs[activeSongIndex];
   const activeSongState = getSongState(songState, activeSong.id);
   const moodOptions = useMemo(() => ['all', ...new Set(favoriteSongs.flatMap((song) => song.moods))], []);
@@ -650,9 +693,32 @@ const FavSongs = ({ setActiveTab }: SetActiveTabProps) => {
     });
   };
 
+  const playRandomSong = () => {
+    if (favoriteSongs.length <= 1) return;
+
+    let nextIndex = activeSongIndexRef.current;
+
+    while (nextIndex === activeSongIndexRef.current) {
+      nextIndex = Math.floor(Math.random() * favoriteSongs.length);
+    }
+
+    playSong(nextIndex);
+  };
+
   const showSongAtOffset = (offset: number) => {
     if (repeatMode === 'Repeat One') {
-      playSong(activeSongIndex);
+      youtubePlayerRef.current?.seekTo?.(0, true);
+      youtubePlayerRef.current?.playVideo?.();
+      setIsPlaying(true);
+      rememberSong(activeSong.id);
+      updateSongState(activeSong.id, {
+        listenCount: getSongState(songState, activeSong.id).listenCount + 1,
+      });
+      return;
+    }
+
+    if (shuffleMode && offset > 0) {
+      playRandomSong();
       return;
     }
 
@@ -666,21 +732,79 @@ const FavSongs = ({ setActiveTab }: SetActiveTabProps) => {
     playSong((nextIndex + favoriteSongs.length) % favoriteSongs.length);
   };
 
+  isPlayingRef.current = isPlaying;
+  activeSongIndexRef.current = activeSongIndex;
+  showSongAtOffsetRef.current = showSongAtOffset;
+
   const selectSong = (index: number) => {
     playSong(index);
   };
 
   const shuffleSong = () => {
-    if (favoriteSongs.length <= 1) return;
+    setShuffleMode((currentShuffleMode) => {
+      const nextShuffleMode = !currentShuffleMode;
 
-    let nextIndex = activeSongIndex;
+      if (nextShuffleMode) {
+        playRandomSong();
+      }
 
-    while (nextIndex === activeSongIndex) {
-      nextIndex = Math.floor(Math.random() * favoriteSongs.length);
+      return nextShuffleMode;
+    });
+  };
+
+  useEffect(() => {
+    let isMounted = true;
+
+    loadYoutubeIframeApi().then(() => {
+      if (!isMounted || !playerElementRef.current || typeof window === 'undefined') return;
+
+      const browserWindow = window as typeof window & {
+        YT?: {
+          Player: new (
+            element: HTMLIFrameElement,
+            options: {
+              events: {
+                onReady: () => void;
+                onStateChange: (event: { data: number }) => void;
+              };
+            },
+          ) => { destroy?: () => void; playVideo?: () => void; pauseVideo?: () => void; seekTo?: (seconds: number, allowSeekAhead: boolean) => void };
+          PlayerState?: { ENDED: number };
+        };
+      };
+
+      youtubePlayerRef.current?.destroy?.();
+      youtubePlayerRef.current = new browserWindow.YT!.Player(playerElementRef.current, {
+        events: {
+          onReady: () => {
+            if (isPlayingRef.current) {
+              youtubePlayerRef.current?.playVideo?.();
+            }
+          },
+          onStateChange: (event) => {
+            if (event.data === browserWindow.YT?.PlayerState?.ENDED) {
+              showSongAtOffsetRef.current(1);
+            }
+          },
+        },
+      });
+    });
+
+    return () => {
+      isMounted = false;
+      youtubePlayerRef.current?.destroy?.();
+      youtubePlayerRef.current = null;
+    };
+  }, [activeSong.embedId]);
+
+  useEffect(() => {
+    if (isPlaying) {
+      youtubePlayerRef.current?.playVideo?.();
+      return;
     }
 
-    playSong(nextIndex);
-  };
+    youtubePlayerRef.current?.pauseVideo?.();
+  }, [isPlaying]);
 
   const toggleSongFavorite = (id: string) => {
     updateSongState(id, {
@@ -716,9 +840,10 @@ const FavSongs = ({ setActiveTab }: SetActiveTabProps) => {
 
         <div className="mt-8 glass-card rounded-[20px] p-5 sm:p-7">
           <iframe
-            key={`${activeSong.embedId}-${isPlaying ? 'playing' : 'paused'}`}
+            ref={playerElementRef}
+            key={activeSong.embedId}
             title={activeSong.title}
-            src={`https://www.youtube.com/embed/${activeSong.embedId}?autoplay=${isPlaying ? 1 : 0}&controls=0&modestbranding=1&rel=0`}
+            src={`https://www.youtube.com/embed/${activeSong.embedId}?autoplay=${isPlaying ? 1 : 0}&controls=0&enablejsapi=1&modestbranding=1&rel=0`}
             allow="autoplay; encrypted-media"
             className="absolute h-px w-px opacity-0 pointer-events-none"
           />
@@ -784,11 +909,15 @@ const FavSongs = ({ setActiveTab }: SetActiveTabProps) => {
                   <button
                     type="button"
                     onClick={shuffleSong}
-                    className="rounded-2xl border border-cyan-200/30 bg-cyan-400/10 px-4 py-3 text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-cyan-400/20 hover:shadow-lg sm:px-5"
-                    aria-label="Shuffle songs"
+                    className={`rounded-2xl border px-4 py-3 text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg sm:px-5 ${
+                      shuffleMode
+                        ? 'border-cyan-100/60 bg-cyan-400/30 shadow-[0_14px_35px_rgba(34,211,238,0.25)]'
+                        : 'border-cyan-200/30 bg-cyan-400/10 hover:bg-cyan-400/20'
+                    }`}
+                    aria-label={shuffleMode ? 'Turn shuffle off' : 'Turn shuffle on'}
                   >
-                    <span className="block text-[11px] uppercase tracking-[2px] text-cyan-100">Random</span>
-                    <span className="mt-1 block text-sm font-semibold">Shuffle</span>
+                    <span className="block text-[11px] uppercase tracking-[2px] text-cyan-100">{shuffleMode ? 'Random On' : 'Random'}</span>
+                    <span className="mt-1 block text-sm font-semibold">{shuffleMode ? 'Shuffle On' : 'Shuffle'}</span>
                   </button>
                 <button
                   type="button"
