@@ -17,8 +17,8 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-1',
     embedId: 'dMa_DDiTGKc',
-    title: 'Funk Radio Pick 1',
-    artist: 'YouTube Music',
+    title: 'TIKI TIKI (Slowed)',
+    artist: 'Unique Vibes',
     source: 'YouTube Radio',
     moods: ['Chill', 'Coding', 'Drive'],
     url: 'https://www.youtube.com/watch?v=dMa_DDiTGKc&list=RDdMa_DDiTGKc&start_radio=1',
@@ -27,8 +27,8 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-2',
     embedId: '57KetBnOvJY',
-    title: 'Funk Radio Pick 2',
-    artist: 'YouTube Music',
+    title: 'SEMPERO (Super Slowed)',
+    artist: 'SUKA.',
     source: 'YouTube Radio',
     moods: ['Party', 'Workout'],
     url: 'https://www.youtube.com/watch?v=57KetBnOvJY&list=RD57KetBnOvJY&start_radio=1',
@@ -37,8 +37,8 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-3',
     embedId: 'gNBrDh_AUeQ',
-    title: 'Funk Radio Pick 3',
-    artist: 'YouTube Music',
+    title: 'HEAVENLY JUMPSTYLE SLOWED',
+    artist: 'The Vibe Guide',
     source: 'YouTube Radio',
     moods: ['Chill', 'Drive'],
     url: 'https://www.youtube.com/watch?v=gNBrDh_AUeQ&list=RDgNBrDh_AUeQ&start_radio=1',
@@ -57,8 +57,8 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-5',
     embedId: 'zHm8GFK0m-E',
-    title: 'Funk Radio Pick 5',
-    artist: 'YouTube Music',
+    title: 'MONTAGEM ALQUIMIA',
+    artist: 'h6itam',
     source: 'YouTube Radio',
     moods: ['Chill', 'Focus'],
     url: 'https://www.youtube.com/watch?v=zHm8GFK0m-E&list=RDzHm8GFK0m-E&start_radio=1',
@@ -67,8 +67,8 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-6',
     embedId: 'GeszARkWZw0',
-    title: 'Funk Radio Pick 6',
-    artist: 'YouTube Music',
+    title: 'SLAVA FUNK!',
+    artist: 'MVSTERIOUS',
     source: 'YouTube Radio',
     moods: ['Workout', 'Drive'],
     url: 'https://www.youtube.com/watch?v=GeszARkWZw0&list=RDGeszARkWZw0&start_radio=1',
@@ -77,8 +77,8 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-7',
     embedId: '4ywS4E5NmIk',
-    title: 'Funk Radio Pick 7',
-    artist: 'YouTube Music',
+    title: 'FUNK CRIMINAL (Super Slowed)',
+    artist: 'ICEDMANE',
     source: 'YouTube Radio',
     moods: ['Party', 'Drive'],
     url: 'https://www.youtube.com/watch?v=4ywS4E5NmIk&list=RD4ywS4E5NmIk&start_radio=1',
@@ -88,7 +88,7 @@ const favoriteSongs: Song[] = [
     id: 'song-8',
     embedId: 'uzcUJcqGQPw',
     title: 'MATADORA',
-    artist: 'MarkoTNN',
+    artist: 'DJ Asul',
     source: 'YouTube Radio',
     moods: ['Coding', 'Focus'],
     url: 'https://www.youtube.com/watch?v=uzcUJcqGQPw&list=RDuzcUJcqGQPw&start_radio=1',
@@ -107,8 +107,8 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-10',
     embedId: 'gvGQ27rWmg0',
-    title: 'Funk Radio Pick 10',
-    artist: 'YouTube Music',
+    title: 'MONTAGEM UNKNOWN',
+    artist: 'AKXNESHIVA',
     source: 'YouTube Radio',
     moods: ['Workout', 'Party'],
     url: 'https://www.youtube.com/watch?v=gvGQ27rWmg0&list=RDgvGQ27rWmg0&start_radio=1',
@@ -127,7 +127,7 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-12',
     embedId: 'MQoColHyGzQ',
-    title: 'Saiyaara Full Song | Ahaan Panday, Aneet Padda | Tanishk Bagchi, Faheem A, Arslan N | Irshad Kamil',
+    title: 'Saiyaara',
     artist: 'YRF',
     source: 'YouTube Radio',
     moods: ['Party', 'Drive'],
@@ -137,7 +137,7 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-13',
     embedId: 'ozhLT28diEk',
-    title: 'Piya Ghar Aavenge | Lyrical Video | Kailash Kher | Paresh Kamath | Naresh Kamath | Chaandan Mein',
+    title: 'Piya Ghar Aavenge',
     artist: 'I-POP Hits',
     source: 'YouTube Radio',
     moods: ['Chill', 'Coding'],
@@ -147,7 +147,7 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-14',
     embedId: 'hHuG7FIKgtc',
-    title: 'Ishq Official Lyrical Video I Amir Ameer | Faheem Abdullah | Rauhan Malik I Love Song 2024',
+    title: 'Ishq',
     artist: 'Artiste First',
     source: 'YouTube Radio',
     moods: ['Workout', 'Drive'],
@@ -157,7 +157,7 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-15',
     embedId: '-NHkPJj0wws',
-    title: 'Teri Yaad (Music Video) Faheem Abdullah | Hyder Dar | Zia | VYRL Originals',
+    title: 'Teri Yaad',
     artist: 'Universal Music India',
     source: 'YouTube Radio',
     moods: ['Party', 'Focus'],
@@ -167,7 +167,7 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-16',
     embedId: 'C3njz8sf4aM',
-    title: 'Ehsaas (Video) Faheem Abdullah | Duha Shah | Vaibhav Pani | Muzammil Ibrahim | Vinali Bhatnagar',
+    title: 'Ehsaas',
     artist: 'Universal Music India',
     source: 'YouTube Radio',
     moods: ['Chill', 'Drive'],
@@ -177,7 +177,7 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-17',
     embedId: 'FcRKX6gOmPA',
-    title: 'Teri Yaad (Music Video) Faheem Abdullah | Hyder Dar | Zia | Heartbreak Song',
+    title: 'Teri Yaad',
     artist: 'UMusicIndiaVEVO',
     source: 'YouTube Radio',
     moods: ['Coding', 'Focus'],
@@ -187,7 +187,7 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-18',
     embedId: 'LZmoCN76MEU',
-    title: 'JALPARI (Lyrical Video): Faheem Abdullah | Huzaif Nazar | Rather Hashim | Bhushan Kumar',
+    title: 'Jalpari',
     artist: 'T-Series',
     source: 'YouTube Radio',
     moods: ['Party', 'Workout'],
@@ -197,7 +197,7 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-19',
     embedId: 'p6ca7gq5H70',
-    title: 'Jo Tu Nahi To Aisa Main Chehra|| Maand Slowed and Reverb',
+    title: 'Maand',
     artist: 'Zakee.0xLofi',
     source: 'YouTube Radio',
     moods: ['Chill', 'Drive'],
@@ -207,7 +207,7 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-20',
     embedId: 'IAONd2d_PDU',
-    title: 'Jaan Se Guzarte Hain (Lyrical) | Dhurandhar The Revenge | Ranveer Singh | Shashwat Sachdev,Khan Saab',
+    title: 'Jaan Se Guzarte Hain',
     artist: 'T-Series',
     source: 'YouTube Radio',
     moods: ['Coding', 'Drive'],
@@ -217,7 +217,7 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-21',
     embedId: 'MWjaK_nW72E',
-    title: 'Chupke Chupke Raat Din Aansoon Bahana Yaad Hai | Ghulam Ali Ghazals | Old ghazals | Sad Ghazals',
+    title: 'Chupke Chupke Raat Din',
     artist: 'Saregama Ghazal',
     source: 'YouTube Radio',
     moods: ['Party', 'Focus'],
@@ -227,7 +227,7 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-22',
     embedId: '65UEwJVf-5Q',
-    title: 'Saiyaara Tu badla Nahi Hai Song | Amitabh Bachchan | Kishore Kumar #kishorekumar #1985 #saiyaara',
+    title: 'Tu Badla Nahi Hai',
     artist: 'Hot Chillies Music',
     source: 'YouTube Radio',
     moods: ['Chill', 'Party'],
@@ -237,7 +237,7 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-23',
     embedId: 'clzuRgaV5dw',
-    title: 'LYRICAL: Guzarish  | Ghajini feat. Aamir Khan | Asin | Love Song | T-Series',
+    title: 'Guzarish',
     artist: 'T-Series',
     source: 'YouTube Radio',
     moods: ['Workout', 'Drive'],
@@ -247,7 +247,7 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-24',
     embedId: 'M5OCLifZK1w',
-    title: 'Noor, Khan, Madhurxo - Aarzu (Official Music Video)',
+    title: 'Aarzu',
     artist: 'Noor',
     source: 'YouTube Radio',
     moods: ['Coding', 'Focus'],
@@ -257,7 +257,7 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-25',
     embedId: 'E2JmfVq9qys',
-    title: 'AADAT MEGA MASHUP | AP DHILLON FT. TARA SUTARIA | YO YO HONEY SINGH | SHUBH MUSIC | AP DHILLION SONG',
+    title: 'Aadat Mega Mashup',
     artist: 'SHUBH Music',
     source: 'YouTube Radio',
     moods: ['Chill', 'Drive'],
@@ -267,7 +267,7 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-26',
     embedId: 'g6xvHG8nd5U',
-    title: 'Bebe Rexha - The Way I Are (Dance With Somebody) feat. Lil Wayne [Official Music Video]',
+    title: 'The Way I Are (Dance With Somebody)',
     artist: 'Bebe Rexha',
     source: 'YouTube Radio',
     moods: ['English', 'Chill', 'Drive'],
@@ -277,8 +277,8 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-27',
     embedId: '6swmTBVI83k',
-    title: 'Lil Nas X - MONTERO (Call Me By Your Name) (Official Video)',
-    artist: 'LilNasXVEVO',
+    title: 'MONTERO (Call Me By Your Name)',
+    artist: 'Lil Nas X',
     source: 'YouTube Radio',
     moods: ['English', 'Party', 'Workout'],
     url: 'https://www.youtube.com/watch?v=6swmTBVI83k&list=RD6swmTBVI83k&start_radio=1',
@@ -287,8 +287,8 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-28',
     embedId: 'B9synWjqBn8',
-    title: 'Travis Scott - FE!N ft. Playboi Carti',
-    artist: 'TravisScottVEVO',
+    title: 'FE!N',
+    artist: 'Travis Scott',
     source: 'YouTube Radio',
     moods: ['English', 'Chill', 'Focus'],
     url: 'https://www.youtube.com/watch?v=B9synWjqBn8&list=RD6swmTBVI83k&index=3',
@@ -297,8 +297,8 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-29',
     embedId: 'hOHKltAiKXQ',
-    title: 'Hanumankind, Kalmi - Hanumankind - Big Dawgs | Prod. Kalmi (Official Music Video) | Def Jam India',
-    artist: 'HanumankindVEVO',
+    title: 'Big Dawgs',
+    artist: 'Hanumankind, Kalmi',
     source: 'YouTube Radio',
     moods: ['English', 'Coding', 'Drive'],
     url: 'https://www.youtube.com/watch?v=hOHKltAiKXQ&list=RD6swmTBVI83k&index=4',
@@ -307,8 +307,8 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-30',
     embedId: 'MbJ72KO5khs',
-    title: 'Hanumankind - Run It Up ( Prod. By Kalmi ) | (Official Music Video)',
-    artist: 'HanumankindVEVO',
+    title: 'Run It Up',
+    artist: 'Hanumankind',
     source: 'YouTube Radio',
     moods: ['English', 'Party', 'Drive'],
     url: 'https://www.youtube.com/watch?v=MbJ72KO5khs&list=RD6swmTBVI83k&index=7',
@@ -317,8 +317,8 @@ const favoriteSongs: Song[] = [
   {
     id: 'song-31',
     embedId: 'tt2k8PGm-TI',
-    title: 'ZAYN - Dusk Till Dawn (Official Video) ft. Sia',
-    artist: 'ZaynVEVO',
+    title: 'Dusk Till Dawn',
+    artist: 'ZAYN feat. Sia',
     source: 'YouTube Radio',
     moods: ['English', 'Chill', 'Workout'],
     url: 'https://www.youtube.com/watch?v=tt2k8PGm-TI&list=RDtt2k8PGm-TI&start_radio=1',
