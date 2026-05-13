@@ -4,9 +4,7 @@ import { styles } from '../styles';
 import { SectionWrapper } from '../hoc';
 import { slideIn } from '../utils/motion';
 import { send, sendHover } from '../assets';
-
-const contactEmail = 'clevercottonmouth@gmail.com';
-const formSubmitEndpoint = 'https://formsubmit.co/ajax/8afc617e303d56fd038545b21c3045de';
+import { contactEmail, sendEmailNotification } from '../utils/emailNotifications';
 
 const Contact = () => {
   const [form, setForm] = useState({
@@ -34,25 +32,12 @@ const Contact = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(formSubmitEndpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          message: form.message,
-          _subject: `Portfolio contact from ${form.name}`,
-          _template: 'table',
-          _captcha: 'false',
-        }),
+      await sendEmailNotification({
+        name: form.name,
+        email: form.email,
+        message: form.message,
+        _subject: `Portfolio contact from ${form.name}`,
       });
-
-      if (!response.ok) {
-        throw new Error('Unable to send message');
-      }
 
       setNotice({
         type: 'success',

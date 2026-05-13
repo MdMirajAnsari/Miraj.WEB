@@ -19,6 +19,7 @@ import BlogDetail from './components/blog-detail.component';
 import Footer from './components/footer.component';
 import PropTypes from 'prop-types';
 import type { Theme, ThemeProps } from './models';
+import { notifySiteVisit } from './utils/emailNotifications';
 
 const HomePage = ({ theme, onThemeChange }: ThemeProps) => (
   <>
@@ -71,6 +72,10 @@ const App = () => {
   useEffect(() => {
     window.localStorage.setItem('theme', theme);
   }, [theme]);
+
+  useEffect(() => {
+    notifySiteVisit();
+  }, []);
 
   return (
     <BrowserRouter>
