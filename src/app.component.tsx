@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import {
   About,
   Contact,
@@ -19,10 +19,14 @@ import Blog from './components/blog.component';
 import BlogDetail from './components/blog-detail.component';
 import Footer from './components/footer.component';
 import ContentStudio from './components/content-studio.component';
+import Dashboard from './components/dashboard.component';
+import Login from './components/login.component';
 import Seo from './components/seo.component';
 import PropTypes from 'prop-types';
 import type { Theme, ThemeProps } from './models';
 import { notifySiteVisit } from './utils/emailNotifications';
+import { useAppDispatch } from './redux';
+import { recordPageVisit } from './redux/features/analytics/analyticsSlice';
 
 const HomePage = ({ theme, onThemeChange }: ThemeProps) => (
   <>
@@ -65,6 +69,31 @@ HomePage.propTypes = {
   onThemeChange: PropTypes.func.isRequired,
 };
 
+const getRouteLabel = (path: string) => {
+  if (path === '/') return 'Home';
+  if (path.startsWith('/blog/')) return 'Blog Detail';
+
+  return path
+    .replace('/', '')
+    .split('-')
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ') || 'Home';
+};
+
+const RouteTracker = () => {
+  const dispatch = useAppDispatch();
+  const location = useLocation();
+
+  useEffect(() => {
+    dispatch(recordPageVisit({
+      path: `${location.pathname}${location.search}`,
+      label: getRouteLabel(location.pathname),
+    }));
+  }, [dispatch, location.pathname, location.search]);
+
+  return null;
+};
+
 const App = () => {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window === 'undefined') return 'glass';
@@ -85,6 +114,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Seo />
+      <RouteTracker />
       <div
         className={`theme-${theme} ${
           theme === 'glass' ? 'glass-theme' : ''
@@ -104,6 +134,8 @@ const App = () => {
           <Route path="/youtube" element={<YouTube />} />
           <Route path="/gov" element={<Gov />} />
           <Route path="/content-studio" element={<ContentStudio />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </div>
     </BrowserRouter>

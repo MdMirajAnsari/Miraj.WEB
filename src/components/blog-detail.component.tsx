@@ -6,6 +6,8 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import { blogPosts } from '../constants/blogData';
+import { useAppDispatch } from '../redux';
+import { recordBlogRead } from '../redux/features/analytics/analyticsSlice';
 import { toRawMarkdownUrl } from '../utils/markdown';
 import type { BlogPost } from '../models';
 
@@ -136,6 +138,7 @@ CopyableCode.defaultProps = {
 const BlogDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const blog = (blogPosts as Record<string, BlogPost>)[id || ''];
   const [content, setContent] = useState(blog?.content || '');
   const [isLoadingContent, setIsLoadingContent] = useState(false);
@@ -206,7 +209,13 @@ const BlogDetail = () => {
 
     const nextRecentIds = [blog.id, ...readStoredArray(recentStorageKey).filter((recentId) => recentId !== blog.id)].slice(0, 6);
     writeStoredArray(recentStorageKey, nextRecentIds);
-  }, [blog]);
+    dispatch(recordBlogRead({
+      id: blog.id,
+      title: blog.title,
+      category: blog.category,
+      readTime: blog.readTime,
+    }));
+  }, [blog, dispatch]);
 
   useEffect(() => {
     if (!blog) return undefined;

@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { styles } from '../styles';
+import { useAppDispatch } from '../redux';
+import { recordVideoWatch } from '../redux/features/analytics/analyticsSlice';
 import type { VideoState, YouTubePlaylist, YouTubeVideo } from '../models';
 
 const storageKey = 'miraj-youtube-video-state';
@@ -560,6 +562,7 @@ type VideoStateMap = Record<number, Partial<VideoState>>;
 const getVideoState = (videoState: VideoStateMap, id: number): Partial<VideoState> => videoState[id] || {};
 
 const YouTube = () => {
+  const dispatch = useAppDispatch();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [sortMode, setSortMode] = useState('newest');
@@ -673,6 +676,18 @@ const YouTube = () => {
         ...changes,
       },
     }));
+
+    if (changes.watched) {
+      const watchedVideo = videos.find((video) => video.id === id);
+
+      if (watchedVideo) {
+        dispatch(recordVideoWatch({
+          id: watchedVideo.id,
+          title: watchedVideo.title,
+          category: watchedVideo.category,
+        }));
+      }
+    }
   };
 
   const watchedCount = videos.filter((video) => getVideoState(videoState, video.id).watched).length;
