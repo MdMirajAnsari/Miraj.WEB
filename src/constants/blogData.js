@@ -1816,5 +1816,18 @@ These directives make Angular powerful for building dynamic, interactive user in
     markdownUrl:
       "https://github.com/MdMirajAnsari/InterviewNavigator/blob/main/Dumps/DevInterview/spring.md",
   },
+  71: {
+    id: 71,
+    title: "Run Commands Reference",
+    excerpt:
+      "Use the Run dialog (Win+R), Start → Run, or a terminal to open the following Windows utilities and special folders. For Run, paste the command and pre...",
+    date: "Jun 7, 2026",
+    category: "Tutorial",
+    readTime: 3,
+    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800",
+    author: "Miraj",
+    markdownUrl:
+      "https://github.com/MdMirajAnsari/Reference-Architecture/blob/main/run_commands.md",
+  },
 
 };
