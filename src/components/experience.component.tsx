@@ -3,6 +3,7 @@ import {
   VerticalTimelineElement,
 } from 'react-vertical-timeline-component';
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import 'react-vertical-timeline-component/style.min.css';
 import { styles } from '../styles';
 import PropTypes from 'prop-types';
@@ -68,7 +69,42 @@ ExperienceCard.propTypes = {
   }).isRequired,
 };
 
+const resumeUrl = 'https://drive.google.com/file/d/1VH-Zb5P4hnfuQw596fImcDI0ALLw6win/view?usp=sharing';
+
 const Experience = () => {
+  const [resumeProgress, setResumeProgress] = useState(0);
+  const [isResumeDownloading, setIsResumeDownloading] = useState(false);
+
+  useEffect(() => {
+    if (!isResumeDownloading) return undefined;
+
+    const intervalId = window.setInterval(() => {
+      setResumeProgress((currentProgress) => {
+        const nextProgress = Math.min(currentProgress + 8, 100);
+
+        if (nextProgress === 100) {
+          window.clearInterval(intervalId);
+          window.setTimeout(() => {
+            window.open(resumeUrl, '_blank');
+            setIsResumeDownloading(false);
+            setResumeProgress(0);
+          }, 250);
+        }
+
+        return nextProgress;
+      });
+    }, 90);
+
+    return () => window.clearInterval(intervalId);
+  }, [isResumeDownloading]);
+
+  const handleResumeDownload = () => {
+    if (isResumeDownloading) return;
+
+    setResumeProgress(4);
+    setIsResumeDownloading(true);
+  };
+
   return (
     <>
       <motion.div variants={textVariant()}>
@@ -118,12 +154,8 @@ const Experience = () => {
               w-[135px] h-[46px] rounded-[10px] glass-button
               sm:mt-[22px] mt-[16px] transition duration-[0.2s] 
               ease-in-out relative overflow-hidden group"
-              onClick={() => {
-                window.open(
-                  'https://drive.google.com/file/d/1VH-Zb5P4hnfuQw596fImcDI0ALLw6win/view?usp=sharing',
-                  '_blank'
-                );
-              }}
+              onClick={handleResumeDownload}
+              disabled={isResumeDownloading}
               whileHover={{ 
                 scale: 1.08,
                 boxShadow: '0 0 25px rgba(0, 255, 150, 0.6), 0 0 40px rgba(0, 150, 255, 0.4)'
@@ -160,7 +192,7 @@ const Experience = () => {
                 }}
               >
                 <motion.span
-                  animate={{ y: [0, -2, 0] }}
+                  animate={isResumeDownloading ? { opacity: [1, 0.7, 1] } : { y: [0, -2, 0] }}
                   transition={{
                     duration: 0.6,
                     repeat: Infinity,
@@ -168,7 +200,7 @@ const Experience = () => {
                     ease: 'easeInOut'
                   }}
                 >
-                  MY RESUME
+                  {isResumeDownloading ? resumeProgress + '%' : 'MY RESUME'}
                 </motion.span>
                 
                 <motion.img
@@ -192,6 +224,17 @@ const Experience = () => {
                 />
               </motion.div>
 
+              {isResumeDownloading && (
+                <div className="absolute left-2 right-2 bottom-2 z-20 h-1.5 overflow-hidden rounded-full bg-white/20">
+                  <motion.div
+                    className="h-full rounded-full bg-gradient-to-r from-emerald-300 via-cyan-300 to-indigo-300"
+                    initial={{ width: '0%' }}
+                    animate={{ width: `${resumeProgress}%` }}
+                    transition={{ duration: 0.16, ease: 'easeOut' }}
+                  />
+                </div>
+              )}
+
               {/* Pulse effect on hover */}
               <motion.div
                 className="absolute inset-0 bg-white opacity-0 rounded-[10px]"
@@ -211,3 +254,5 @@ const Experience = () => {
 
 const WrappedExperience = SectionWrapper(Experience, 'work');
 export default WrappedExperience;
+
+
