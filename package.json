@@ -8,7 +8,8 @@
     "build": "vite build",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "search:index": "npx pagefind --site dist"
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
@@ -45,3 +46,5 @@
     "vite": "^4.3.2"
   }
 }
+
+

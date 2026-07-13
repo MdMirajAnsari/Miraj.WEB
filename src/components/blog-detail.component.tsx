@@ -10,6 +10,10 @@ import { useAppDispatch } from '../redux';
 import { recordBlogRead } from '../redux/features/analytics/analyticsSlice';
 import { toRawMarkdownUrl } from '../utils/markdown';
 import type { BlogPost } from '../models';
+import BlogEngagement from './blog-engagement.component';
+import GiscusComments from './giscus-comments.component';
+import NewsletterSignup from './newsletter-signup.component';
+import { trackUmamiEvent } from '../utils/integrations';
 
 const favoriteStorageKey = 'miraj-blog-favorites';
 const recentStorageKey = 'miraj-blog-recently-viewed';
@@ -215,6 +219,11 @@ const BlogDetail = () => {
       category: blog.category,
       readTime: blog.readTime,
     }));
+    trackUmamiEvent('blog_read', {
+      id: blog.id,
+      title: blog.title,
+      category: blog.category,
+    });
   }, [blog, dispatch]);
 
   useEffect(() => {
@@ -380,6 +389,7 @@ const BlogDetail = () => {
               <button type="button" onClick={copyLink} className="glass-button text-white px-4 py-2 rounded-lg">
                 {copiedLink ? 'Copied link' : 'Copy link'}
               </button>
+              <BlogEngagement postId={enrichedBlog.id} title={enrichedBlog.title} />
             </motion.div>
 
             <motion.div
@@ -430,9 +440,13 @@ const BlogDetail = () => {
                 </div>
               </section>
             )}
+
+            <GiscusComments term={`blog-${enrichedBlog.id}-${slugify(enrichedBlog.title)}`} />
           </main>
 
           <aside className="xl:sticky xl:top-24 space-y-6">
+            <NewsletterSignup />
+
             {headings.length > 0 && (
               <section className="glass-card rounded-lg p-5">
                 <h2 className="text-white text-lg font-semibold mb-4">Contents</h2>
@@ -478,3 +492,4 @@ const BlogDetail = () => {
 };
 
 export default BlogDetail;
+

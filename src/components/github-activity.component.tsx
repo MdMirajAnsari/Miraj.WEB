@@ -4,6 +4,7 @@ import { SectionWrapper } from '../hoc';
 import { styles } from '../styles';
 import { fadeIn, textVariant } from '../utils/motion';
 import LazyImage from './lazy-image.component';
+import { githubHeaders, integrations } from '../utils/integrations';
 
 interface GitHubUser {
   avatar_url: string;
@@ -41,7 +42,7 @@ interface GitHubEvent {
   };
 }
 
-const githubUsername = import.meta.env.VITE_GITHUB_USERNAME || 'MdMirajAnsari';
+const githubUsername = integrations.github.username;
 const dayInMs = 1000 * 60 * 60 * 24;
 
 const clampMetric = (value: number, max: number) => Math.max(8, Math.min(100, (value / Math.max(max, 1)) * 100));
@@ -88,7 +89,7 @@ const GitHubActivity = () => {
 
   useEffect(() => {
     const controller = new AbortController();
-    const headers = { Accept: 'application/vnd.github+json' };
+    const headers = githubHeaders();
 
     Promise.all([
       fetch(`https://api.github.com/users/${githubUsername}`, { signal: controller.signal, headers }),
@@ -411,3 +412,4 @@ const GitHubActivity = () => {
 };
 
 export default SectionWrapper(GitHubActivity, 'github');
+

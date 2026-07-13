@@ -5,6 +5,7 @@ import { styles } from '../styles';
 import { blogPosts } from '../constants/blogData';
 import type { BlogPost, DecoratedBlogPost } from '../models';
 import LazyImage from './lazy-image.component';
+import PagefindSearchPanel from './pagefind-search-panel.component';
 
 const favoriteStorageKey = 'miraj-blog-favorites';
 const recentStorageKey = 'miraj-blog-recently-viewed';
@@ -335,6 +336,8 @@ const Blog = () => {
         </div>
       </div>
 
+      <PagefindSearchPanel query={searchTerm} />
+
       {(pinnedPosts.length > 0 || recentlyViewedPosts.length > 0) && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {pinnedPosts.length > 0 && (
@@ -386,3 +389,4 @@ const Blog = () => {
 };
 
 export default Blog;
+

@@ -2,6 +2,8 @@ import { Navigate } from 'react-router-dom';
 import { logout } from '../redux/features/auth/authSlice';
 import { resetAnalytics } from '../redux/features/analytics/analyticsSlice';
 import { useAppDispatch, useAppSelector } from '../redux';
+import GitHubStatsCard from './github-stats-card.component';
+import WeatherCard from './weather-card.component';
 
 const formatDate = (value: string) =>
   new Intl.DateTimeFormat('en-IN', {
@@ -111,6 +113,11 @@ const Dashboard = () => {
           </article>
         </section>
 
+        <section className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+          <WeatherCard />
+          <GitHubStatsCard />
+        </section>
+
         <section className="grid grid-cols-1 xl:grid-cols-2 gap-6">
           <article className="glass-card rounded-lg p-5 sm:p-6">
             <h2 className="text-xl font-bold text-white mb-5">Blogs Read</h2>
@@ -160,3 +167,6 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+
+

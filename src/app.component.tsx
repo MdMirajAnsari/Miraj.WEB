@@ -27,6 +27,7 @@ import type { Theme, ThemeProps } from './models';
 import { notifySiteVisit } from './utils/emailNotifications';
 import { useAppDispatch } from './redux';
 import { recordPageVisit } from './redux/features/analytics/analyticsSlice';
+import { integrations, isUmamiConfigured, trackUmamiEvent } from './utils/integrations';
 
 const HomePage = ({ theme, onThemeChange }: ThemeProps) => (
   <>
@@ -85,10 +86,13 @@ const RouteTracker = () => {
   const location = useLocation();
 
   useEffect(() => {
+    const path = `${location.pathname}${location.search}`;
+
     dispatch(recordPageVisit({
-      path: `${location.pathname}${location.search}`,
+      path,
       label: getRouteLabel(location.pathname),
     }));
+    trackUmamiEvent('page_view', { path });
   }, [dispatch, location.pathname, location.search]);
 
   return null;
@@ -109,6 +113,16 @@ const App = () => {
 
   useEffect(() => {
     notifySiteVisit();
+  }, []);
+
+  useEffect(() => {
+    if (!isUmamiConfigured || document.querySelector('script[data-website-id]')) return;
+
+    const script = document.createElement('script');
+    script.defer = true;
+    script.src = integrations.umami.scriptUrl;
+    script.setAttribute('data-website-id', integrations.umami.websiteId);
+    document.head.appendChild(script);
   }, []);
 
   return (
@@ -143,3 +157,5 @@ const App = () => {
 };
 
 export default App;
+
+

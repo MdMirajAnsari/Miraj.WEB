@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { styles } from '../styles';
 import type { Theme, ThemeProps } from '../models';
+import FooterWeatherStatus from './footer-weather-status.component';
 
 const themes: Theme[] = ['dark', 'light', 'glass'];
 
@@ -53,6 +54,8 @@ const Footer = ({ theme, onThemeChange }: ThemeProps) => {
             </a>
           </div>
         </div>
+
+        <FooterWeatherStatus />
       </div>
     </footer>
   );
@@ -64,3 +67,4 @@ Footer.propTypes = {
 };
 
 export default Footer;
+
