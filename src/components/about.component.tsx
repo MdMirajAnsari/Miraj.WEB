@@ -47,13 +47,12 @@ const About = () => {
         variants={fadeIn("", "", 0.1, 1)}
         className="mt-4 text-taupe text-[18px] max-w-3xl leading-[30px]"
       >
-        3+ years experienced full stack software engineer professional possessing a prolific
-        track record of driving user growth, boosting user retention & enhancing
-        market share. Highly skilled software developer with experience in
-        Asp.Net Core, Web Api, React, and SQL Server. Strong experience in
-        developing and maintaining web applications using modern technologies
-        and frameworks. Proven track record of delivering high-quality, scalable
-        software solutions on time and within budget.
+        Full Stack Software Engineer with 4+ years of experience building scalable,
+        reliable, and user-focused web applications. Skilled in ASP.NET Core,
+        Web API, React, and SQL Server, with strong hands-on experience designing,
+        developing, and maintaining modern software solutions. Proven ability to
+        deliver high-quality features on time while improving product performance,
+        user retention, and business impact.
       </motion.p>
 
       <div className="mt-20 flex flex-wrap gap-6 sm:gap-10 justify-center">
@@ -66,3 +65,4 @@ const About = () => {
 };
 
 export default SectionWrapper(About, "about");
+
