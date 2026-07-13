@@ -39,6 +39,28 @@ const getPosition = () =>
       timeout: 6000,
     });
   });
+const getReadableLocationName = async (latitude: number, longitude: number) => {
+  try {
+    const response = await fetch(
+      `https://geocoding-api.open-meteo.com/v1/reverse?latitude=${latitude}&longitude=${longitude}&language=en&format=json`,
+    );
+
+    if (!response.ok) {
+      return 'Current location';
+    }
+
+    const data = await response.json();
+    const match = data.results?.[0];
+
+    if (!match) {
+      return 'Current location';
+    }
+
+    return [match.name, match.admin1, match.country].filter(Boolean).join(', ');
+  } catch {
+    return 'Current location';
+  }
+};
 
 const geocodeFallbackLocation = async () => {
   if (integrations.weather.latitude && integrations.weather.longitude) {
@@ -101,10 +123,13 @@ const FooterWeatherStatus = () => {
 
         try {
           const position = await getPosition();
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+
           location = {
-            label: 'Your location',
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
+            label: await getReadableLocationName(latitude, longitude),
+            latitude,
+            longitude,
           };
         } catch {
           location = await geocodeFallbackLocation();
@@ -165,4 +190,5 @@ const FooterWeatherStatus = () => {
 };
 
 export default FooterWeatherStatus;
+
 
