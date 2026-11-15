@@ -7,6 +7,8 @@ interface WeatherState {
   windSpeed: number;
   humidity: number;
   code: number;
+  airQualityIndex: number | null;
+  pm25: number | null;
 }
 
 const weatherLabels: Record<number, string> = {
@@ -73,12 +75,34 @@ const WeatherCard = () => {
         }
 
         const data = await response.json();
+        let airQualityIndex: number | null = null;
+        let pm25: number | null = null;
+
+        try {
+          const airQualityResponse = await fetch(
+            `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${location.latitude}&longitude=${location.longitude}&current=us_aqi,pm2_5`,
+            { signal: controller.signal },
+          );
+
+          if (airQualityResponse.ok) {
+            const airQualityData = await airQualityResponse.json();
+            airQualityIndex = airQualityData.current?.us_aqi ?? null;
+            pm25 = airQualityData.current?.pm2_5 ?? null;
+          }
+        } catch (airQualityError) {
+          if (airQualityError instanceof DOMException && airQualityError.name === 'AbortError') {
+            throw airQualityError;
+          }
+        }
+
         setWeather({
           city: location.name,
           temperature: Math.round(data.current.temperature_2m),
           windSpeed: Math.round(data.current.wind_speed_10m),
           humidity: data.current.relative_humidity_2m,
           code: data.current.weather_code,
+          airQualityIndex,
+          pm25,
         });
       } catch (fetchError) {
         if (!(fetchError instanceof DOMException && fetchError.name === 'AbortError')) {
@@ -105,6 +129,8 @@ const WeatherCard = () => {
             <div className="text-right text-sm text-slate-300">
               <p>{weather.humidity}% humidity</p>
               <p>{weather.windSpeed} km/h wind</p>
+              {weather.airQualityIndex !== null && <p>{weather.airQualityIndex} US AQI</p>}
+              {weather.pm25 !== null && <p>{weather.pm25.toFixed(1)} µg/m³ PM2.5</p>}
             </div>
           </div>
         </>
