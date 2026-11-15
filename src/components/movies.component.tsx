@@ -39,6 +39,7 @@ const SAMPLE_FALLBACK_MOVIES: RepoMovie[] = [
 ];
 
 const STORAGE_ENDPOINT_KEY = 'miraj-movies-server-endpoint';
+const DEFAULT_TUNNEL_ENDPOINT = 'https://increased-look-complications-bet.trycloudflare.com';
 const VIDEO_EXTENSIONS = ['.mp4', '.webm', '.mkv', '.mov', '.m4v', '.ogv', '.avi'];
 
 function formatFileSize(bytes: number): string {
@@ -46,6 +47,23 @@ function formatFileSize(bytes: number): string {
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
   if (bytes < 1024 * 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
   return `${(bytes / (1024 * 1024 * 1024)).toFixed(2)} GB`;
+}
+
+// Prefer MP4 container over MKV when both exist for maximum browser compatibility
+function deduplicateMovies(list: RepoMovie[]): RepoMovie[] {
+  const map = new Map<string, RepoMovie>();
+  list.forEach((m) => {
+    const key = m.title.toLowerCase().replace(/\s+(mp4|mkv)$/, '');
+    const existing = map.get(key);
+    if (!existing) {
+      map.set(key, m);
+    } else {
+      if (m.extension.toLowerCase() === 'mp4' && existing.extension.toLowerCase() !== 'mp4') {
+        map.set(key, m);
+      }
+    }
+  });
+  return Array.from(map.values());
 }
 
 const Movies = () => {
@@ -64,10 +82,22 @@ const Movies = () => {
   const [needsPermissionGrant, setNeedsPermissionGrant] = useState(false);
   const [videoError, setVideoError] = useState<string | null>(null);
 
-  // Custom Media Server Endpoint
+  // Custom Media Server Endpoint (reads URL query ?endpoint=... or stored value or default Cloudflare tunnel)
   const [customEndpoint, setCustomEndpoint] = useState(() => {
     if (typeof window !== 'undefined') {
-      return window.localStorage.getItem(STORAGE_ENDPOINT_KEY) || '';
+      const params = new URLSearchParams(window.location.search);
+      const paramEp = params.get('endpoint');
+      if (paramEp) {
+        const cleanParam = paramEp.trim().replace(/\/$/, '');
+        window.localStorage.setItem(STORAGE_ENDPOINT_KEY, cleanParam);
+        return cleanParam;
+      }
+      const saved = window.localStorage.getItem(STORAGE_ENDPOINT_KEY);
+      if (saved) return saved;
+      // Default to active Cloudflare stream if accessed online
+      if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+        return DEFAULT_TUNNEL_ENDPOINT;
+      }
     }
     return '';
   });
@@ -118,9 +148,10 @@ const Movies = () => {
     });
 
     if (loadedList.length > 0) {
-      loadedList.sort((a, b) => a.title.localeCompare(b.title));
-      setMovies(loadedList);
-      setActiveMovie(loadedList[0]);
+      const deduped = deduplicateMovies(loadedList);
+      deduped.sort((a, b) => a.title.localeCompare(b.title));
+      setMovies(deduped);
+      setActiveMovie(deduped[0]);
       setConnectionStatus('browser-folder');
       setServerDirectory('C:\\Users\\Miraj\\source\\repos\\repo-play (Connected via Browser)');
       setVideoError(null);
@@ -238,9 +269,10 @@ const Movies = () => {
                 streamUrl: host ? `${host}${m.streamUrl}` : m.streamUrl,
               }));
 
-              if (list.length > 0) {
-                setMovies(list);
-                setActiveMovie((prev) => prev || list[0]);
+              const deduped = deduplicateMovies(list);
+              if (deduped.length > 0) {
+                setMovies(deduped);
+                setActiveMovie((prev) => prev || deduped[0]);
               } else {
                 setMovies(SAMPLE_FALLBACK_MOVIES);
                 setActiveMovie((prev) => prev || SAMPLE_FALLBACK_MOVIES[0]);
@@ -461,25 +493,67 @@ const Movies = () => {
 
         {/* Hosted Alert / Guidance Banner (when on Vercel) */}
         {isHosted && connectionStatus !== 'connected' && connectionStatus !== 'browser-folder' && (
-          <div className="mt-6 p-5 rounded-2xl bg-gradient-to-r from-blue-900/40 via-purple-900/30 to-black/60 border border-cyan-500/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div className="mt-6 p-6 rounded-2xl bg-gradient-to-r from-blue-900/40 via-purple-900/30 to-black/70 border border-cyan-500/40 space-y-4">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
                 <span className="text-xl">🌐</span>
                 <h4 className="font-bold text-white text-sm">
-                  You are viewing the hosted app on Vercel ({hostname || 'mirajai.vercel.app'})
+                  Connecting to your PC from the Hosted App ({hostname || 'mirajai.vercel.app'})
                 </h4>
               </div>
               <p className="text-xs text-slate-300">
-                Because this app is hosted on Vercel in the cloud, browsers prevent cloud websites from silently reading your Windows hard drive (<code className="text-cyan-300 font-mono">C:\Users\Miraj\source\repos\repo-play</code>).
-                Click <strong>&ldquo;Connect repo-play Folder&rdquo;</strong> to authorize your browser to play all your videos directly with 1080p/4K resolution!
+                Because Vercel is hosted on the internet, browsers block direct calls to local IP addresses (<code className="text-cyan-300 font-mono">192.168.x.x</code>) due to HTTPS Mixed Content security. Choose one of two instant ways to watch your videos:
               </p>
             </div>
-            <button
-              onClick={handleOpenDirectoryPicker}
-              className="px-5 py-2.5 rounded-xl bg-cyan-500 text-black font-poppins font-bold text-xs uppercase tracking-wider hover:bg-cyan-400 whitespace-nowrap transition"
-            >
-              Connect Local repo-play Folder
-            </button>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+              {/* Method 1: Browser Native Folder (0 setup) */}
+              <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex flex-col justify-between gap-3">
+                <div className="space-y-1">
+                  <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 uppercase font-mono font-bold">
+                    Method 1: Direct Disk Access
+                  </span>
+                  <h5 className="font-bold text-white text-xs mt-1">Connect C:\Users\Miraj\source\repos\repo-play</h5>
+                  <p className="text-[11px] text-slate-400">
+                    Reads videos directly on your computer without uploading. Plays 1080p/4K instantly with 0 cloud data usage!
+                  </p>
+                </div>
+                <button
+                  onClick={handleOpenDirectoryPicker}
+                  className="px-4 py-2.5 rounded-xl bg-cyan-500 text-black font-poppins font-bold text-xs uppercase tracking-wider hover:bg-cyan-400 whitespace-nowrap transition"
+                >
+                  📁 Connect repo-play Folder
+                </button>
+              </div>
+
+              {/* Method 2: Cloudflare Live Stream URL */}
+              <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex flex-col justify-between gap-3">
+                <div className="space-y-1">
+                  <span className="text-[10px] px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 uppercase font-mono font-bold">
+                    Method 2: Live Cloud Stream
+                  </span>
+                  <h5 className="font-bold text-white text-xs mt-1">HTTPS Stream Tunnel from your PC</h5>
+                  <p className="text-[11px] text-slate-400">
+                    Enter your Cloudflare tunnel URL (run <code className="text-cyan-300 font-mono">npm run media:cloud</code> on your PC):
+                  </p>
+                </div>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={customEndpoint}
+                    onChange={(e) => setCustomEndpoint(e.target.value)}
+                    placeholder="https://...trycloudflare.com"
+                    className="flex-1 px-3 py-2 rounded-xl bg-black/60 border border-white/15 text-white font-mono text-xs outline-none focus:border-cyan-400"
+                  />
+                  <button
+                    onClick={() => handleSaveEndpoint()}
+                    className="px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold text-xs whitespace-nowrap hover:opacity-90 transition"
+                  >
+                    Connect
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         )}
 

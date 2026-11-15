@@ -35,8 +35,9 @@ const server = http.createServer((req, res) => {
   // CORS Headers for cross-origin access from hosted web apps
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Range, Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Headers', 'Range, Content-Type, Authorization, Access-Control-Request-Private-Network');
   res.setHeader('Access-Control-Expose-Headers', 'Content-Range, Accept-Ranges, Content-Length');
+  res.setHeader('Access-Control-Allow-Private-Network', 'true');
 
   if (req.method === 'OPTIONS') {
     res.statusCode = 204;
