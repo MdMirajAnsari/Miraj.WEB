@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { styles } from '../styles';
 import { fadeIn, textVariant } from '../utils/motion';
 import type { EnrichedGovLink, GovLink } from '../models';
+import PublicHolidaysSection from './public-holidays.component';
 
 const favoriteStorageKey = 'miraj-gov-favorites';
 const recentStorageKey = 'miraj-gov-recent-links';
@@ -299,6 +300,7 @@ GovCard.propTypes = {
 };
 
 const Gov = () => {
+  const [govTab, setGovTab] = useState<'portals' | 'holidays'>('portals');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedScope, setSelectedScope] = useState('all');
@@ -397,7 +399,37 @@ const Gov = () => {
           Find official government websites and public services in one place.
         </motion.p>
 
-      <div className="mt-8 glass-card rounded-[20px] p-4 sm:p-5">
+        {/* Tab Selection */}
+        <div className="mt-6 flex flex-wrap gap-3">
+          <button
+            type="button"
+            onClick={() => setGovTab('portals')}
+            className={`px-5 py-2.5 rounded-xl text-sm font-medium transition ${
+              govTab === 'portals' ? 'glass-button-active text-white' : 'glass-button text-slate-300'
+            }`}
+          >
+            🏛️ Portals & Official Services ({govLinks.length})
+          </button>
+          <button
+            type="button"
+            onClick={() => setGovTab('holidays')}
+            className={`px-5 py-2.5 rounded-xl text-sm font-medium transition flex items-center gap-2 ${
+              govTab === 'holidays' ? 'glass-button-active text-white' : 'glass-button text-slate-300'
+            }`}
+          >
+            <span>🗓️</span>
+            <span>Public Holidays & Bank Holidays (Live API)</span>
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-mono">
+              Nager.Date
+            </span>
+          </button>
+        </div>
+
+        {govTab === 'holidays' ? (
+          <PublicHolidaysSection />
+        ) : (
+          <>
+            <div className="mt-8 glass-card rounded-[20px] p-4 sm:p-5">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_170px_170px_170px] gap-4">
           <input
             type="search"
@@ -539,6 +571,8 @@ const Gov = () => {
           </div>
         </div>
       )}
+          </>
+        )}
       </div>
     </main>
   );

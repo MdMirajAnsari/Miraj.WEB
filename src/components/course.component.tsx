@@ -4,6 +4,7 @@ import { styles } from '../styles';
 import { SectionWrapper } from '../hoc';
 import { fadeIn, textVariant, staggerContainer } from '../utils/motion';
 import type { CoursePhase, CourseReason, CourseTopic } from '../models';
+import BooksSection from './books-section.component';
 
 const CourseHero = () => {
   return (
@@ -609,6 +610,7 @@ const Course = () => {
       <WhyChoose />
       <Curriculum />
       <StudentSuccess />
+      <BooksSection />
       <CTA />
       <FAQ />
     </div>

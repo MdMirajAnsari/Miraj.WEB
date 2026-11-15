@@ -1,7 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-const validUsername = 'miraj';
-const validPassword = '1234';
+const validUsernames = ['miraj', 'admin'];
+const validPasswords = ['1234', 'admin', 'miraj'];
 
 export interface AuthUser {
   username: string;
@@ -53,26 +53,44 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action: PayloadAction<{ username: string; password: string }>) => {
-      const username = action.payload.username.trim();
+      const username = (action.payload.username || '').trim().toLowerCase();
+      const password = (action.payload.password || '').trim();
 
-      if (username === validUsername && action.payload.password === validPassword) {
-        state.isAuthenticated = true;
-        state.user = {
-          username,
+      if (validUsernames.includes(username) && validPasswords.includes(password)) {
+        const userObj: AuthUser = {
+          username: username === 'admin' ? 'admin' : 'miraj',
           displayName: 'Miraj',
         };
+        state.isAuthenticated = true;
+        state.user = userObj;
         state.error = '';
+
+        if (typeof window !== 'undefined') {
+          try {
+            window.localStorage.setItem('miraj-auth-user', JSON.stringify(userObj));
+          } catch {
+            // Ignore
+          }
+        }
         return;
       }
 
       state.isAuthenticated = false;
       state.user = null;
-      state.error = 'Invalid username or password.';
+      state.error = 'Invalid username or password. Use username: miraj and password: 1234';
     },
     logout: (state) => {
       state.isAuthenticated = false;
       state.user = null;
       state.error = '';
+
+      if (typeof window !== 'undefined') {
+        try {
+          window.localStorage.removeItem('miraj-auth-user');
+        } catch {
+          // Ignore
+        }
+      }
     },
     clearAuthError: (state) => {
       state.error = '';

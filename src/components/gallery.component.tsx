@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { styles } from '../styles';
 import type { GalleryImageModel } from '../models';
+import MuseumArtSection from './museum-art.component';
 
 const favoriteStorageKey = 'miraj-gallery-favorites';
 const recentStorageKey = 'miraj-gallery-recently-viewed';
@@ -331,6 +332,7 @@ GalleryImage.propTypes = {
 };
 
 const Gallery = () => {
+  const [galleryTab, setGalleryTab] = useState<'photos' | 'museum'>('photos');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedAlbum, setSelectedAlbum] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
@@ -498,14 +500,46 @@ const Gallery = () => {
           Gallery
         </h2>
         <p className={`${styles.sectionSubText} text-center text-gray-300`}>
-          Featured Photos Collection
+          Featured Photos & World Masterpieces
         </p>
         <p className="mt-3 text-sm sm:text-base text-blue-300 font-poppins">
-          {filteredImages.length} of {galleryImages.length} photos | {favoriteIds.length} saved
+          {galleryTab === 'photos'
+            ? `${filteredImages.length} of ${galleryImages.length} photos | ${favoriteIds.length} saved`
+            : 'Explore public domain artworks live from the Art Institute of Chicago'}
         </p>
+
+        {/* Gallery Mode Switcher */}
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <button
+            type="button"
+            onClick={() => setGalleryTab('photos')}
+            className={`px-5 py-2.5 rounded-xl text-sm font-medium transition ${
+              galleryTab === 'photos' ? 'glass-button-active text-white' : 'glass-button text-slate-300'
+            }`}
+          >
+            📷 My Photos & Scenes ({galleryImages.length})
+          </button>
+          <button
+            type="button"
+            onClick={() => setGalleryTab('museum')}
+            className={`px-5 py-2.5 rounded-xl text-sm font-medium transition flex items-center gap-2 ${
+              galleryTab === 'museum' ? 'glass-button-active text-white' : 'glass-button text-slate-300'
+            }`}
+          >
+            <span>🎨</span>
+            <span>Museum Masterpieces (Live API)</span>
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-mono">
+              Art Institute Chicago
+            </span>
+          </button>
+        </div>
       </div>
 
-      <div className="glass-card rounded-lg p-4 sm:p-5 mb-8">
+      {galleryTab === 'museum' ? (
+        <MuseumArtSection />
+      ) : (
+        <>
+          <div className="glass-card rounded-lg p-4 sm:p-5 mb-8">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_180px_180px] gap-4">
           <input
             type="search"
@@ -702,6 +736,8 @@ const Gallery = () => {
             </aside>
           </div>
         </div>
+      )}
+        </>
       )}
     </div>
   );

@@ -23,11 +23,23 @@ const Login = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(login({ username, password }));
+    const cleanUser = username.trim().toLowerCase();
+    const cleanPass = password.trim();
 
-    if (username.trim() === 'miraj' && password === '1234') {
+    dispatch(login({ username: cleanUser, password: cleanPass }));
+
+    const validUsers = ['miraj', 'admin'];
+    const validPasses = ['1234', 'admin', 'miraj'];
+
+    if (validUsers.includes(cleanUser) && validPasses.includes(cleanPass)) {
       navigate(from, { replace: true });
     }
+  };
+
+  const handleFillDemo = () => {
+    setUsername('miraj');
+    setPassword('1234');
+    dispatch(clearAuthError());
   };
 
   return (
@@ -60,9 +72,24 @@ const Login = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="glass-card rounded-lg p-6 sm:p-8 flex flex-col justify-center">
-          <div className="mb-8">
-            <p className="text-sm uppercase tracking-[3px] text-indigo-200 font-semibold">Welcome back</p>
-            <h2 className="mt-3 text-3xl font-bold text-white font-poppins">Login</h2>
+          <div className="mb-6 flex items-center justify-between">
+            <div>
+              <p className="text-sm uppercase tracking-[3px] text-indigo-200 font-semibold">Welcome back</p>
+              <h2 className="mt-2 text-3xl font-bold text-white font-poppins">Login</h2>
+            </div>
+            <button
+              type="button"
+              onClick={handleFillDemo}
+              className="text-xs px-3 py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 hover:bg-cyan-500/30 transition"
+              title="Auto-fill credentials"
+            >
+              Fill Demo Login
+            </button>
+          </div>
+
+          <div className="mb-5 p-3 rounded-lg bg-white/5 border border-white/10 text-xs text-slate-300 flex items-center justify-between">
+            <span>Demo: <strong className="text-white">miraj</strong> / <strong className="text-white">1234</strong></span>
+            <span className="text-emerald-400">Ready</span>
           </div>
 
           <label className="block mb-5">

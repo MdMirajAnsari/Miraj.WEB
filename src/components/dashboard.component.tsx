@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../redux';
 import GitHubStatsCard from './github-stats-card.component';
 import WeatherCard from './weather-card.component';
 import DomainsStatsCard from './domains-stats-card.component';
+import CryptoMarketCard from './crypto-market-card.component';
 
 const formatDate = (value: string) =>
   new Intl.DateTimeFormat('en-IN', {
@@ -114,10 +115,11 @@ const Dashboard = () => {
           </article>
         </section>
 
-        <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-6">
+        <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-6">
           <WeatherCard />
           <GitHubStatsCard />
           <DomainsStatsCard />
+          <CryptoMarketCard />
         </section>
 
         <section className="grid grid-cols-1 xl:grid-cols-2 gap-6">

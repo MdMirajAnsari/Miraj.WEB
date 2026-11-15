@@ -489,6 +489,174 @@ const Applications = ({ setActiveTab }: SetActiveTabProps) => {
           </li>
         </ul>
       </motion.div>
+
+      {/* Free Public APIs Ecosystem Card */}
+      <motion.div
+        variants={fadeIn("up", "spring", 0.6, 0.75)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="bg-jetLight p-8 rounded-[20px] shadow-card hover:shadow-xl transition-all duration-300 md:col-span-2"
+      >
+        <div className="flex items-center justify-between gap-3 mb-6">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 bg-french rounded-[10px] flex items-center justify-center">
+              <span className="text-[24px]">⚡</span>
+            </div>
+            <div>
+              <h3 className="text-timberWolf font-beckman font-bold text-[24px] tracking-[1px]">
+                Free Public APIs Ecosystem
+              </h3>
+              <p className="text-xs text-taupe">Integrated live services & developer REST APIs</p>
+            </div>
+          </div>
+          <span className="text-xs bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full font-mono font-semibold border border-emerald-500/30">
+            Active Integrations
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-sm">
+          {/* Weather & Climate */}
+          <div className="bg-white/5 p-4 rounded-xl border border-white/10">
+            <h4 className="text-white font-bold mb-3 flex items-center gap-2">
+              <span>🌦️</span> Weather & Space
+            </h4>
+            <ul className="space-y-2 text-taupe text-[13px]">
+              <li>
+                <a href="https://open-meteo.com/en/docs" target="_blank" rel="noreferrer" className="hover:text-french flex items-center justify-between">
+                  <span>▸ Open-Meteo Global</span>
+                  <span className="text-[10px] text-cyan-300 bg-cyan-500/10 px-1.5 py-0.5 rounded">Used in Footer</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.weather.gov/documentation/services-web-api" target="_blank" rel="noreferrer" className="hover:text-french">
+                  ▸ NWS Weather.gov API
+                </a>
+              </li>
+              <li>
+                <a href="https://power.larc.nasa.gov/docs/services/api/" target="_blank" rel="noreferrer" className="hover:text-french">
+                  ▸ NASA POWER Solar & Met
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/chubin/wttr.in" target="_blank" rel="noreferrer" className="hover:text-french">
+                  ▸ wttr.in Terminal Weather
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Books & Research */}
+          <div className="bg-white/5 p-4 rounded-xl border border-white/10">
+            <h4 className="text-white font-bold mb-3 flex items-center gap-2">
+              <span>📚</span> Books & Research
+            </h4>
+            <ul className="space-y-2 text-taupe text-[13px]">
+              <li>
+                <a href="https://openlibrary.org/developers/api" target="_blank" rel="noreferrer" className="hover:text-french flex items-center justify-between">
+                  <span>▸ Open Library API</span>
+                  <span className="text-[10px] text-cyan-300 bg-cyan-500/10 px-1.5 py-0.5 rounded">In Course</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://gutendex.com/" target="_blank" rel="noreferrer" className="hover:text-french">
+                  ▸ Gutendex Gutenberg Books
+                </a>
+              </li>
+              <li>
+                <a href="https://www.crossref.org/documentation/retrieve-metadata/rest-api/" target="_blank" rel="noreferrer" className="hover:text-french">
+                  ▸ Crossref Research Metadata
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Markets & Finance */}
+          <div className="bg-white/5 p-4 rounded-xl border border-white/10">
+            <h4 className="text-white font-bold mb-3 flex items-center gap-2">
+              <span>📈</span> Crypto & Financial
+            </h4>
+            <ul className="space-y-2 text-taupe text-[13px]">
+              <li>
+                <a href="https://docs.coingecko.com/" target="_blank" rel="noreferrer" className="hover:text-french flex items-center justify-between">
+                  <span>▸ CoinGecko Prices</span>
+                  <span className="text-[10px] text-cyan-300 bg-cyan-500/10 px-1.5 py-0.5 rounded">In Dashboard</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://defillama.com/docs/api" target="_blank" rel="noreferrer" className="hover:text-french flex items-center justify-between">
+                  <span>▸ DefiLlama TVL API</span>
+                  <span className="text-[10px] text-cyan-300 bg-cyan-500/10 px-1.5 py-0.5 rounded">In Dashboard</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://allratestoday.com/" target="_blank" rel="noreferrer" className="hover:text-french">
+                  ▸ AllRatesToday Currencies
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Art & Museums */}
+          <div className="bg-white/5 p-4 rounded-xl border border-white/10">
+            <h4 className="text-white font-bold mb-3 flex items-center gap-2">
+              <span>🎨</span> Art & Culture
+            </h4>
+            <ul className="space-y-2 text-taupe text-[13px]">
+              <li>
+                <a href="https://api.artic.edu/docs/" target="_blank" rel="noreferrer" className="hover:text-french flex items-center justify-between">
+                  <span>▸ Art Institute of Chicago</span>
+                  <span className="text-[10px] text-cyan-300 bg-cyan-500/10 px-1.5 py-0.5 rounded">In Gallery</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://metmuseum.github.io/" target="_blank" rel="noreferrer" className="hover:text-french">
+                  ▸ Met Museum Collection
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Government & Holidays */}
+          <div className="bg-white/5 p-4 rounded-xl border border-white/10">
+            <h4 className="text-white font-bold mb-3 flex items-center gap-2">
+              <span>🗓️</span> Government & Dates
+            </h4>
+            <ul className="space-y-2 text-taupe text-[13px]">
+              <li>
+                <a href="https://date.nager.at/Api" target="_blank" rel="noreferrer" className="hover:text-french flex items-center justify-between">
+                  <span>▸ Nager.Date Global Holidays</span>
+                  <span className="text-[10px] text-cyan-300 bg-cyan-500/10 px-1.5 py-0.5 rounded">In Gov</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.gov.uk/bank-holidays.json" target="_blank" rel="noreferrer" className="hover:text-french">
+                  ▸ UK Bank Holidays Official
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Entertainment & Anime */}
+          <div className="bg-white/5 p-4 rounded-xl border border-white/10">
+            <h4 className="text-white font-bold mb-3 flex items-center gap-2">
+              <span>🎬</span> Anime & Entertainment
+            </h4>
+            <ul className="space-y-2 text-taupe text-[13px]">
+              <li>
+                <a href="https://docs.api.jikan.moe/" target="_blank" rel="noreferrer" className="hover:text-french">
+                  ▸ Jikan MyAnimeList API
+                </a>
+              </li>
+              <li>
+                <a href="https://www.tvmaze.com/api" target="_blank" rel="noreferrer" className="hover:text-french">
+                  ▸ TVmaze TV Shows & Cast
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </motion.div>
         </div>
 
        
