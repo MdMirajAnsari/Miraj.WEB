@@ -39,7 +39,6 @@ const SAMPLE_FALLBACK_MOVIES: RepoMovie[] = [
 ];
 
 const STORAGE_ENDPOINT_KEY = 'miraj-movies-server-endpoint';
-const PERMANENT_STREAM_ENDPOINT = 'https://miraj-movies-player.loca.lt';
 const DEFAULT_TUNNEL_ENDPOINT = 'https://mattress-physician-tough-vertical.trycloudflare.com';
 const VIDEO_EXTENSIONS = ['.mp4', '.webm', '.mkv', '.mov', '.m4v', '.ogv', '.avi'];
 
@@ -112,15 +111,6 @@ const Movies = () => {
       const isExternalHost = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
       setIsHosted(isExternalHost);
       setHostname(window.location.hostname);
-
-      // Keep address bar clean: remove bulky ?endpoint= query string once saved
-      const params = new URLSearchParams(window.location.search);
-      if (params.has('endpoint')) {
-        params.delete('endpoint');
-        const remainingQuery = params.toString() ? `?${params.toString()}` : '';
-        const newUrl = `${window.location.pathname}${remainingQuery}${window.location.hash}`;
-        window.history.replaceState({}, '', newUrl);
-      }
     }
   }, []);
 
@@ -133,14 +123,8 @@ const Movies = () => {
       const ext = name.substring(name.lastIndexOf('.')).toLowerCase();
 
       if (VIDEO_EXTENSIONS.includes(ext)) {
-        let playableBlob: Blob = file;
-        // Fix for Windows Chrome/Edge: explicitly tag blob MIME type for .mkv and .mp4
-        if (!file.type || file.type === 'application/octet-stream') {
-          const mimeType = ext === '.mkv' ? 'video/x-matroska' : ext === '.webm' ? 'video/webm' : 'video/mp4';
-          playableBlob = file.slice(0, file.size, mimeType);
-        }
-
-        const streamUrl = URL.createObjectURL(playableBlob);
+        // Direct browser object URL without memory-slicing
+        const streamUrl = URL.createObjectURL(file);
         const cleanTitle = name.replace(/\.[^/.]+$/, '').replace(/[-_.]+/g, ' ').trim();
 
         loadedList.push({
@@ -248,8 +232,9 @@ const Movies = () => {
       if (customUrl.trim()) {
         endpointsToTry.push(customUrl.trim().replace(/\/$/, ''));
       }
-      endpointsToTry.push(PERMANENT_STREAM_ENDPOINT);
-      endpointsToTry.push(DEFAULT_TUNNEL_ENDPOINT);
+      if (!endpointsToTry.includes(DEFAULT_TUNNEL_ENDPOINT)) {
+        endpointsToTry.push(DEFAULT_TUNNEL_ENDPOINT);
+      }
 
       // If running on localhost
       if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
