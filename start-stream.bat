@@ -4,6 +4,7 @@ cd /d "%~dp0"
 
 echo ======================================================================
 echo 🎬 Initializing Repo-Play Cloud Streamer...
+echo 📧 All streaming links will be sent to clevercottonmouth@gmail.com
 echo ======================================================================
 
 :: Clean up any lingering background cloudflared or port 4201 processes

@@ -31,6 +31,51 @@ export function formatSize(bytes) {
   return `${(bytes / (1024 * 1024 * 1024)).toFixed(2)} GB`;
 }
 
+export function getMovieList() {
+  try {
+    const files = fs.readdirSync(REPO_PLAY_DIR);
+    const rawMovies = files
+      .filter((file) => {
+        const ext = path.extname(file).toLowerCase();
+        return VIDEO_EXTENSIONS.includes(ext);
+      })
+      .map((file, idx) => {
+        const fullPath = path.join(REPO_PLAY_DIR, file);
+        const stats = fs.statSync(fullPath);
+        const ext = path.extname(file).toLowerCase().replace('.', '');
+        const cleanTitle = path
+          .basename(file, path.extname(file))
+          .replace(/[-_.]+/g, ' ')
+          .trim();
+
+        return {
+          id: `media-${idx + 1}-${encodeURIComponent(file)}`,
+          filename: file,
+          title: cleanTitle,
+          extension: ext,
+          size: stats.size,
+          sizeFormatted: formatSize(stats.size),
+          modified: stats.mtime.toISOString(),
+          streamUrl: `/movies-media/${encodeURIComponent(file)}`,
+        };
+      });
+
+    // Deduplicate: if both mp4 and mkv exist for same title, prefer mp4
+    const movieMap = new Map();
+    for (const m of rawMovies) {
+      const key = m.title.toLowerCase();
+      if (!movieMap.has(key)) {
+        movieMap.set(key, m);
+      } else if (m.extension === 'mp4' && movieMap.get(key).extension !== 'mp4') {
+        movieMap.set(key, m);
+      }
+    }
+    return Array.from(movieMap.values());
+  } catch (err) {
+    return [];
+  }
+}
+
 export function createMediaServer() {
   const server = http.createServer((req, res) => {
     // CORS Headers for cross-origin access from hosted web apps
@@ -67,44 +112,7 @@ export function createMediaServer() {
     // 1. List Movies endpoint
     if (pathname === '/api/movies') {
       try {
-        const files = fs.readdirSync(REPO_PLAY_DIR);
-        const rawMovies = files
-          .filter((file) => {
-            const ext = path.extname(file).toLowerCase();
-            return VIDEO_EXTENSIONS.includes(ext);
-          })
-          .map((file, idx) => {
-            const fullPath = path.join(REPO_PLAY_DIR, file);
-            const stats = fs.statSync(fullPath);
-            const ext = path.extname(file).toLowerCase().replace('.', '');
-            const cleanTitle = path
-              .basename(file, path.extname(file))
-              .replace(/[-_.]+/g, ' ')
-              .trim();
-
-            return {
-              id: `media-${idx + 1}-${encodeURIComponent(file)}`,
-              filename: file,
-              title: cleanTitle,
-              extension: ext,
-              size: stats.size,
-              sizeFormatted: formatSize(stats.size),
-              modified: stats.mtime.toISOString(),
-              streamUrl: `/movies-media/${encodeURIComponent(file)}`,
-            };
-          });
-
-        // Deduplicate: if both mp4 and mkv exist for same title, prefer mp4
-        const movieMap = new Map();
-        for (const m of rawMovies) {
-          const key = m.title.toLowerCase();
-          if (!movieMap.has(key)) {
-            movieMap.set(key, m);
-          } else if (m.extension === 'mp4' && movieMap.get(key).extension !== 'mp4') {
-            movieMap.set(key, m);
-          }
-        }
-        const movies = Array.from(movieMap.values());
+        const movies = getMovieList();
 
         res.setHeader('Content-Type', 'application/json');
         res.end(
