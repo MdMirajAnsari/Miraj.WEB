@@ -16,5 +16,6 @@ import GitHubActivity from './github-activity.component';
 import Domains from './domains.component';
 import DevTools from './dev-tools.component';
 import Terminal from './terminal.component';
+import Movies from './movies.component';
 
-export { Hero, Navbar, About, Tech, Experience, Projects, GitHubActivity, Gadgets, Contact, Blog, Gov, Gallery, YouTube, BallCanvas, Course, Domains, DevTools, Terminal };
+export { Hero, Navbar, About, Tech, Experience, Projects, GitHubActivity, Gadgets, Contact, Blog, Gov, Gallery, YouTube, BallCanvas, Course, Domains, DevTools, Terminal, Movies };

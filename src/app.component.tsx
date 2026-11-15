@@ -17,6 +17,7 @@ import {
   Domains,
   DevTools,
   Terminal,
+  Movies,
 } from './components';
 import { AchievementToast } from './components/achievement-toast.component';
 import { AiAssistant } from './components/ai-assistant.component';
@@ -153,6 +154,7 @@ const App = () => {
           <Route path="/youtube" element={<YouTube />} />
           <Route path="/gov" element={<Gov />} />
           <Route path="/domains" element={<Domains />} />
+          <Route path="/movies" element={<Movies />} />
           <Route path="/tools" element={<DevTools />} />
           <Route path="/terminal" element={<Terminal />} />
           <Route path="/content-studio" element={<ContentStudio />} />

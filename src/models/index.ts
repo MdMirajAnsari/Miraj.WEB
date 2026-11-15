@@ -18,4 +18,5 @@ export type {
   DomainsDbAccountInfo,
   DomainSearchParams,
 } from './domainsdb.model';
+export type { RepoMovie } from './movie.model';
 

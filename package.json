@@ -4,12 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "vite",
+    "start": "vite --host",
     "build": "vite build",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "search:index": "npx pagefind --site dist"
+    "preview": "vite preview --host",
+    "search:index": "npx pagefind --site dist",
+    "media:server": "node scripts/media-server.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
