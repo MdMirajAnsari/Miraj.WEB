@@ -1,83 +1,84 @@
 import { spawn, exec } from 'child_process';
 import http from 'http';
 import fs from 'fs';
+import { createMediaServer, PORT, REPO_PLAY_DIR } from './media-server.mjs';
 
 const CLOUDFLARED_PATH = 'C:\\Program Files (x86)\\cloudflared\\cloudflared.exe';
-const MEDIA_SERVER_PORT = 4201;
 
-function checkMediaServerRunning() {
+function startLocalServer() {
   return new Promise((resolve) => {
-    const req = http.get(`http://localhost:${MEDIA_SERVER_PORT}/health`, (res) => {
-      resolve(res.statusCode === 200);
+    const server = createMediaServer();
+
+    server.once('error', (err) => {
+      if (err.code === 'EADDRINUSE') {
+        console.log(`✅ Media server already running on port ${PORT}.`);
+        resolve(true);
+      } else {
+        console.error('Server error:', err);
+        resolve(false);
+      }
     });
-    req.on('error', () => resolve(false));
-    req.setTimeout(1500, () => {
-      req.destroy();
-      resolve(false);
+
+    server.listen(PORT, '0.0.0.0', () => {
+      console.log(`✅ Media server started on 0.0.0.0:${PORT}`);
+      resolve(true);
     });
   });
 }
 
 async function main() {
-  console.log('\n======================================================');
-  console.log('🚀 Starting Repo-Play Cloud Streamer...');
-  console.log('======================================================\n');
+  console.log('\n======================================================================');
+  console.log('🎬 Repo-Play Cloudflare Streamer');
+  console.log('======================================================================\n');
 
-  // 1. Ensure media server is running on port 4201
-  const isRunning = await checkMediaServerRunning();
-  if (!isRunning) {
-    console.log('📡 Starting local media server on port 4201...');
-    const serverProc = spawn('node', ['scripts/media-server.mjs'], {
-      detached: true,
-      stdio: 'inherit',
-    });
-    serverProc.unref();
-    await new Promise((r) => setTimeout(r, 2000));
-  } else {
-    console.log('✅ Local media server is active on port 4201.');
-  }
-
-  // 2. Launch cloudflared tunnel
   if (!fs.existsSync(CLOUDFLARED_PATH)) {
-    console.error(`\n❌ cloudflared not found at ${CLOUDFLARED_PATH}`);
+    console.error(`❌ cloudflared.exe not found at ${CLOUDFLARED_PATH}`);
     process.exit(1);
   }
 
+  // 1. Start media server
+  await startLocalServer();
+
+  // 2. Start Cloudflare Tunnel
   console.log('🌐 Connecting to Cloudflare Edge Network...');
-  const tunnel = spawn(CLOUDFLARED_PATH, ['tunnel', '--url', `http://localhost:${MEDIA_SERVER_PORT}`]);
+  const tunnel = spawn(CLOUDFLARED_PATH, ['tunnel', '--url', `http://127.0.0.1:${PORT}`]);
 
-  let tunnelUrlFound = false;
+  let tunnelFound = false;
 
-  const handleOutput = (data) => {
-    const text = data.toString();
+  const handleTunnelOutput = (chunk) => {
+    const text = chunk.toString();
     const match = text.match(/https:\/\/[a-zA-Z0-9-]+\.trycloudflare\.com/);
-    if (match && !tunnelUrlFound) {
-      tunnelUrlFound = true;
+    if (match && !tunnelFound) {
+      tunnelFound = true;
       const tunnelUrl = match[0];
-      const vercelUrl = `https://mirajai.vercel.app/movies?endpoint=${encodeURIComponent(tunnelUrl)}`;
+      const directAppUrl = `https://mirajai.vercel.app/movies?endpoint=${encodeURIComponent(tunnelUrl)}`;
 
       console.log('\n======================================================================');
-      console.log('🎬 REPO-PLAY CLOUD STREAM IS READY!');
+      console.log('🎉 YOUR CLOUDFLARE STREAM IS LIVE!');
       console.log('======================================================================');
-      console.log('\n👉 YOUR DIRECT ACCESS LINK (Click or Copy):');
-      console.log(`\n   ${vercelUrl}\n`);
+      console.log(`📁 Movies Folder:  ${REPO_PLAY_DIR}`);
+      console.log(`⚡ Cloudflare URL:  ${tunnelUrl}`);
+      console.log('\n👉 YOUR DIRECT STREAM LINK (Click or Copy):');
+      console.log(`\n   ${directAppUrl}\n`);
       console.log('======================================================================');
-      console.log(`📁 Local Directory: C:\\Users\\Miraj\\source\\repos\\repo-play`);
-      console.log(`⚡ Live Tunnel:     ${tunnelUrl}`);
-      console.log('======================================================================\n');
       console.log('🌐 Opening your browser automatically...');
-      console.log('💡 Keep this window open while watching your movies!\n');
+      console.log('💡 Keep this window open while watching movies on Vercel!\n');
 
-      // Automatically launch in default browser
-      exec(`start "" "${vercelUrl}"`);
+      exec(`start "" "${directAppUrl}"`);
     }
   };
 
-  tunnel.stdout.on('data', handleOutput);
-  tunnel.stderr.on('data', handleOutput);
+  tunnel.stdout.on('data', handleTunnelOutput);
+  tunnel.stderr.on('data', handleTunnelOutput);
 
   tunnel.on('close', (code) => {
-    console.log(`\nTunnel closed (exit code ${code})`);
+    console.log(`\nCloudflare tunnel closed (exit code ${code})`);
+    process.exit(code || 0);
+  });
+
+  process.on('SIGINT', () => {
+    tunnel.kill();
+    process.exit(0);
   });
 }
 
