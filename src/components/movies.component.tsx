@@ -3,6 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { styles } from '../styles';
 import { textVariant } from '../utils/motion';
 import type { RepoMovie } from '../models';
+import {
+  saveSavedDirectoryHandle,
+  getSavedDirectoryHandle,
+} from '../utils/repoPlayStorage';
 
 const SAMPLE_FALLBACK_MOVIES: RepoMovie[] = [
   {
@@ -35,26 +39,35 @@ const SAMPLE_FALLBACK_MOVIES: RepoMovie[] = [
 ];
 
 const STORAGE_ENDPOINT_KEY = 'miraj-movies-server-endpoint';
+const VIDEO_EXTENSIONS = ['.mp4', '.webm', '.mkv', '.mov', '.m4v', '.ogv', '.avi'];
+
+function formatFileSize(bytes: number): string {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  if (bytes < 1024 * 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  return `${(bytes / (1024 * 1024 * 1024)).toFixed(2)} GB`;
+}
 
 const Movies = () => {
   const [movies, setMovies] = useState<RepoMovie[]>([]);
   const [activeMovie, setActiveMovie] = useState<RepoMovie | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedFormat, setSelectedFormat] = useState('all');
   const [playbackSpeed, setPlaybackSpeed] = useState<number>(1);
-  const [isServerActive, setIsServerActive] = useState(false);
+  const [connectionStatus, setConnectionStatus] = useState<'connected' | 'disconnected' | 'browser-folder'>('disconnected');
   const [serverDirectory, setServerDirectory] = useState('C:\\Users\\Miraj\\source\\repos\\repo-play');
-  const [serverIp, setServerIp] = useState('192.168.1.8');
   const [showNetworkModal, setShowNetworkModal] = useState(false);
+  const [isHosted, setIsHosted] = useState(false);
+  const [hostname, setHostname] = useState('');
+  const [savedHandle, setSavedHandle] = useState<FileSystemDirectoryHandle | null>(null);
+  const [needsPermissionGrant, setNeedsPermissionGrant] = useState(false);
+  const [videoError, setVideoError] = useState<string | null>(null);
 
-  // Custom LAN server endpoint (e.g. for hosted app communicating to home computer)
+  // Custom Media Server Endpoint
   const [customEndpoint, setCustomEndpoint] = useState(() => {
     if (typeof window !== 'undefined') {
-      return (
-        window.localStorage.getItem(STORAGE_ENDPOINT_KEY) ||
-        (window.location.hostname === 'localhost' ? '' : 'http://192.168.1.8:4201')
-      );
+      return window.localStorage.getItem(STORAGE_ENDPOINT_KEY) || '';
     }
     return '';
   });
@@ -63,93 +76,31 @@ const Movies = () => {
   const folderInputRef = useRef<HTMLInputElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Fetch movies from server (either local Vite dev server or standalone LAN media server on port 4201)
-  const fetchMoviesFromEndpoint = useCallback(async (baseUrl: string = customEndpoint) => {
-    setLoading(true);
-
-    const endpointsToTry: string[] = [];
-    if (baseUrl.trim()) {
-      endpointsToTry.push(baseUrl.trim().replace(/\/$/, ''));
-    }
-    endpointsToTry.push(''); // relative URL: /api/movies
-    endpointsToTry.push('http://localhost:4201');
-    endpointsToTry.push('http://192.168.1.8:4201');
-
-    let success = false;
-
-    for (const host of endpointsToTry) {
-      try {
-        const url = `${host}/api/movies`;
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 2000);
-
-        const res = await fetch(url, { signal: controller.signal });
-        clearTimeout(timeoutId);
-
-        if (res.ok) {
-          const data = await res.json();
-          setIsServerActive(true);
-          if (data.directory) setServerDirectory(data.directory);
-          if (data.serverIp) setServerIp(data.serverIp);
-
-          const list: RepoMovie[] = (data.movies || []).map((m: RepoMovie) => ({
-            ...m,
-            // Prepend host URL if streaming from remote LAN server
-            streamUrl: host ? `${host}${m.streamUrl}` : m.streamUrl,
-          }));
-
-          if (list.length > 0) {
-            setMovies(list);
-            setActiveMovie((prev) => prev || list[0]);
-          } else {
-            setMovies(SAMPLE_FALLBACK_MOVIES);
-            setActiveMovie((prev) => prev || SAMPLE_FALLBACK_MOVIES[0]);
-          }
-
-          success = true;
-          break;
-        }
-      } catch {
-        // try next endpoint
-      }
-    }
-
-    if (!success) {
-      setIsServerActive(false);
-      setMovies((prev) => (prev.length > 0 ? prev : SAMPLE_FALLBACK_MOVIES));
-      setActiveMovie((prev) => prev || SAMPLE_FALLBACK_MOVIES[0]);
-    }
-
-    setLoading(false);
-  }, [customEndpoint]);
-
   useEffect(() => {
-    fetchMoviesFromEndpoint();
-  }, [fetchMoviesFromEndpoint]);
-
-  const handleSaveEndpoint = () => {
     if (typeof window !== 'undefined') {
-      window.localStorage.setItem(STORAGE_ENDPOINT_KEY, customEndpoint.trim());
+      const isExternalHost = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+      setIsHosted(isExternalHost);
+      setHostname(window.location.hostname);
     }
-    fetchMoviesFromEndpoint(customEndpoint);
-    setShowNetworkModal(false);
-  };
+  }, []);
 
-  // Handle local folder selection in browser (Direct local playback without server)
-  const handleSelectLocalFolder = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
-
-    const videoExts = ['.mp4', '.webm', '.mkv', '.mov', '.m4v', '.ogv', '.avi'];
+  // Process a list of File objects into RepoMovie objects
+  const processFiles = useCallback((files: File[]) => {
     const loadedList: RepoMovie[] = [];
 
-    Array.from(files).forEach((file, idx) => {
+    files.forEach((file, idx) => {
       const name = file.name;
       const ext = name.substring(name.lastIndexOf('.')).toLowerCase();
 
-      if (videoExts.includes(ext)) {
-        const streamUrl = URL.createObjectURL(file);
-        const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
+      if (VIDEO_EXTENSIONS.includes(ext)) {
+        let playableBlob: Blob = file;
+        // Fix for Windows Chrome/Edge: explicitly tag blob MIME type for .mkv and .mp4
+        if (!file.type || file.type === 'application/octet-stream') {
+          const mimeType = ext === '.mkv' ? 'video/x-matroska' : ext === '.webm' ? 'video/webm' : 'video/mp4';
+          playableBlob = file.slice(0, file.size, mimeType);
+        }
+
+        const streamUrl = URL.createObjectURL(playableBlob);
         const cleanTitle = name.replace(/\.[^/.]+$/, '').replace(/[-_.]+/g, ' ').trim();
 
         loadedList.push({
@@ -158,7 +109,7 @@ const Movies = () => {
           title: cleanTitle,
           extension: ext.replace('.', ''),
           size: file.size,
-          sizeFormatted: `${sizeMb} MB`,
+          sizeFormatted: formatFileSize(file.size),
           modified: new Date(file.lastModified).toISOString(),
           streamUrl,
           isLocalFile: true,
@@ -167,11 +118,188 @@ const Movies = () => {
     });
 
     if (loadedList.length > 0) {
+      loadedList.sort((a, b) => a.title.localeCompare(b.title));
       setMovies(loadedList);
       setActiveMovie(loadedList[0]);
-      setIsServerActive(true);
-      setServerDirectory('Local Folder (Selected directly in Browser)');
+      setConnectionStatus('browser-folder');
+      setServerDirectory('C:\\Users\\Miraj\\source\\repos\\repo-play (Connected via Browser)');
+      setVideoError(null);
     }
+  }, []);
+
+  // Read files from a DirectoryHandle
+  const readFilesFromHandle = useCallback(
+    async (handle: FileSystemDirectoryHandle) => {
+      try {
+        setLoading(true);
+        const collectedFiles: File[] = [];
+
+        for await (const entry of (handle as any).values()) {
+          if (entry.kind === 'file') {
+            const file = await entry.getFile();
+            const ext = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+            if (VIDEO_EXTENSIONS.includes(ext)) {
+              collectedFiles.push(file);
+            }
+          }
+        }
+
+        if (collectedFiles.length > 0) {
+          processFiles(collectedFiles);
+          setNeedsPermissionGrant(false);
+        }
+      } catch (err) {
+        console.warn('Error reading files from directory handle', err);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [processFiles],
+  );
+
+  // Modern File System Access API (showDirectoryPicker)
+  const handleOpenDirectoryPicker = async () => {
+    if (typeof window !== 'undefined' && 'showDirectoryPicker' in window) {
+      try {
+        // @ts-expect-error showDirectoryPicker is standard in Chromium
+        const dirHandle: FileSystemDirectoryHandle = await window.showDirectoryPicker({ mode: 'read' });
+        setSavedHandle(dirHandle);
+        await saveSavedDirectoryHandle(dirHandle);
+        await readFilesFromHandle(dirHandle);
+        return;
+      } catch (err) {
+        if (err instanceof DOMException && err.name === 'AbortError') return;
+      }
+    }
+
+    // Fallback to directory input
+    folderInputRef.current?.click();
+  };
+
+  // Re-authorize stored folder handle
+  const handleAuthorizeSavedHandle = async () => {
+    if (!savedHandle) return;
+    try {
+      // @ts-expect-error requestPermission is standard in Chromium
+      const perm = await savedHandle.requestPermission({ mode: 'read' });
+      if (perm === 'granted') {
+        await readFilesFromHandle(savedHandle);
+      }
+    } catch {
+      handleOpenDirectoryPicker();
+    }
+  };
+
+  // Standard input file directory picker fallback
+  const handleFolderInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+    processFiles(Array.from(files));
+  };
+
+  // Fetch movies from server endpoints (LAN server or tunnel)
+  const fetchMoviesFromEndpoint = useCallback(
+    async (customUrl: string = customEndpoint) => {
+      setLoading(true);
+
+      const endpointsToTry: string[] = [];
+
+      if (customUrl.trim()) {
+        endpointsToTry.push(customUrl.trim().replace(/\/$/, ''));
+      }
+
+      // If running on localhost
+      if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+        endpointsToTry.push('');
+        endpointsToTry.push('http://localhost:4201');
+        endpointsToTry.push('http://127.0.0.1:4201');
+      }
+
+      let success = false;
+
+      for (const host of endpointsToTry) {
+        try {
+          const url = `${host}/api/movies`;
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 2500);
+
+          const res = await fetch(url, { signal: controller.signal });
+          clearTimeout(timeoutId);
+
+          const contentType = res.headers.get('content-type') || '';
+          if (res.ok && contentType.includes('application/json')) {
+            const data = await res.json();
+            if (data && Array.isArray(data.movies)) {
+              setConnectionStatus('connected');
+              if (data.directory) setServerDirectory(data.directory);
+
+              const list: RepoMovie[] = data.movies.map((m: RepoMovie) => ({
+                ...m,
+                streamUrl: host ? `${host}${m.streamUrl}` : m.streamUrl,
+              }));
+
+              if (list.length > 0) {
+                setMovies(list);
+                setActiveMovie((prev) => prev || list[0]);
+              } else {
+                setMovies(SAMPLE_FALLBACK_MOVIES);
+                setActiveMovie((prev) => prev || SAMPLE_FALLBACK_MOVIES[0]);
+              }
+
+              success = true;
+              break;
+            }
+          }
+        } catch {
+          // Continue to next endpoint
+        }
+      }
+
+      if (!success) {
+        setConnectionStatus((prev) => (prev === 'browser-folder' ? 'browser-folder' : 'disconnected'));
+        if (movies.length === 0) {
+          setMovies(SAMPLE_FALLBACK_MOVIES);
+          setActiveMovie(SAMPLE_FALLBACK_MOVIES[0]);
+        }
+      }
+
+      setLoading(false);
+    },
+    [customEndpoint, movies.length],
+  );
+
+  // Check for saved IndexedDB folder handle on initial mount
+  useEffect(() => {
+    const initPersistence = async () => {
+      try {
+        const handle = await getSavedDirectoryHandle();
+        if (handle) {
+          setSavedHandle(handle);
+          // @ts-expect-error queryPermission is standard in Chromium
+          const perm = await handle.queryPermission({ mode: 'read' });
+          if (perm === 'granted') {
+            await readFilesFromHandle(handle);
+            return;
+          } else {
+            setNeedsPermissionGrant(true);
+          }
+        }
+      } catch {
+        // Fall through
+      }
+      fetchMoviesFromEndpoint();
+    };
+
+    initPersistence();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleSaveEndpoint = () => {
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(STORAGE_ENDPOINT_KEY, customEndpoint.trim());
+    }
+    fetchMoviesFromEndpoint(customEndpoint);
+    setShowNetworkModal(false);
   };
 
   const handleSpeedChange = (speed: number) => {
@@ -227,7 +355,7 @@ const Movies = () => {
   const availableExtensions = ['all', ...Array.from(new Set(movies.map((m) => m.extension.toLowerCase())))];
 
   return (
-    <div className="relative z-0 min-h-screen pt-[120px] pb-20">
+    <div id="movies" className="relative z-0 min-h-screen pt-[120px] pb-20">
       <div className={`${styles.padding} max-w-7xl mx-auto`}>
         {/* Header */}
         <motion.div
@@ -237,95 +365,149 @@ const Movies = () => {
           className="flex flex-col lg:flex-row lg:items-end justify-between gap-6"
         >
           <div>
-            <p className={`${styles.sectionSubText}`}>Personal Media & Video Streamer</p>
+            <p className={`${styles.sectionSubText}`}>Personal Cinema & Video Player</p>
             <h2 className={`${styles.sectionHeadTextLight}`}>Repo Play.</h2>
             <p className="mt-2 text-taupe text-[16px] max-w-2xl">
-              Stream movies directly from{' '}
+              Stream movies directly from your local{' '}
               <code className="text-cyan-300 font-mono bg-white/10 px-2 py-0.5 rounded text-xs">
-                C:\Users\Miraj\source\repos\repo-play
+                repo-play
               </code>{' '}
-              on your home Wi-Fi network, on mobile devices, or when hosted.
+              folder, across your home Wi-Fi network, or on this hosted app with zero cloud upload.
             </p>
           </div>
 
           {/* Action Buttons */}
           <div className="flex flex-wrap items-center gap-3">
+            {/* Primary Connect Button */}
+            <button
+              onClick={handleOpenDirectoryPicker}
+              className="px-5 py-3 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 text-white font-poppins font-bold text-sm shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-2"
+              title="Select C:\Users\Miraj\source\repos\repo-play"
+            >
+              <span>📁</span>
+              <span>Connect repo-play Folder</span>
+            </button>
+
+            {/* Choose Individual Files fallback */}
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              className="glass-button px-4 py-3 rounded-xl text-xs font-semibold text-white flex items-center gap-2 hover:bg-white/10 transition"
+              title="Pick individual video files (.mkv, .mp4, etc.)"
+            >
+              <span>🎬</span>
+              <span>Pick Video Files</span>
+            </button>
+
             <button
               onClick={() => fetchMoviesFromEndpoint()}
               disabled={loading}
-              className="glass-button px-4 py-2.5 rounded-xl text-xs font-semibold text-white flex items-center gap-2 hover:bg-white/10 transition"
-              title="Rescan directory"
+              className="glass-button px-4 py-3 rounded-xl text-xs font-semibold text-white flex items-center gap-2 hover:bg-white/10 transition"
+              title="Rescan connected media server"
             >
               <span>🔄</span>
-              <span>{loading ? 'Scanning...' : 'Refresh Library'}</span>
+              <span>{loading ? 'Scanning...' : 'Refresh'}</span>
             </button>
 
-            {/* Same Network Settings Pill */}
             <button
               onClick={() => setShowNetworkModal(true)}
-              className="glass-button px-4 py-2.5 rounded-xl text-xs font-semibold text-cyan-300 border border-cyan-500/30 flex items-center gap-2 hover:bg-white/10 transition"
+              className="glass-button px-4 py-3 rounded-xl text-xs font-semibold text-cyan-300 border border-cyan-500/30 flex items-center gap-2 hover:bg-white/10 transition"
             >
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Same Network / Host Setup</span>
+              <span>Network & Server Setup</span>
             </button>
 
-            {/* Browser Folder Picker */}
-            <button
-              onClick={() => folderInputRef.current?.click()}
-              className="glass-button-active px-4 py-2.5 rounded-xl text-xs font-semibold text-white flex items-center gap-2"
-              title="Select folder directly without server"
-            >
-              <span>📁</span>
-              <span>Select Folder</span>
-            </button>
+            {/* Hidden file inputs */}
             <input
               ref={folderInputRef}
               type="file"
-              // @ts-expect-error webkitdirectory is supported in modern browsers
+              // @ts-expect-error webkitdirectory is standard in browsers
               webkitdirectory=""
               directory=""
               multiple
               className="hidden"
-              onChange={handleSelectLocalFolder}
+              onChange={handleFolderInputChange}
             />
-
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              className="glass-button px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white flex items-center gap-2"
-            >
-              <span>➕</span>
-              <span>Add Videos</span>
-            </button>
             <input
               ref={fileInputRef}
               type="file"
-              accept="video/*"
+              accept="video/*,.mkv,.mp4,.webm,.mov,.avi"
               multiple
               className="hidden"
-              onChange={handleSelectLocalFolder}
+              onChange={handleFolderInputChange}
             />
           </div>
         </motion.div>
 
-        {/* Directory Connection Banner */}
+        {/* 1-Click Reconnect Banner (when user previously chose repo-play) */}
+        {needsPermissionGrant && (
+          <div className="mt-6 p-4 rounded-2xl bg-gradient-to-r from-cyan-900/60 via-blue-900/40 to-black/80 border border-cyan-400/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <span className="text-2xl animate-bounce">⚡</span>
+              <div>
+                <h4 className="font-bold text-white text-sm">Resume Previous repo-play Session</h4>
+                <p className="text-xs text-slate-300">
+                  Click to re-authorize browser access to your saved movies folder.
+                </p>
+              </div>
+            </div>
+            <button
+              onClick={handleAuthorizeSavedHandle}
+              className="px-5 py-2.5 rounded-xl bg-cyan-400 text-black font-poppins font-bold text-xs uppercase tracking-wider hover:bg-cyan-300 whitespace-nowrap transition"
+            >
+              Authorize & Load Movies
+            </button>
+          </div>
+        )}
+
+        {/* Hosted Alert / Guidance Banner (when on Vercel) */}
+        {isHosted && connectionStatus !== 'connected' && connectionStatus !== 'browser-folder' && (
+          <div className="mt-6 p-5 rounded-2xl bg-gradient-to-r from-blue-900/40 via-purple-900/30 to-black/60 border border-cyan-500/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">🌐</span>
+                <h4 className="font-bold text-white text-sm">
+                  You are viewing the hosted app on Vercel ({hostname || 'mirajai.vercel.app'})
+                </h4>
+              </div>
+              <p className="text-xs text-slate-300">
+                Because this app is hosted on Vercel in the cloud, browsers prevent cloud websites from silently reading your Windows hard drive (<code className="text-cyan-300 font-mono">C:\Users\Miraj\source\repos\repo-play</code>).
+                Click <strong>&ldquo;Connect repo-play Folder&rdquo;</strong> to authorize your browser to play all your videos directly with 1080p/4K resolution!
+              </p>
+            </div>
+            <button
+              onClick={handleOpenDirectoryPicker}
+              className="px-5 py-2.5 rounded-xl bg-cyan-500 text-black font-poppins font-bold text-xs uppercase tracking-wider hover:bg-cyan-400 whitespace-nowrap transition"
+            >
+              Connect Local repo-play Folder
+            </button>
+          </div>
+        )}
+
+        {/* Directory Connection Status Banner */}
         <div className="mt-6 p-4 rounded-2xl bg-black/40 border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
           <div className="flex items-center gap-2.5">
             <span
               className={`w-2.5 h-2.5 rounded-full ${
-                isServerActive ? 'bg-emerald-400 animate-pulse' : 'bg-cyan-400'
+                connectionStatus === 'connected' || connectionStatus === 'browser-folder'
+                  ? 'bg-emerald-400 animate-pulse'
+                  : 'bg-amber-400'
               }`}
             />
             <span className="text-slate-300">
-              Active Storage:{' '}
+              Active Source:{' '}
               <strong className="text-white font-mono">{serverDirectory}</strong>
             </span>
           </div>
 
           <div className="flex items-center gap-3 text-slate-400">
-            <span>{movies.length} videos available</span>
+            <span>{movies.length} videos loaded</span>
             <span className="text-white/20">•</span>
             <span className="text-cyan-300 font-mono">
-              LAN IP: {serverIp}
+              {connectionStatus === 'browser-folder'
+                ? 'Direct Local Stream (100% Private, 0 Cloud Bandwidth)'
+                : connectionStatus === 'connected'
+                ? 'Live LAN Media Stream'
+                : 'Demo Mode (Click Connect Folder)'}
             </span>
           </div>
         </div>
@@ -351,7 +533,7 @@ const Movies = () => {
                   <div className="flex items-center gap-2.5">
                     <span className="text-2xl">📡</span>
                     <h3 className="text-lg font-bold text-white font-poppins">
-                      Same Network & Hosted Setup
+                      Connecting Videos on Vercel & Same Network
                     </h3>
                   </div>
                   <button
@@ -363,44 +545,72 @@ const Movies = () => {
                 </div>
 
                 <div className="space-y-4 text-xs text-slate-300">
-                  <div className="p-4 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-200 space-y-1.5">
-                    <p className="font-bold text-sm">📱 Access from any phone/tablet/TV on Wi-Fi:</p>
-                    <p>Open your phone's browser and go to:</p>
-                    <code className="block p-2 rounded bg-black/50 font-mono text-white text-xs select-all">
-                      http://{serverIp}:4200/movies
-                    </code>
+                  {/* Option 1: 1-Click Browser Connection */}
+                  <div className="p-4 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-200 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <p className="font-bold text-sm text-white">⚡ Method 1: Instant Local Folder Connection</p>
+                      <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 uppercase font-mono">
+                        Recommended for Vercel
+                      </span>
+                    </div>
+                    <p className="text-slate-300">
+                      Works on your hosted site (<code className="text-white">mirajai.vercel.app</code>) immediately without needing any local server or port forwarding:
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowNetworkModal(false);
+                        handleOpenDirectoryPicker();
+                      }}
+                      className="px-4 py-2 rounded-lg bg-cyan-400 text-black font-bold text-xs hover:bg-cyan-300 transition"
+                    >
+                      Select C:\Users\Miraj\source\repos\repo-play
+                    </button>
                   </div>
 
-                  <div className="space-y-2">
-                    <label className="font-semibold text-white block uppercase tracking-wider text-[11px]">
-                      LAN Media Server Endpoint (When app is hosted online):
-                    </label>
-                    <div className="flex gap-2">
+                  {/* Option 2: Same Wi-Fi Network Access */}
+                  <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <p className="font-bold text-sm text-white">📱 Method 2: Watch on Phone or TV on Same Wi-Fi</p>
+                      <span className="text-[10px] px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 uppercase font-mono">
+                        Zero Config
+                      </span>
+                    </div>
+                    <p className="text-slate-400 leading-relaxed">
+                      While your PC runs <code className="text-white">npm start</code>, open this URL on your phone or smart TV connected to the same Wi-Fi:
+                    </p>
+                    <div className="p-2.5 rounded-lg bg-black/60 border border-white/10 text-cyan-300 font-mono text-center text-sm font-bold">
+                      http://192.168.1.8:4200/movies
+                    </div>
+                    <p className="text-[11px] text-slate-400">
+                      Your phone will stream all movies directly from your PC at maximum Wi-Fi speeds without any cloud lag!
+                    </p>
+                  </div>
+
+                  {/* Option 3: HTTPS Tunnel URL */}
+                  <div className="space-y-2 p-4 rounded-xl bg-white/5 border border-white/10">
+                    <p className="font-bold text-sm text-white">🌐 Method 3: Remote Media Server (localtunnel / ngrok)</p>
+                    <p className="text-slate-400 leading-relaxed">
+                      To stream from your PC to <code className="text-white">mirajai.vercel.app</code> from anywhere outside your home, start an HTTPS tunnel:
+                    </p>
+                    <code className="block p-2 rounded bg-black/50 text-cyan-300 font-mono text-[11px]">
+                      npx localtunnel --port 4201
+                    </code>
+                    <div className="flex gap-2 pt-1">
                       <input
                         type="text"
                         value={customEndpoint}
                         onChange={(e) => setCustomEndpoint(e.target.value)}
-                        placeholder={`http://${serverIp}:4201`}
+                        placeholder="https://your-tunnel.loca.lt"
                         className="flex-1 px-3 py-2 rounded-xl bg-black/50 border border-white/15 text-white font-mono text-xs outline-none focus:border-cyan-400"
                       />
                       <button
                         onClick={handleSaveEndpoint}
                         className="glass-button-active px-4 py-2 rounded-xl font-semibold text-white"
                       >
-                        Apply
+                        Save
                       </button>
                     </div>
-                    <p className="text-[11px] text-slate-400 leading-relaxed">
-                      Start the standalone LAN server on your PC anytime by running:{' '}
-                      <code className="text-cyan-300 font-mono">npm run media:server</code>.
-                    </p>
-                  </div>
-
-                  <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-1">
-                    <strong className="text-white">🚀 Zero-Setup Hosted Mode:</strong>
-                    <p className="text-slate-400">
-                      Even if you deploy to Vercel/Netlify, you can always click the <strong>&ldquo;Select Folder&rdquo;</strong> button and pick your <code className="text-white">repo-play</code> folder directly in the browser without needing any backend server!
-                    </p>
                   </div>
                 </div>
 
@@ -409,7 +619,7 @@ const Movies = () => {
                     onClick={() => setShowNetworkModal(false)}
                     className="glass-button px-5 py-2 rounded-xl text-xs text-white"
                   >
-                    Done
+                    Close
                   </button>
                 </div>
               </motion.div>
@@ -424,23 +634,54 @@ const Movies = () => {
             <div className="glass-card rounded-2xl overflow-hidden shadow-2xl border border-white/15 bg-black/80">
               <div className="relative aspect-video bg-black flex items-center justify-center">
                 {activeMovie ? (
-                  <video
-                    key={activeMovie.streamUrl}
-                    ref={videoRef}
-                    controls
-                    autoPlay
-                    playsInline
-                    className="w-full h-full object-contain"
-                    src={activeMovie.streamUrl}
-                    onEnded={() => {
-                      const currentIndex = movies.findIndex((m) => m.id === activeMovie.id);
-                      if (currentIndex >= 0 && currentIndex < movies.length - 1) {
-                        setActiveMovie(movies[currentIndex + 1]);
-                      }
-                    }}
-                  >
-                    Your browser does not support the video tag.
-                  </video>
+                  <>
+                    <video
+                      key={activeMovie.streamUrl}
+                      ref={videoRef}
+                      controls
+                      autoPlay
+                      playsInline
+                      className="w-full h-full object-contain"
+                      src={activeMovie.streamUrl}
+                      onError={() => {
+                        setVideoError('codec_or_container');
+                      }}
+                      onPlay={() => setVideoError(null)}
+                      onEnded={() => {
+                        const currentIndex = movies.findIndex((m) => m.id === activeMovie.id);
+                        if (currentIndex >= 0 && currentIndex < movies.length - 1) {
+                          setActiveMovie(movies[currentIndex + 1]);
+                        }
+                      }}
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+
+                    {/* Codec / Audio Notice Overlay if video playback reports an error */}
+                    {videoError && (
+                      <div className="absolute inset-0 z-10 bg-black/90 p-6 flex flex-col items-center justify-center text-center space-y-3">
+                        <span className="text-4xl">⚠️</span>
+                        <h4 className="text-sm font-bold text-white">Browser Codec Notice</h4>
+                        <p className="text-xs text-slate-300 max-w-md leading-relaxed">
+                          This video file (<code className="text-cyan-300 font-mono">{activeMovie.filename}</code>) uses a container or audio codec (such as Dolby Digital AC-3 or DTS 5.1) that Chrome cannot decode natively.
+                        </p>
+                        <div className="flex flex-wrap gap-2 justify-center pt-2">
+                          <button
+                            onClick={() => window.open(activeMovie.streamUrl, '_blank')}
+                            className="px-4 py-2 rounded-xl bg-cyan-500 text-black font-bold text-xs hover:bg-cyan-400 transition"
+                          >
+                            Open in Desktop Player / New Tab
+                          </button>
+                          <button
+                            onClick={() => setVideoError(null)}
+                            className="px-4 py-2 rounded-xl glass-button text-white text-xs hover:bg-white/10 transition"
+                          >
+                            Dismiss
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </>
                 ) : (
                   <div className="text-center p-8 text-slate-400">
                     <span className="text-5xl block mb-3">🎬</span>
@@ -555,7 +796,10 @@ const Movies = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
                       transition={{ delay: idx * 0.02 }}
-                      onClick={() => setActiveMovie(movie)}
+                      onClick={() => {
+                        setActiveMovie(movie);
+                        setVideoError(null);
+                      }}
                       className={`p-3.5 rounded-xl cursor-pointer border transition flex items-center justify-between gap-3 ${
                         isActive
                           ? 'bg-gradient-to-r from-blue-600/30 to-cyan-500/20 border-cyan-400/50 shadow-md'
@@ -609,7 +853,7 @@ const Movies = () => {
                   <span className="text-3xl block mb-2">📁</span>
                   <p>No matching video files found.</p>
                   <p className="mt-1 text-slate-500">
-                    Add video files to <code className="text-cyan-300 font-mono">repo-play</code> or click &ldquo;Select Folder&rdquo; above.
+                    Click <strong className="text-white">&ldquo;Connect repo-play Folder&rdquo;</strong> to load your movies.
                   </p>
                 </div>
               )}
@@ -617,10 +861,9 @@ const Movies = () => {
 
             {/* Quick guide tip card */}
             <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-xs text-slate-300 space-y-1">
-              <p className="font-bold text-white">How to stream on same Wi-Fi:</p>
+              <p className="font-bold text-white">How to watch videos here:</p>
               <p className="text-slate-400 leading-relaxed">
-                Connect your phone or smart TV to the same Wi-Fi network and open{' '}
-                <strong className="text-cyan-300 font-mono">http://{serverIp}:4200/movies</strong>!
+                Click <strong className="text-cyan-300">Connect repo-play Folder</strong> and choose your local folder. All movies will load instantly in 1080p/4K directly in your browser!
               </p>
             </div>
           </div>
