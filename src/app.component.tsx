@@ -14,6 +14,7 @@ import {
   Gallery,
   YouTube,
   Course,
+  Domains,
 } from './components';
 import Blog from './components/blog.component';
 import BlogDetail from './components/blog-detail.component';
@@ -147,6 +148,7 @@ const App = () => {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/youtube" element={<YouTube />} />
           <Route path="/gov" element={<Gov />} />
+          <Route path="/domains" element={<Domains />} />
           <Route path="/content-studio" element={<ContentStudio />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />

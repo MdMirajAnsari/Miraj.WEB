@@ -25,8 +25,13 @@ export const integrations = {
     latitude: import.meta.env.VITE_WEATHER_LATITUDE || '',
     longitude: import.meta.env.VITE_WEATHER_LONGITUDE || '',
   },
+  domainsdb: {
+    apiKey: import.meta.env.VITE_DOMAINSDB_API_KEY || 'f962e99b-bc47-4ca8-88d8-810445b2eeb6',
+    baseUrl: 'https://api.domainsdb.info/v1',
+  },
 };
 
+export const isDomainsDbConfigured = Boolean(integrations.domainsdb.apiKey);
 export const isSupabaseConfigured = Boolean(integrations.supabase.url && integrations.supabase.anonKey);
 export const isGiscusConfigured = Boolean(
   integrations.giscus.repo &&

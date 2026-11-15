@@ -12,3 +12,10 @@ export type { Technology } from './technology.model';
 export type { Theme, ThemeProps } from './theme.model';
 export type { CoursePhase, CourseReason, CourseTopic } from './course.model';
 export type { VideoState, YouTubePlaylist, YouTubeVideo } from './youtube-video.model';
+export type {
+  DomainRecord,
+  DomainsDbSearchResult,
+  DomainsDbAccountInfo,
+  DomainSearchParams,
+} from './domainsdb.model';
+

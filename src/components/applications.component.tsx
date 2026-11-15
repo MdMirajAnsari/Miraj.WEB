@@ -442,6 +442,53 @@ const Applications = ({ setActiveTab }: SetActiveTabProps) => {
 
         </ul>
       </motion.div>
+
+      {/* Network & API Tools */}
+      <motion.div
+        variants={fadeIn("up", "spring", 0.5, 0.75)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="bg-jetLight p-8 rounded-[20px] shadow-card hover:shadow-xl transition-all duration-300"
+      >
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-12 h-12 bg-french rounded-[10px] flex items-center justify-center">
+            <span className="text-[24px]">🌐</span>
+          </div>
+          <h3 className="text-timberWolf font-beckman font-bold text-[24px] tracking-[1px]">
+            Network & API Tools
+          </h3>
+        </div>
+
+        <ul className="space-y-3 text-taupe text-[15px] font-poppins">
+          <li className="hover:translate-x-2 transition-transform duration-200">
+            <a href="/domains" className="hover:text-french transition flex items-center justify-between">
+              <span className="flex items-center gap-2"><span className="text-french">▸</span> DomainsDB Explorer (Built-in)</span>
+              <span className="text-xs bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded font-mono">Live API</span>
+            </a>
+          </li>
+          <li className="hover:translate-x-2 transition-transform duration-200">
+            <a href="https://domainsdb.info/" target="_blank" rel="noopener noreferrer" className="hover:text-french transition flex items-center gap-2">
+              <span className="text-french">▸</span> DomainsDB Official Portal
+            </a>
+          </li>
+          <li className="hover:translate-x-2 transition-transform duration-200">
+            <a href="https://www.postman.com/downloads/" target="_blank" rel="noopener noreferrer" className="hover:text-french transition flex items-center gap-2">
+              <span className="text-french">▸</span> Postman
+            </a>
+          </li>
+          <li className="hover:translate-x-2 transition-transform duration-200">
+            <a href="https://curl.se/" target="_blank" rel="noopener noreferrer" className="hover:text-french transition flex items-center gap-2">
+              <span className="text-french">▸</span> cURL
+            </a>
+          </li>
+          <li className="hover:translate-x-2 transition-transform duration-200">
+            <a href="https://www.wireshark.org/" target="_blank" rel="noopener noreferrer" className="hover:text-french transition flex items-center gap-2">
+              <span className="text-french">▸</span> Wireshark
+            </a>
+          </li>
+        </ul>
+      </motion.div>
         </div>
 
        

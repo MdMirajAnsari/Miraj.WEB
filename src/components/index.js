@@ -13,5 +13,6 @@ import Gallery from './gallery.component';
 import YouTube from './youtube.component';
 import Course from './course.component';
 import GitHubActivity from './github-activity.component';
+import Domains from './domains.component';
 
-export { Hero, Navbar, About, Tech, Experience, Projects, GitHubActivity, Gadgets, Contact, Blog, Gov, Gallery, YouTube, BallCanvas, Course };
+export { Hero, Navbar, About, Tech, Experience, Projects, GitHubActivity, Gadgets, Contact, Blog, Gov, Gallery, YouTube, BallCanvas, Course, Domains };
