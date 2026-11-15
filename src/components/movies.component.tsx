@@ -39,7 +39,8 @@ const SAMPLE_FALLBACK_MOVIES: RepoMovie[] = [
 ];
 
 const STORAGE_ENDPOINT_KEY = 'miraj-movies-server-endpoint';
-const DEFAULT_TUNNEL_ENDPOINT = 'https://increased-look-complications-bet.trycloudflare.com';
+const PERMANENT_STREAM_ENDPOINT = 'https://miraj-movies-player.loca.lt';
+const DEFAULT_TUNNEL_ENDPOINT = 'https://mattress-physician-tough-vertical.trycloudflare.com';
 const VIDEO_EXTENSIONS = ['.mp4', '.webm', '.mkv', '.mov', '.m4v', '.ogv', '.avi'];
 
 function formatFileSize(bytes: number): string {
@@ -247,6 +248,8 @@ const Movies = () => {
       if (customUrl.trim()) {
         endpointsToTry.push(customUrl.trim().replace(/\/$/, ''));
       }
+      endpointsToTry.push(PERMANENT_STREAM_ENDPOINT);
+      endpointsToTry.push(DEFAULT_TUNNEL_ENDPOINT);
 
       // If running on localhost
       if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
@@ -261,9 +264,15 @@ const Movies = () => {
         try {
           const url = `${host}/api/movies`;
           const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 2500);
+          const timeoutId = setTimeout(() => controller.abort(), 3500);
 
-          const res = await fetch(url, { signal: controller.signal });
+          const res = await fetch(url, {
+            signal: controller.signal,
+            headers: {
+              'Bypass-Tunnel-Reminder': 'true',
+              'Accept': 'application/json',
+            },
+          });
           clearTimeout(timeoutId);
 
           const contentType = res.headers.get('content-type') || '';
