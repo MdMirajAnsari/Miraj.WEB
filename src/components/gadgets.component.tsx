@@ -5,6 +5,7 @@ import { styles } from '../styles';
 import { gadgets } from '../constants';
 import { fadeIn, textVariant } from '../utils/motion';
 import Applications from './applications.component';
+import EntertainmentSection from './entertainment.component';
 import type { EnrichedGadget, Gadget, GadgetState, SetActiveTabProps, Song, SongState } from '../models';
 import LazyImage from './lazy-image.component';
 import { mergeById, readStudioContent } from '../utils/contentStudio';
@@ -838,6 +839,11 @@ const FavSongs = ({ setActiveTab }: SetActiveTabProps) => {
             className="px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 glass-button-active text-white shadow-lg">
             Fav Songs
           </button>
+          <button
+            onClick={() => setActiveTab('entertainment')}
+            className="px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 glass-button text-taupe">
+            Anime & TV (Live API)
+          </button>
         </div>
 
         <div className="mt-8 glass-card rounded-[20px] p-5 sm:p-7">
@@ -1215,6 +1221,44 @@ const Gadgets = () => {
     return <FavSongs setActiveTab={setActiveTab} />;
   }
 
+  if (activeTab === 'entertainment') {
+    return (
+      <div className="relative z-0 min-h-screen pt-[120px] pb-20">
+        <div className={`${styles.padding} max-w-7xl mx-auto`}>
+          <motion.div variants={textVariant()} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.25 }}>
+            <p className={`${styles.sectionSubText}`}>Pop Culture & Shows</p>
+            <h2 className={`${styles.sectionHeadTextLight}`}>Anime & TV.</h2>
+          </motion.div>
+
+          <div className="mt-8 flex flex-wrap gap-4">
+            <button
+              onClick={() => setActiveTab('gadgets')}
+              className="px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 glass-button text-taupe">
+              Gadgets
+            </button>
+            <button
+              onClick={() => setActiveTab('software')}
+              className="px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 glass-button text-taupe">
+              Applications
+            </button>
+            <button
+              onClick={() => setActiveTab('songs')}
+              className="px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 glass-button text-taupe">
+              Fav Songs
+            </button>
+            <button
+              onClick={() => setActiveTab('entertainment')}
+              className="px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 glass-button-active text-white shadow-lg">
+              Anime & TV (Live API)
+            </button>
+          </div>
+
+          <EntertainmentSection />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="relative z-0 min-h-screen pt-[120px] pb-20">
       <div className={`${styles.padding} max-w-7xl mx-auto`}>
@@ -1244,6 +1288,13 @@ const Gadgets = () => {
               activeTab === 'songs' ? 'glass-button-active text-white shadow-lg' : 'glass-button text-taupe'
             }`}>
             Fav Songs
+          </button>
+          <button
+            onClick={() => setActiveTab('entertainment')}
+            className={`px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 ${
+              activeTab === 'entertainment' ? 'glass-button-active text-white shadow-lg' : 'glass-button text-taupe'
+            }`}>
+            Anime & TV (Live API)
           </button>
         </div>
 

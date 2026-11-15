@@ -15,7 +15,11 @@ import {
   YouTube,
   Course,
   Domains,
+  DevTools,
+  Terminal,
 } from './components';
+import { AchievementToast } from './components/achievement-toast.component';
+import { AiAssistant } from './components/ai-assistant.component';
 import Blog from './components/blog.component';
 import BlogDetail from './components/blog-detail.component';
 import Footer from './components/footer.component';
@@ -149,10 +153,14 @@ const App = () => {
           <Route path="/youtube" element={<YouTube />} />
           <Route path="/gov" element={<Gov />} />
           <Route path="/domains" element={<Domains />} />
+          <Route path="/tools" element={<DevTools />} />
+          <Route path="/terminal" element={<Terminal />} />
           <Route path="/content-studio" element={<ContentStudio />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
+        <AchievementToast />
+        <AiAssistant />
       </div>
     </BrowserRouter>
   );

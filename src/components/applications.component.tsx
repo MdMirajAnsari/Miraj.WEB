@@ -34,6 +34,11 @@ const Applications = ({ setActiveTab }: SetActiveTabProps) => {
             className="px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 glass-button text-taupe">
             Fav Songs
           </button>
+          <button
+            onClick={() => setActiveTab('entertainment')}
+            className="px-6 py-3 rounded-[10px] font-poppins font-medium text-[16px] transition-all duration-300 glass-button text-taupe">
+            Anime & TV (Live API)
+          </button>
         </div>
 
         <div className="w-full flex">

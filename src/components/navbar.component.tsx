@@ -23,6 +23,12 @@ const Navbar = () => {
     } else if (nav.id === 'domains') {
       navigate('/domains');
       setActive(nav.title);
+    } else if (nav.id === 'tools') {
+      navigate('/tools');
+      setActive(nav.title);
+    } else if (nav.id === 'terminal') {
+      navigate('/terminal');
+      setActive(nav.title);
     } else if (nav.id === 'gallery') {
       navigate('/gallery');
       setActive(nav.title);

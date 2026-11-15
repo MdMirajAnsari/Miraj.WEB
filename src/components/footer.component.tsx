@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { styles } from '../styles';
 import type { Theme, ThemeProps } from '../models';
 import FooterWeatherStatus from './footer-weather-status.component';
+import LiveStatusWidget from './live-status-widget.component';
 
 const themes: Theme[] = ['dark', 'light', 'glass'];
 
@@ -53,6 +54,10 @@ const Footer = ({ theme, onThemeChange }: ThemeProps) => {
               <span className="sm:hidden">Coffee</span>
             </a>
           </div>
+        </div>
+
+        <div className="my-6">
+          <LiveStatusWidget />
         </div>
 
         <FooterWeatherStatus />
