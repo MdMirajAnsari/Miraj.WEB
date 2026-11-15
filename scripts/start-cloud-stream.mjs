@@ -1,7 +1,7 @@
 import { spawn } from 'child_process';
 import http from 'http';
+import https from 'https';
 import fs from 'fs';
-import path from 'path';
 
 const CLOUDFLARED_PATH = 'C:\\Program Files (x86)\\cloudflared\\cloudflared.exe';
 const MEDIA_SERVER_PORT = 4201;
@@ -16,6 +16,26 @@ function checkMediaServerRunning() {
       req.destroy();
       resolve(false);
     });
+  });
+}
+
+function getShortUrl(targetUrl) {
+  return new Promise((resolve) => {
+    const apiUrl = `https://is.gd/create.php?format=json&url=${encodeURIComponent(targetUrl)}`;
+    https
+      .get(apiUrl, (res) => {
+        let body = '';
+        res.on('data', (chunk) => (body += chunk));
+        res.on('end', () => {
+          try {
+            const data = JSON.parse(body);
+            resolve(data.shorturl || targetUrl);
+          } catch {
+            resolve(targetUrl);
+          }
+        });
+      })
+      .on('error', () => resolve(targetUrl));
   });
 }
 
@@ -49,20 +69,24 @@ async function main() {
 
   let tunnelUrlFound = false;
 
-  const handleOutput = (data) => {
+  const handleOutput = async (data) => {
     const text = data.toString();
     const match = text.match(/https:\/\/[a-zA-Z0-9-]+\.trycloudflare\.com/);
     if (match && !tunnelUrlFound) {
       tunnelUrlFound = true;
       const tunnelUrl = match[0];
-      const directAppUrl = `https://mirajai.vercel.app/movies?endpoint=${encodeURIComponent(tunnelUrl)}`;
+      const longUrl = `https://mirajai.vercel.app/movies?endpoint=${encodeURIComponent(tunnelUrl)}`;
+      const shortUrl = await getShortUrl(longUrl);
 
       console.log('\n======================================================================');
       console.log('🎉 YOUR CLOUD STREAM IS LIVE!');
       console.log('======================================================================');
-      console.log(`➜ Cloudflare HTTPS Stream: ${tunnelUrl}`);
-      console.log(`\n👉 CLICK HERE TO OPEN IN YOUR HOSTED VERCEL APP:`);
-      console.log(`   ${directAppUrl}`);
+      console.log(`\n🔗 ULTRA SHORT 1-CLICK URL:`);
+      console.log(`   👉 ${shortUrl}`);
+      console.log(`\n🌐 DIRECT APP URL:`);
+      console.log(`   👉 https://mirajai.vercel.app/movies`);
+      console.log(`\n📱 PERMANENT SHORTCUT:`);
+      console.log(`   👉 https://is.gd/mirajmovies  (or https://is.gd/mirajplay)`);
       console.log('======================================================================\n');
       console.log('💡 Keep this terminal window open while streaming movies to Vercel.');
     }

@@ -111,6 +111,15 @@ const Movies = () => {
       const isExternalHost = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
       setIsHosted(isExternalHost);
       setHostname(window.location.hostname);
+
+      // Keep address bar clean: remove bulky ?endpoint= query string once saved
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('endpoint')) {
+        params.delete('endpoint');
+        const remainingQuery = params.toString() ? `?${params.toString()}` : '';
+        const newUrl = `${window.location.pathname}${remainingQuery}${window.location.hash}`;
+        window.history.replaceState({}, '', newUrl);
+      }
     }
   }, []);
 
