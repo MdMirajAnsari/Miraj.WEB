@@ -184,14 +184,17 @@ export function createMediaServer() {
   return server;
 }
 
-// Standalone entrypoint
-const server = createMediaServer();
-server.listen(PORT, '0.0.0.0', () => {
-  const localIp = getLocalIp();
-  console.log('\n======================================================');
-  console.log('🎬 Repo-Play LAN Media Server is running!');
-  console.log(`📁 Directory: ${REPO_PLAY_DIR}`);
-  console.log(`➜ Local:      http://localhost:${PORT}`);
-  console.log(`➜ Same Wi-Fi: http://${localIp}:${PORT}`);
-  console.log('======================================================\n');
-});
+// Standalone entrypoint (only run if executed directly, not when imported)
+const isDirectRun = process.argv[1] && process.argv[1].replace(/\\/g, '/').endsWith('scripts/media-server.mjs');
+if (isDirectRun) {
+  const server = createMediaServer();
+  server.listen(PORT, '0.0.0.0', () => {
+    const localIp = getLocalIp();
+    console.log('\n======================================================');
+    console.log('🎬 Repo-Play LAN Media Server is running!');
+    console.log(`📁 Directory: ${REPO_PLAY_DIR}`);
+    console.log(`➜ Local:      http://localhost:${PORT}`);
+    console.log(`➜ Same Wi-Fi: http://${localIp}:${PORT}`);
+    console.log('======================================================\n');
+  });
+}
