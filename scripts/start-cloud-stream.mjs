@@ -48,18 +48,20 @@ function startLocalServer() {
   });
 }
 
-async function sendStreamLinksToEmail({ tunnelUrl, directAppUrl }) {
+async function sendStreamLinksToEmail({ tunnelUrl, encodedAppUrl, rawAppUrl }) {
   console.log(`\n📧 Sending streaming links to ${TARGET_EMAIL}...`);
 
   const localIp = getLocalIp();
 
   const payload = {
-    _subject: '🎬 Your Repo-Play Stream Links',
-    Direct_Vercel_Link: directAppUrl,
-    Cloudflare_Tunnel_URL: tunnelUrl,
+    _subject: `🎬 Watch Movies: ${encodedAppUrl}`,
+    CLICK_TO_WATCH: encodedAppUrl,
+    Direct_Vercel_Link: encodedAppUrl,
+    Raw_Link: rawAppUrl,
+    Cloudflare_Tunnel: tunnelUrl,
     Home_WiFi_Link: `http://${localIp}:${PORT}`,
-    Stream_Started_At: new Date().toLocaleString(),
-    _template: 'table',
+    message: `🎬 YOUR REPO-PLAY STREAM IS READY!\n\n👉 Click below to open and watch movies on Vercel:\n${encodedAppUrl}\n\n(Alternative direct link):\n${rawAppUrl}\n\n⚡ Cloudflare Edge Tunnel:\n${tunnelUrl}\n\n🏠 Home Wi-Fi LAN:\nhttp://${localIp}:${PORT}\n\nStarted at: ${new Date().toLocaleString()}`,
+    _template: 'box',
     _captcha: 'false',
   };
 
@@ -117,20 +119,32 @@ async function main() {
     if (match && !tunnelFound) {
       tunnelFound = true;
       const tunnelUrl = match[0];
-      const directAppUrl = `https://mirajai.vercel.app/movies?endpoint=${tunnelUrl}`;
+      const encodedAppUrl = `https://mirajai.vercel.app/movies?endpoint=${encodeURIComponent(tunnelUrl)}`;
+      const rawAppUrl = `https://mirajai.vercel.app/movies?endpoint=${tunnelUrl}`;
+
+      // Save to latest-stream-link.txt
+      try {
+        fs.writeFileSync('latest-stream-link.txt', `${encodedAppUrl}\n${rawAppUrl}\n`, 'utf8');
+      } catch {}
+
+      // Copy link to Windows clipboard automatically
+      try {
+        spawn('powershell', ['-NoProfile', '-Command', `Set-Clipboard -Value '${encodedAppUrl}'`]);
+        console.log('📋 Copied direct stream link to Windows Clipboard! (Press Ctrl+V to paste)');
+      } catch {}
 
       console.log('\n======================================================================');
       console.log('🎉 YOUR CLOUDFLARE STREAM IS LIVE!');
       console.log('======================================================================');
       console.log(`📁 Movies Folder:  ${REPO_PLAY_DIR}`);
       console.log(`⚡ Cloudflare URL:  ${tunnelUrl}`);
-      console.log('\n👉 YOUR DIRECT STREAM LINK (Click or Copy):');
-      console.log(`\n   ${directAppUrl}\n`);
+      console.log('\n👉 YOUR DIRECT STREAM LINK:');
+      console.log(`\n   ${encodedAppUrl}\n`);
       console.log('======================================================================');
       console.log('💡 Keep this window open while watching movies on Vercel!\n');
 
-      // Send email notification with links only (no movie details)
-      sendStreamLinksToEmail({ tunnelUrl, directAppUrl });
+      // Send email notification with clickable encoded link
+      sendStreamLinksToEmail({ tunnelUrl, encodedAppUrl, rawAppUrl });
     }
   };
 
