@@ -37,10 +37,6 @@ export const navLinks = [
     title: "Domains",
   },
   {
-    id: "movies",
-    title: "Movies",
-  },
-  {
     id: "tools",
     title: "Tools",
   },
