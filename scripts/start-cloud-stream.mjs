@@ -1,7 +1,7 @@
-import { spawn, exec } from 'child_process';
+import { spawn } from 'child_process';
 import net from 'net';
 import fs from 'fs';
-import { createMediaServer, getLocalIp, getMovieList, PORT, REPO_PLAY_DIR } from './media-server.mjs';
+import { createMediaServer, getLocalIp, PORT, REPO_PLAY_DIR } from './media-server.mjs';
 
 const CLOUDFLARED_PATH = 'C:\\Program Files (x86)\\cloudflared\\cloudflared.exe';
 const TARGET_EMAIL = 'clevercottonmouth@gmail.com';
@@ -52,26 +52,12 @@ async function sendStreamLinksToEmail({ tunnelUrl, directAppUrl }) {
   console.log(`\n📧 Sending streaming links to ${TARGET_EMAIL}...`);
 
   const localIp = getLocalIp();
-  const movies = getMovieList();
-
-  const movieListFormatted =
-    movies.length > 0
-      ? movies
-          .map(
-            (m, idx) =>
-              `${idx + 1}. ${m.title} (${m.sizeFormatted}) [${m.extension.toUpperCase()}]`,
-          )
-          .join('\n')
-      : 'No movies found in repo-play folder';
 
   const payload = {
-    _subject: `🎬 Repo-Play Stream is LIVE! (${movies.length} movies ready)`,
+    _subject: '🎬 Your Repo-Play Stream Links',
     Direct_Vercel_Link: directAppUrl,
     Cloudflare_Tunnel_URL: tunnelUrl,
     Home_WiFi_Link: `http://${localIp}:${PORT}`,
-    Movies_Folder: REPO_PLAY_DIR,
-    Total_Videos: `${movies.length} available`,
-    Available_Movies: movieListFormatted,
     Stream_Started_At: new Date().toLocaleString(),
     _template: 'table',
     _captcha: 'false',
@@ -91,7 +77,7 @@ async function sendStreamLinksToEmail({ tunnelUrl, directAppUrl }) {
 
     const data = await res.json();
     if (data.success === 'true' || res.ok) {
-      console.log(`✉️  SUCCESS: All streaming links delivered to ${TARGET_EMAIL}!\n`);
+      console.log(`✉️  SUCCESS: Stream links delivered to ${TARGET_EMAIL}!\n`);
     } else {
       console.warn(`⚠️  Email notice response:`, data.message || data);
     }
@@ -141,13 +127,10 @@ async function main() {
       console.log('\n👉 YOUR DIRECT STREAM LINK (Click or Copy):');
       console.log(`\n   ${directAppUrl}\n`);
       console.log('======================================================================');
-      console.log('🌐 Opening your browser automatically...');
-      console.log('💡 Keep this window open while watching movies on Vercel!');
+      console.log('💡 Keep this window open while watching movies on Vercel!\n');
 
-      // Send email notification to user's Gmail
+      // Send email notification with links only (no movie details)
       sendStreamLinksToEmail({ tunnelUrl, directAppUrl });
-
-      exec(`start "" "${directAppUrl}"`);
     }
   };
 
